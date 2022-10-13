@@ -27,6 +27,9 @@ missSound = pygame.mixer.Sound(musicPath+"/miss_sound.mp3")
 dogSound = pygame.mixer.Sound(musicPath+"/dog_sound.mp3")
 catSound = pygame.mixer.Sound(musicPath+"/cat_sound.mp3")
 
+hitSound.set_volume(0.4)
+missSound.set_volume(0.4)
+
 font=pygame.font.Font(fontPath+"/trebuc.ttf",32)
 
 pygame.display.set_icon(dog)
