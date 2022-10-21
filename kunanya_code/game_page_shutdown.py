@@ -3,6 +3,7 @@ import time
 import array
 import os
 
+
 codePath = os.getcwd()
 parentPath = os.path.dirname(os.getcwd())
 os.chdir(parentPath)
@@ -47,6 +48,7 @@ cloudBack = 0
 
 scoreValue = 0
 countPlaySFX = 0
+pauseTime = 0
 
 
 array.array("i")                
@@ -144,8 +146,14 @@ while True:
                 elif event.key == pygame.K_j: 
                     dogX = 915
                     key = "j"
+                elif event.key == pygame.K_SPACE:
+                    pygame.mixer.music.pause()
+                    from pause_temp import _pauseTime
+                    pauseTime += _pauseTime()
+                    pygame.mixer.music.unpause()
                     
-    presentTicks=(pygame.time.get_ticks()-startTicks)/1000 
+                    
+    presentTicks=(pygame.time.get_ticks()-startTicks-pauseTime)/1000 
     
     if a[1] == 0:       
         countPlaySFX += _callDog(1,3.2,countPlaySFX)
