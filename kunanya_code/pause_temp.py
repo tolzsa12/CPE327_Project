@@ -2,20 +2,18 @@ import pygame
 import time
 import array
 import os
+
+main_path=os.getcwd()
+
 pygame.init()
 pygame.display.set_caption("gameV.0.1")
 screen = pygame.display.set_mode((1280, 800))
-bgp=pygame.image.load("/Users/kookwangs/Documents/GitHub/CPE327_Project/olavan_asset/pause_page/pause_page.png")
+bgp=pygame.image.load(main_path+"/olavan_asset/pause_page/pause_page.png")
 pauseTime = 0
 
 
-codePathP = os.getcwd()
-parentPathP = os.path.dirname(os.getcwd())
-#os.chdir(parentPathP)
-#parentPathP = os.getcwd()
-pausePagePathP = parentPathP + "/olavan_asset/pause_page"
 
-font=pygame.font.Font("/Users/kookwangs/Documents/GitHub/CPE327_Project/font/trebuc.ttf",32)
+font=pygame.font.Font(main_path+"/font/trebuc.ttf",32)
 pauseTime = 0
 
 def testText(x):
@@ -41,5 +39,3 @@ def _pauseTime():
         pygame.display.update()
 
 
-
-print(pausePagePathP)
