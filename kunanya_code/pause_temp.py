@@ -2,18 +2,19 @@ import pygame
 import time
 import array
 import os
+#import game_page_shutdown
 
-main_path=os.getcwd()
+mainPath=os.getcwd()
 
 pygame.init()
 pygame.display.set_caption("gameV.0.1")
 screen = pygame.display.set_mode((1280, 800))
-bgp=pygame.image.load(main_path+"/olavan_asset/pause_page/pause_page.png")
+bgp=pygame.image.load(mainPath+"/olavan_asset/pause_page/pause_page.png")
 pauseTime = 0
 
 
 
-font=pygame.font.Font(main_path+"/font/trebuc.ttf",32)
+font=pygame.font.Font(mainPath+"/font/trebuc.ttf",32)
 pauseTime = 0
 
 def testText(x):
@@ -32,6 +33,8 @@ def _pauseTime():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_c:            
                     return pauseTime-pauseStart
+                elif event.key == pygame.K_r:
+                    return -1
 
         
         screen.blit(bgp,(0,0))
