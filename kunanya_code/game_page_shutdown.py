@@ -6,7 +6,6 @@ import os
 
 os.chdir("../")
 mainPath = os.getcwd()
-print(mainPath)
 #parentPath = os.path.dirname(os.getcwd())
 #os.chdir(parentPath)
 #parentPath = os.getcwd()
@@ -41,8 +40,6 @@ font=pygame.font.Font(fontPath+"/trebuc.ttf",32)
 pygame.display.set_icon(dog)
 
 
-screen.blit(sushi,(138,495))
-screen.blit(food,(1047,495))
 
 pygame.mixer.music.load(musicPath+"/shutdown_music.mp3")
 
@@ -81,7 +78,6 @@ def _callCat(n,t,countPlaySFX,presentTicks):
 
 def _callDog(n,t,countPlaySFX,presentTicks):
     count = 0
-    print(presentTicks)
     if presentTicks >= t and countPlaySFX<n:
         dogSound.play()
         count+=1   
@@ -144,6 +140,8 @@ def _play2():
 
     while True:
         key = "n"
+        ysushi = 495
+        yfood = 495
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                         quit()
@@ -151,9 +149,11 @@ def _play2():
                     if event.key == pygame.K_f:            
                         catX = 255
                         key = "f"
+                        ysushi = 488
                     elif event.key == pygame.K_j: 
                         dogX = 915
                         key = "j"
+                        yfood = 488
                     elif event.key == pygame.K_SPACE:
                         pygame.mixer.music.pause()
                         from pause_temp import _pauseTime
@@ -299,6 +299,9 @@ def _play2():
         pygame.time.delay(10)
         catX = 497
         dogX = 666
+        
+        screen.blit(sushi,(138,ysushi))
+        screen.blit(food,(1047,yfood))
         pygame.display.update()
 
 

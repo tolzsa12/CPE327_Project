@@ -12,6 +12,9 @@ screen = pygame.display.set_mode((1280, 800))
 bgp=pygame.image.load(mainPath+"/olavan_asset/pause_page/pause_page.png")
 pauseTime = 0
 
+back=pygame.image.load(mainPath+"/olavan_asset/pause_page/back_select_song.png")
+continues=pygame.image.load(mainPath+"/olavan_asset/pause_page/continue_button.png")
+restart=pygame.image.load(mainPath+"/olavan_asset/pause_page/restart_button.png")
 
 
 font=pygame.font.Font(mainPath+"/font/trebuc.ttf",32)
@@ -35,10 +38,13 @@ def _pauseTime():
                     return pauseTime-pauseStart
                 elif event.key == pygame.K_r:
                     return -1
+        
 
         
         screen.blit(bgp,(0,0))
-        testText(pauseTime/1000)
+        screen.blit(back,(425,571))
+        screen.blit(continues,(425,211))
+        screen.blit(restart,(425,391))
         pygame.display.update()
 
 
