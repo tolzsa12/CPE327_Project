@@ -34,7 +34,7 @@ def _pauseTime():
             if event.type == pygame.QUIT:
                     quit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_c:            
+                if event.key == pygame.K_c or (pygame.MOUSEBUTTONDOWN and continues.get_rect().collidepoint(event.pos)) :            
                     return pauseTime-pauseStart
                 elif event.key == pygame.K_r:
                     return -1
