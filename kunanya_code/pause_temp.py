@@ -21,8 +21,16 @@ font=pygame.font.Font(mainPath+"/font/trebuc.ttf",32)
 pauseTime = 0
 
 def testText(x):
-        text=font.render(str(x),True,(0,0,0))
-        screen.blit(text, (400,300))
+    text=font.render(str(x),True,(0,0,0))
+    screen.blit(text, (400,300))
+
+
+def checkClickRect(left,top,width,height):
+    pos = pygame.mouse.get_pos()
+    if (pos[0]>=left and pos[0]<=left+width) and (pos[1]>=top and pos[1]<=top+height):
+        return 1
+    else:
+        return 0
 
 
 
@@ -34,12 +42,15 @@ def _pauseTime():
             if event.type == pygame.QUIT:
                     quit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_c or (pygame.MOUSEBUTTONDOWN and continues.get_rect().collidepoint(event.pos)) :            
+                if event.key == pygame.K_c:            
                     return pauseTime-pauseStart
                 elif event.key == pygame.K_r:
                     return -1
-        
-
+            if pygame.mouse.get_pressed()[0]:
+                if checkClickRect(425,211,430,180) == 1:
+                    return pauseTime-pauseStart
+                if checkClickRect(425,391,430,180) == 1:
+                    return -1
         
         screen.blit(bgp,(0,0))
         screen.blit(back,(425,571))
