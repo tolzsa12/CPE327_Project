@@ -1,6 +1,10 @@
 import pygame
+import os
 
 pygame.init()
+os.chdir("../")
+mainPath = os.getcwd()
+homePagePath = mainPath + "/olavan_asset/total_score_page"
 
 
 #create game window
@@ -9,15 +13,15 @@ SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 800
 screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 pygame.display.set_caption("OLAVAN")
-bg = pygame.image.load("bg.png") 
-collectButton = pygame.image.load("Collect_button.png")
-titleGetpoint = pygame.image.load("getPoint.png")
-star5 = pygame.image.load("1.png") # 5 point
-star4 = pygame.image.load("2.png") # 4 point 
-star3 = pygame.image.load("3.png") # 3 point
-star2 = pygame.image.load("4.png") # 2 point
-star1 = pygame.image.load("5.png") # 1 point
-star0 = pygame.image.load("6.png") # 0 point
+bg = pygame.image.load(homePagePath+"/Total_score_page.png") 
+collectButton = pygame.image.load(homePagePath+"/Collect_button.png")
+titleGetpoint = pygame.image.load(homePagePath+"/getPoint.png")
+star5 = pygame.image.load(homePagePath+"/1.png") # 5 point
+star4 = pygame.image.load(homePagePath+"/2.png") # 4 point 
+star3 = pygame.image.load(homePagePath+"/3.png") # 3 point
+star2 = pygame.image.load(homePagePath+"/4.png") # 2 point
+star1 = pygame.image.load(homePagePath+"/5.png") # 1 point
+star0 = pygame.image.load(homePagePath+"/6.png") # 0 point
 
 #show star
 
