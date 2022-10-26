@@ -197,10 +197,10 @@ def _play2():
             scoreValue += _checkCat(12,31,key,presentTicks,a)
         elif a[13] == 0:
             countPlaySFX += _callDog(13,32.6,countPlaySFX,presentTicks)
-            scoreValue += _checkDog(13,32.6,key,presentTicks,a)#now
+            scoreValue += _checkDog(13,32.6,key,presentTicks,a)
         elif a[14] == 0:
             countPlaySFX += _callCat(14,34.3,countPlaySFX,presentTicks)
-            scoreValue += _checkCat(14,34.3,key,presentTicks,a)#now
+            scoreValue += _checkCat(14,34.3,key,presentTicks,a)
         elif a[15] == 0:
             countPlaySFX += _callDog(15,37.65,countPlaySFX,presentTicks)
             scoreValue += _checkDog(15,37.65,key,presentTicks,a)
@@ -222,7 +222,6 @@ def _play2():
         elif a[21] == 0:
             countPlaySFX += _callCat(21,52.3,countPlaySFX,presentTicks)
             scoreValue += _checkCat(21,52.3,key,presentTicks,a)
-            #bf hook
         elif a[22] == 0:
             countPlaySFX += _callDog(22,54.7,countPlaySFX,presentTicks)
             scoreValue += _checkDog(22,54.7,key,presentTicks,a)
