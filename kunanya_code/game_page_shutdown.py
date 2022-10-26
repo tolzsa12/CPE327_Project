@@ -186,28 +186,28 @@ def _play2():
             scoreValue += _checkDog(6,17.9,key,presentTicks,a)
         elif a[7] == 0:
             countPlaySFX += _callCat(7,19.6,countPlaySFX,presentTicks)
-            scoreValue += _checkCat(7,19.6,key,presentTicks,a)#now
+            scoreValue += _checkCat(7,19.6,key,presentTicks,a)
         elif a[8] == 0:
             countPlaySFX += _callCat(8,21.2,countPlaySFX,presentTicks)
-            scoreValue += _checkCat(8,21.2,key,presentTicks,a)#now
+            scoreValue += _checkCat(8,21.2,key,presentTicks,a)
         elif a[9] == 0:
             countPlaySFX += _callDog(9,24.5,countPlaySFX,presentTicks)
             scoreValue += _checkDog(9,24.5,key,presentTicks,a)
         elif a[10] == 0:
             countPlaySFX += _callCat(10,26.14,countPlaySFX,presentTicks)
-            scoreValue += _checkCat(10,26.14,key,presentTicks,a)#now
+            scoreValue += _checkCat(10,26.14,key,presentTicks,a)
         elif a[11] == 0:
             countPlaySFX += _callDog(11,29.4,countPlaySFX,presentTicks)
-            scoreValue += _checkDog(11,29.4,key,presentTicks,a)#now
+            scoreValue += _checkDog(11,29.4,key,presentTicks,a)
         elif a[12] == 0:
             countPlaySFX += _callCat(12,31,countPlaySFX,presentTicks)
             scoreValue += _checkCat(12,31,key,presentTicks,a)
         elif a[13] == 0:
             countPlaySFX += _callDog(13,32.6,countPlaySFX,presentTicks)
-            scoreValue += _checkDog(13,32.6,key,presentTicks,a)#now
+            scoreValue += _checkDog(13,32.6,key,presentTicks,a)
         elif a[14] == 0:
             countPlaySFX += _callCat(14,34.3,countPlaySFX,presentTicks)
-            scoreValue += _checkCat(14,34.3,key,presentTicks,a)#now
+            scoreValue += _checkCat(14,34.3,key,presentTicks,a)
         elif a[15] == 0:
             countPlaySFX += _callDog(15,37.65,countPlaySFX,presentTicks)
             scoreValue += _checkDog(15,37.65,key,presentTicks,a)
@@ -275,7 +275,6 @@ def _play2():
         
         
         
-        
         screen.blit(bg,(0,0))
         screen.blit(sushi,(138,495))
         screen.blit(food,(1047,495))
@@ -303,6 +302,6 @@ def _play2():
         screen.blit(sushi,(138,ysushi))
         screen.blit(food,(1047,yfood))
         pygame.display.update()
-
+        
 
 _play2()
