@@ -10,11 +10,10 @@ mainPath = os.getcwd()
 #os.chdir(parentPath)
 #parentPath = os.getcwd()
 
-
-
 gamePagePath = mainPath + "/olavan_asset/game_page"
 fontPath = mainPath + "/font"
 musicPath = mainPath + "/music"
+highestScorePath = mainPath + "/highest_score"
 
 pygame.init()
 pygame.display.set_caption("gameV.0.1")
@@ -34,16 +33,13 @@ catSound = pygame.mixer.Sound(musicPath+"/cat_sound.mp3")
 
 hitSound.set_volume(0.4)
 missSound.set_volume(0.4)
-
 font=pygame.font.Font(fontPath+"/trebuc.ttf",32)
-
 pygame.display.set_icon(dog)
-
-
-
 pygame.mixer.music.load(musicPath+"/shutdown_music.mp3")
 
-
+def _getHighestScore():
+    with open(highestScorePath+"/highest_score_shutdown.txt","r") as f:
+        return f.read()
 
 def _showText(text,x,y):
     showText=font.render(text,True,(0,0,0))
@@ -58,15 +54,9 @@ def _showDog(x,y):
 def _showCloud(x,y):
     screen.blit(cloud,(x,y))
 
-def testText(x):
-        text=font.render(str(x),True,(0,0,0))
-        screen.blit(text, (400,300))
-def testText1(x):
-        text=font.render(str(x),True,(0,0,0))
-        screen.blit(text, (800,400))
-def testText2(x):
-        text=font.render(str(x),True,(0,0,0))
-        screen.blit(text, (800,600))
+#def testText(x):
+        #text=font.render(str(x),True,(0,0,0))
+        #screen.blit(text, (400,300))
 
 def _callCat(n,t,countPlaySFX,presentTicks):
     count = 0
@@ -120,28 +110,31 @@ def _checkDog(countPlaySFX,recentSoundTime,key,presentTicks,a):
 
 
 def _play2():
-
+    #array for counting the beat
     array.array("i")                
     a = array.array("i",(0 for i in range(0,36)))
     a[0] = 1
-
+    #any variables
     pauseTime = 0
     pygame.mixer.music.set_volume(0.3)
     pygame.mixer.music.play(1,0.0)
     startTicks=pygame.time.get_ticks()
     countPlaySFX = 0
     scoreValue = 0
-
-    catX = 497
-    dogX = 666
     cloudX = 0
     cloudBack = 0
-    
 
+    try:
+        highestScore = int(_getHighestScore())
+    except:
+        highestScore = 0
+    
     while True:
-        key = "n"
+        key = "initial"
         ysushi = 495
         yfood = 495
+        catX = 497
+        dogX = 666
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                         quit()
@@ -186,19 +179,19 @@ def _play2():
             scoreValue += _checkDog(6,17.9,key,presentTicks,a)
         elif a[7] == 0:
             countPlaySFX += _callCat(7,19.6,countPlaySFX,presentTicks)
-            scoreValue += _checkCat(7,19.6,key,presentTicks,a)#now
+            scoreValue += _checkCat(7,19.6,key,presentTicks,a)
         elif a[8] == 0:
             countPlaySFX += _callCat(8,21.2,countPlaySFX,presentTicks)
-            scoreValue += _checkCat(8,21.2,key,presentTicks,a)#now
+            scoreValue += _checkCat(8,21.2,key,presentTicks,a)
         elif a[9] == 0:
             countPlaySFX += _callDog(9,24.5,countPlaySFX,presentTicks)
             scoreValue += _checkDog(9,24.5,key,presentTicks,a)
         elif a[10] == 0:
             countPlaySFX += _callCat(10,26.14,countPlaySFX,presentTicks)
-            scoreValue += _checkCat(10,26.14,key,presentTicks,a)#now
+            scoreValue += _checkCat(10,26.14,key,presentTicks,a)
         elif a[11] == 0:
             countPlaySFX += _callDog(11,29.4,countPlaySFX,presentTicks)
-            scoreValue += _checkDog(11,29.4,key,presentTicks,a)#now
+            scoreValue += _checkDog(11,29.4,key,presentTicks,a)
         elif a[12] == 0:
             countPlaySFX += _callCat(12,31,countPlaySFX,presentTicks)
             scoreValue += _checkCat(12,31,key,presentTicks,a)
@@ -273,14 +266,8 @@ def _play2():
             countPlaySFX += _callCat(35,80.2,countPlaySFX,presentTicks)
             scoreValue += _checkCat(35,80.2,key,presentTicks,a)
         
-        
-        
-        
+        #preferences
         screen.blit(bg,(0,0))
-        screen.blit(sushi,(138,495))
-        screen.blit(food,(1047,495))
-
-        
         _showCat(catX,400)
         _showDog(dogX,400)
         _showText("Shutdown",562,50)
@@ -304,5 +291,12 @@ def _play2():
         screen.blit(food,(1047,yfood))
         pygame.display.update()
 
-
+        if presentTicks >= 15:
+            print("eiei")
+            if scoreValue > highestScore:
+                highestScore = scoreValue
+                print(highestScore)
+            with open(highestScorePath+"/highest_score_shutdown.txt","w") as f:
+                f.write(str(highestScore))
+            
 _play2()

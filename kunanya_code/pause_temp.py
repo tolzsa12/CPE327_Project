@@ -25,7 +25,7 @@ def testText(x):
     screen.blit(text, (400,300))
 
 
-def checkClickRect(left,top,width,height):
+def _checkClickRect(left,top,width,height):
     pos = pygame.mouse.get_pos()
     if (pos[0]>=left and pos[0]<=left+width) and (pos[1]>=top and pos[1]<=top+height):
         return 1
@@ -47,9 +47,9 @@ def _pauseTime():
                 elif event.key == pygame.K_r:
                     return -1
             if pygame.mouse.get_pressed()[0]:
-                if checkClickRect(425,211,430,180) == 1:
+                if _checkClickRect(425,211,430,180) == 1:
                     return pauseTime-pauseStart
-                if checkClickRect(425,391,430,180) == 1:
+                if _checkClickRect(425,391,430,180) == 1:
                     return -1
         
         screen.blit(bgp,(0,0))
