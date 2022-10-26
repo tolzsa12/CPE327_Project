@@ -13,7 +13,7 @@ SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 800
 screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 pygame.display.set_caption("OLAVAN")
-bg = pygame.image.load(homePagePath+"/Total_score_page.png") 
+bg = pygame.image.load(homePagePath+"/bg.png") 
 collectButton = pygame.image.load(homePagePath+"/Collect_button.png")
 titleGetpoint = pygame.image.load(homePagePath+"/getPoint.png")
 star5 = pygame.image.load(homePagePath+"/1.png") # 5 point
