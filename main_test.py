@@ -20,10 +20,9 @@ t2 = [0, 3.2, 6.5, 9.8, 13.1, 16.32, 17.9, 19.6, 21.2, 24.5, 26.14, 29.4, 31, 32
 t3 = [0, 10.77, 12.15, 13.35, 14.86, 16.12, 17.5, 19.9, 22.84, 24.11, 25.28, 26.8, 28.02, 29.266, 30.783, 32.19, 33.498, 34.856, 36.157, 37.525, 40.746, 42.771, 44.132, 45.4, 46.4, 48.172, 49.47, 50.7, 52.03, 53.429, 54.8, 57.45, 58.8, 60.043, 61.37, 64.78, 75]
 c = 'c'
 d = 'd'
-n = 'n'
-b1 = [n, c, d, c, d, d, c, d, c, d, d, c, c, d, d, d, d, c, c, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, c]
-b2 = [n, d, c, d, c, d, d, c, c, d, c, d, c, d, c, d, d, c, c, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, c]
-b3 = [n, c, c, c, d, d, d, c, d, d, d, d, c, d, c, d, d, c, d, d, c, c, d, d, d, c, d, d, c, d, c, d, c, d, c, d]
+b1 = ["n", c, d, c, d, d, c, d, c, d, d, c, c, d, d, d, d, c, c, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, c]
+b2 = ["n", d, c, d, c, d, d, c, c, d, c, d, c, d, c, d, d, c, c, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, c]
+b3 = ["n", c, c, c, d, d, d, c, d, d, d, d, c, d, c, d, d, c, d, d, c, c, d, d, d, c, d, d, c, d, c, d, c, d, c, d]
 
 #image load
 gamePageBg=pygame.image.load(gamePagePath+"/game_page.png")
@@ -342,6 +341,7 @@ def _play(t,b,songName):
                 f.write(str(highestScore))
             return scoreValue
 
+
 def calculatePoint(endGameScore):
     if endGameScore == 0:
         return 0
@@ -355,7 +355,8 @@ def calculatePoint(endGameScore):
         return 4
     else:
         return 5
-        
+
+
 #totalscorepage
 def total_score_page(score,songName):
     totalScorePagePath = mainPath + "/olavan_asset/total_score_page"
