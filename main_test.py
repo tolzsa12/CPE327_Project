@@ -6,6 +6,7 @@ import os
 mainPath = os.getcwd()
 print(mainPath)
 gamePagePath = mainPath + "/olavan_asset/game_page"
+tempPagePath = mainPath + "/olavan_asset/temp"
 fontPath = mainPath + "/font"
 musicPath = mainPath + "/music"
 highestScorePath = mainPath + "/highest_score"
@@ -185,7 +186,7 @@ def _play(t,b,songName):
                         pygame.mixer.music.pause()
                         pauseTemp = _pauseTime()
                         if pauseTemp == -1:
-                            _play(t,songName)
+                            _play(t,b,songName)
                         elif pauseTemp == 0:
                             main()
                         pauseTime += pauseTemp
@@ -368,6 +369,7 @@ def total_score_page(score,songName):
 
 def main_page():
     while True:
+        tempmenu = pygame.image.load(tempPagePath+"/tempmenu.png")
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                     quit()
@@ -379,6 +381,7 @@ def main_page():
                 elif event.key == pygame.K_k:
                     return 3
         screen.blit(gamePageBg,(0,0))
+        screen.blit(tempmenu,(390,300))
         pygame.display.update()
         
 def main():
