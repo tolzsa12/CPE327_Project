@@ -134,14 +134,23 @@ def _pauseTime():
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(425,211,430,180) == 1:
                     return pauseTime-pauseStart
-                if _checkClickRect(425,391,430,180) == 1:
+                elif _checkClickRect(425,391,430,180) == 1:
                     return -1
-    
+                elif _checkClickRect(425,571,430,180) == 1:
+                    return 0
         screen.blit(pausePageBg,(0,0))
         screen.blit(back,(425,571))
         screen.blit(continues,(425,211))
         screen.blit(restart,(425,391))
         pygame.display.update()
+
+
+def _checkClickRect(left,top,width,height):
+    pos = pygame.mouse.get_pos()
+    if (pos[0]>=left and pos[0]<=left+width) and (pos[1]>=top and pos[1]<=top+height):
+        return 1
+    else:
+        return 0
 
 def _play(t,b,songName):
     #array for counting the beat
