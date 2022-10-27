@@ -35,7 +35,7 @@ hitSound.set_volume(0.4)
 missSound.set_volume(0.4)
 font=pygame.font.Font(fontPath+"/trebuc.ttf",32)
 pygame.display.set_icon(dog)
-pygame.mixer.music.load(musicPath+"/shutdown_music.mp3")
+
 
 def _getHighestScore():
     with open(highestScorePath+"/highest_score_shutdown.txt","r") as f:
@@ -115,6 +115,7 @@ def _play2():
     a = array.array("i",(0 for i in range(0,36)))
     a[0] = 1
     #any variables
+    pygame.mixer.music.load(musicPath+"/shutdown_music.mp3")
     pauseTime = 0
     pygame.mixer.music.set_volume(0.3)
     pygame.mixer.music.play(1,0.0)
