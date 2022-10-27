@@ -16,12 +16,12 @@ pygame.display.set_caption("OLAVAN")
 bg = pygame.image.load(homePagePath+"/bg.png") 
 collectButton = pygame.image.load(homePagePath+"/Collect_button.png")
 titleGetpoint = pygame.image.load(homePagePath+"/getPoint.png")
-star5 = pygame.image.load(homePagePath+"/1.png") # 5 point
-star4 = pygame.image.load(homePagePath+"/2.png") # 4 point 
+star5 = pygame.image.load(homePagePath+"/5.png") # 5 point
+star4 = pygame.image.load(homePagePath+"/4.png") # 4 point 
 star3 = pygame.image.load(homePagePath+"/3.png") # 3 point
-star2 = pygame.image.load(homePagePath+"/4.png") # 2 point
-star1 = pygame.image.load(homePagePath+"/5.png") # 1 point
-star0 = pygame.image.load(homePagePath+"/6.png") # 0 point
+star2 = pygame.image.load(homePagePath+"/2.png") # 2 point
+star1 = pygame.image.load(homePagePath+"/1.png") # 1 point
+star0 = pygame.image.load(homePagePath+"/0.png") # 0 point
 
 #show star
 

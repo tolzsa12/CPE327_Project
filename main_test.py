@@ -14,9 +14,16 @@ pygame.init()
 pygame.display.set_caption("main_test")
 screen = pygame.display.set_mode((1280, 800))
 #game variable               
-t1 = [0, 4.4, 9.1, 11.3, 13.7, 16, 18.3, 22.9, 25.1, 28.8, 31.1, 37.9, 38.9, 41.5, 46.1, 47.3, 48.5, 51.1, 52.9, 55.2, 57.6, 59.8, 64.56, 66.8, 70.35, 71.4, 72.6, 73.8, 76, 78.5, 82.9, 84.2, 85.5, 86.6, 90, 94, 111]
-t2 = [0, 3.2, 6.5, 9.8, 13.1, 16.32, 17.9, 19.6, 21.2, 24.5, 26.14, 29.4, 31, 32.6, 34.3, 37.65, 39.25, 42.55, 44.2, 47.45, 50.74, 52.3, 54.7, 57.23, 58.9, 60.5, 62.2, 63.7, 67, 68.6, 70.26, 71.98, 73.56, 75.2, 76.7, 80.2, 92]
-t3 = [0, 10.77, 12.15, 13.35, 14.86, 16.12, 17.5, 19.9, 22.84, 24.11, 25.28, 26.8, 28.02, 29.266, 30.783, 32.19, 33.498, 34.856, 36.157, 37.525, 40.746, 42.771, 44.132, 45.4, 46.4, 48.172, 49.47, 50.7, 52.03, 53.429, 54.8, 57.45, 58.8, 60.043, 61.37, 64.78, 78]
+t1 = [0, 4.4, 9.1, 11.3, 13.7, 16, 18.3, 22.9, 25.1, 28.8, 31.1, 37.9, 38.9, 41.5, 46.1, 47.3, 48.5, 51.1, 52.9, 55.2, 57.6, 59.8, 64.56, 66.8, 70.35, 71.4, 72.6, 73.8, 76, 78.5, 82.9, 84.2, 85.5, 86.6, 90, 94, 108]
+t2 = [0, 3.2, 6.5, 9.8, 13.1, 16.32, 17.9, 19.6, 21.2, 24.5, 26.14, 29.4, 31, 32.6, 34.3, 37.65, 39.25, 42.55, 44.2, 47.45, 50.74, 52.3, 54.7, 57.23, 58.9, 60.5, 62.2, 63.7, 67, 68.6, 70.26, 71.98, 73.56, 75.2, 76.7, 80.2, 89]
+t3 = [0, 10.77, 12.15, 13.35, 14.86, 16.12, 17.5, 19.9, 22.84, 24.11, 25.28, 26.8, 28.02, 29.266, 30.783, 32.19, 33.498, 34.856, 36.157, 37.525, 40.746, 42.771, 44.132, 45.4, 46.4, 48.172, 49.47, 50.7, 52.03, 53.429, 54.8, 57.45, 58.8, 60.043, 61.37, 64.78, 75]
+c = 'c'
+d = 'd'
+n = 'n'
+b1 = [n, c, d, c, d, d, c, d, c, d, d, c, c, d, d, d, d, c, c, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, c]
+b2 = [n, d, c, d, c, d, d, c, c, d, c, d, c, d, c, d, d, c, c, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, c]
+b3 = [n, c, c, c, d, d, d, c, d, d, d, d, c, d, c, d, d, c, d, d, c, c, d, d, d, c, d, d, c, d, c, d, c, d, c, d]
+
 #image load
 gamePageBg=pygame.image.load(gamePagePath+"/game_page.png")
 dog = pygame.image.load(gamePagePath+"/dog.png")
@@ -60,54 +67,48 @@ def _showCloud(x,y):
         #text=font.render(str(x),True,(0,0,0))
         #screen.blit(text, (400,300))
 
-def _callCat(n,t,countPlaySFX,presentTicks):
+def _call(n,b,t,countPlaySFX,presentTicks):
     count = 0
-    if presentTicks >= t and countPlaySFX<n:
+    if presentTicks >= t and countPlaySFX<n and b == 'c':
         catSound.play()
-        count+=1   
-    return count
-
-
-def _callDog(n,t,countPlaySFX,presentTicks):
-    count = 0
-    if presentTicks >= t and countPlaySFX<n:
+        count+=1
+    elif presentTicks >= t and countPlaySFX<n and b == 'd':
         dogSound.play()
         count+=1   
     return count
 
-def _checkCat(countPlaySFX,recentSoundTime,key,presentTicks,a):
+def _check(countPlaySFX,b,recentSoundTime,key,presentTicks,a):
     score = 0
-    if presentTicks>=recentSoundTime and presentTicks<=recentSoundTime+1 and a[countPlaySFX]==0:
-        if key == "f":
-            score+=50
-            hitSound.play()
-            a[countPlaySFX]=1
-        elif key == "j":
-            missSound.play()
-            a[countPlaySFX]=1
-    elif presentTicks>recentSoundTime+1 and a[countPlaySFX]==0:
-            missSound.play()
-            a[countPlaySFX]=1
-    elif a[countPlaySFX]==0 and a[countPlaySFX-1]==1 and (key=="f" or key=="j"):
-            missSound.play()
-    return score
-
-def _checkDog(countPlaySFX,recentSoundTime,key,presentTicks,a):
-    score = 0
-    if presentTicks>=recentSoundTime and presentTicks<=recentSoundTime+1 and a[countPlaySFX]==0:
-        if key == "j":
-            score+=50
-            hitSound.play()
-            a[countPlaySFX]=1
-        elif key == "f":
-            missSound.play()
-            a[countPlaySFX]=1
-    elif presentTicks>recentSoundTime+1 and a[countPlaySFX]==0:
-            missSound.play()
-            a[countPlaySFX]=1
-    elif a[countPlaySFX]==0 and a[countPlaySFX-1]==1 and (key=="f" or key=="j"):
-            missSound.play()
-    return score
+    if b == "c":
+        if presentTicks>=recentSoundTime and presentTicks<=recentSoundTime+1 and a[countPlaySFX]==0:
+            if key == "f":
+                score+=50
+                hitSound.play()
+                a[countPlaySFX]=1
+            elif key == "j":
+                missSound.play()
+                a[countPlaySFX]=1
+        elif presentTicks>recentSoundTime+1 and a[countPlaySFX]==0:
+                missSound.play()
+                a[countPlaySFX]=1
+        elif a[countPlaySFX]==0 and a[countPlaySFX-1]==1 and (key=="f" or key=="j"):
+                missSound.play()
+        return score
+    elif b == "d":
+        if presentTicks>=recentSoundTime and presentTicks<=recentSoundTime+1 and a[countPlaySFX]==0:
+            if key == "j":
+                score+=50
+                hitSound.play()
+                a[countPlaySFX]=1
+            elif key == "f":
+                missSound.play()
+                a[countPlaySFX]=1
+        elif presentTicks>recentSoundTime+1 and a[countPlaySFX]==0:
+                missSound.play()
+                a[countPlaySFX]=1
+        elif a[countPlaySFX]==0 and a[countPlaySFX-1]==1 and (key=="f" or key=="j"):
+                missSound.play()
+        return score
 
 def _pauseTime():
     pausePageBg=pygame.image.load(mainPath+"/olavan_asset/pause_page/pause_page.png")
@@ -141,7 +142,7 @@ def _pauseTime():
         screen.blit(restart,(425,391))
         pygame.display.update()
 
-def _play(t,songName):
+def _play(t,b,songName):
     #array for counting the beat
     array.array("i")                
     a = array.array("i",(0 for i in range(0,36)))
@@ -194,110 +195,110 @@ def _play(t,songName):
         presentTicks=(pygame.time.get_ticks()-startTicks-pauseTime)/1000 
         
         if a[1] == 0:       
-            countPlaySFX += _callCat(1,t[1],countPlaySFX,presentTicks)
-            scoreValue += _checkCat(1,t[1],key,presentTicks,a)
+            countPlaySFX += _call(1,b[1],t[1],countPlaySFX,presentTicks)
+            scoreValue += _check(1,b[1],t[1],key,presentTicks,a)
         elif a[2] == 0:
-            countPlaySFX += _callCat(2,t[2],countPlaySFX,presentTicks)
-            scoreValue += _checkCat(2,t[2],key,presentTicks,a)
+            countPlaySFX += _call(2,b[2],t[2],countPlaySFX,presentTicks)
+            scoreValue += _check(2,b[2],t[2],key,presentTicks,a)
         elif a[3] == 0:
-            countPlaySFX += _callCat(3,t[3],countPlaySFX,presentTicks)
-            scoreValue += _checkCat(3,t[3],key,presentTicks,a) 
+            countPlaySFX += _call(3,b[3],t[3],countPlaySFX,presentTicks)
+            scoreValue += _check(3,b[3],t[3],key,presentTicks,a) 
         elif a[4] == 0:
-            countPlaySFX += _callDog(4,t[4],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(4,t[4],key,presentTicks,a)
+            countPlaySFX += _call(4,b[4],t[4],countPlaySFX,presentTicks)
+            scoreValue += _check(4,b[4],t[4],key,presentTicks,a)
         elif a[5] == 0:
-            countPlaySFX += _callDog(5,t[5],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(5,t[5],key,presentTicks,a)
+            countPlaySFX += _call(5,b[5],t[5],countPlaySFX,presentTicks)
+            scoreValue += _check(5,b[5],t[5],key,presentTicks,a)
         elif a[6] == 0:
-            countPlaySFX += _callDog(6,t[6],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(6,t[6],key,presentTicks,a)
+            countPlaySFX += _call(6,b[6],t[6],countPlaySFX,presentTicks)
+            scoreValue += _check(6,b[6],t[6],key,presentTicks,a)
         elif a[7] == 0:
-            countPlaySFX += _callCat(7,t[7],countPlaySFX,presentTicks)
-            scoreValue += _checkCat(7,t[7],key,presentTicks,a)
+            countPlaySFX += _call(7,b[7],t[7],countPlaySFX,presentTicks)
+            scoreValue += _check(7,b[7],t[7],key,presentTicks,a)
         elif a[8] == 0:
-            countPlaySFX += _callDog(8,t[8],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(8,t[8],key,presentTicks,a)
+            countPlaySFX += _call(8,b[8],t[8],countPlaySFX,presentTicks)
+            scoreValue += _check(8,b[8],t[8],key,presentTicks,a)
         elif a[9] == 0:
-            countPlaySFX += _callDog(9,t[9],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(9,t[9],key,presentTicks,a)
+            countPlaySFX += _call(9,b[9],t[9],countPlaySFX,presentTicks)
+            scoreValue += _check(9,b[9],t[9],key,presentTicks,a)
         elif a[10] == 0:
-            countPlaySFX += _callDog(10,t[10],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(10,t[10],key,presentTicks,a)
+            countPlaySFX += _call(10,b[10],t[10],countPlaySFX,presentTicks)
+            scoreValue += _check(10,b[10],t[10],key,presentTicks,a)
         elif a[11] == 0:
-            countPlaySFX += _callDog(11,t[11],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(11,t[11],key,presentTicks,a)
+            countPlaySFX += _call(11,b[11],t[11],countPlaySFX,presentTicks)
+            scoreValue += _check(11,b[11],t[11],key,presentTicks,a)
         elif a[12] == 0:
-            countPlaySFX += _callCat(12,t[12],countPlaySFX,presentTicks)
-            scoreValue += _checkCat(12,t[12],key,presentTicks,a)
+            countPlaySFX += _call(12,b[12],t[12],countPlaySFX,presentTicks)
+            scoreValue += _check(12,b[12],t[12],key,presentTicks,a)
         elif a[13] == 0:
-            countPlaySFX += _callDog(13,t[13],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(13,t[13],key,presentTicks,a)
+            countPlaySFX += _call(13,b[13],t[13],countPlaySFX,presentTicks)
+            scoreValue += _check(13,b[13],t[13],key,presentTicks,a)
         elif a[14] == 0:
-            countPlaySFX += _callCat(14,t[14],countPlaySFX,presentTicks)
-            scoreValue += _checkCat(14,t[14],key,presentTicks,a)
+            countPlaySFX += _call(14,b[14],t[14],countPlaySFX,presentTicks)
+            scoreValue += _check(14,b[14],t[14],key,presentTicks,a)
         elif a[15] == 0:
-            countPlaySFX += _callDog(15,t[15],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(15,t[15],key,presentTicks,a)
+            countPlaySFX += _call(15,b[15],t[15],countPlaySFX,presentTicks)
+            scoreValue += _check(15,b[15],t[15],key,presentTicks,a)
         elif a[16] == 0:
-            countPlaySFX += _callDog(16,t[16],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(16,t[16],key,presentTicks,a)
+            countPlaySFX += _call(16,b[16],t[16],countPlaySFX,presentTicks)
+            scoreValue += _check(16,b[16],t[16],key,presentTicks,a)
         elif a[17] == 0:
-            countPlaySFX += _callCat(17,t[17],countPlaySFX,presentTicks)
-            scoreValue += _checkCat(17,t[17],key,presentTicks,a)
+            countPlaySFX += _call(17,b[17],t[17],countPlaySFX,presentTicks)
+            scoreValue += _check(17,b[17],t[17],key,presentTicks,a)
         elif a[18] == 0:
-            countPlaySFX += _callDog(18,t[18],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(18,t[18],key,presentTicks,a)
+            countPlaySFX += _call(18,b[18],t[18],countPlaySFX,presentTicks)
+            scoreValue += _check(18,b[18],t[18],key,presentTicks,a)
         elif a[19] == 0:
-            countPlaySFX += _callDog(19,t[19],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(19,t[19],key,presentTicks,a)
+            countPlaySFX += _call(19,b[19],t[19],countPlaySFX,presentTicks)
+            scoreValue += _check(19,b[19],t[19],key,presentTicks,a)
         elif a[20] == 0:
-            countPlaySFX += _callCat(20,t[20],countPlaySFX,presentTicks)
-            scoreValue += _checkCat(20,t[20],key,presentTicks,a)
+            countPlaySFX += _call(20,b[20],t[20],countPlaySFX,presentTicks)
+            scoreValue += _check(20,b[20],t[20],key,presentTicks,a)
         elif a[21] == 0:
-            countPlaySFX += _callCat(21,t[21],countPlaySFX,presentTicks)
-            scoreValue += _checkCat(21,t[21],key,presentTicks,a)
+            countPlaySFX += _call(21,b[21],t[21],countPlaySFX,presentTicks)
+            scoreValue += _check(21,b[21],t[21],key,presentTicks,a)
         elif a[22] == 0:
-            countPlaySFX += _callDog(22,t[22],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(22,t[22],key,presentTicks,a)
+            countPlaySFX += _call(22,b[22],t[22],countPlaySFX,presentTicks)
+            scoreValue += _check(22,b[22],t[22],key,presentTicks,a)
         elif a[23] == 0:
-            countPlaySFX += _callDog(23,t[23],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(23,t[23],key,presentTicks,a)
+            countPlaySFX += _call(23,b[23],t[23],countPlaySFX,presentTicks)
+            scoreValue += _check(23,b[23],t[23],key,presentTicks,a)
         elif a[24] == 0:
-            countPlaySFX += _callDog(24,t[24],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(24,t[24],key,presentTicks,a)
+            countPlaySFX += _call(24,b[24],t[24],countPlaySFX,presentTicks)
+            scoreValue += _check(24,b[24],t[24],key,presentTicks,a)
         elif a[25] == 0:
-            countPlaySFX += _callCat(25,t[25],countPlaySFX,presentTicks)
-            scoreValue += _checkCat(25,t[25],key,presentTicks,a)
+            countPlaySFX += _call(25,b[25],t[25],countPlaySFX,presentTicks)
+            scoreValue += _check(25,b[25],t[25],key,presentTicks,a)
         elif a[26] == 0:
-            countPlaySFX += _callDog(26,t[26],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(26,t[26],key,presentTicks,a)
+            countPlaySFX += _call(26,b[26],t[26],countPlaySFX,presentTicks)
+            scoreValue += _check(26,b[26],t[26],key,presentTicks,a)
         elif a[27] == 0:
-            countPlaySFX += _callDog(27,t[27],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(27,t[27],key,presentTicks,a)
+            countPlaySFX += _call(27,b[27],t[27],countPlaySFX,presentTicks)
+            scoreValue += _check(27,b[27],t[27],key,presentTicks,a)
         elif a[28] == 0:
-            countPlaySFX += _callCat(28,t[28],countPlaySFX,presentTicks)
-            scoreValue += _checkCat(28,t[28],key,presentTicks,a)
+            countPlaySFX += _call(28,b[28],t[28],countPlaySFX,presentTicks)
+            scoreValue += _check(28,b[28],t[28],key,presentTicks,a)
         elif a[29] == 0:
-            countPlaySFX += _callDog(29,t[29],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(29,t[29],key,presentTicks,a)
+            countPlaySFX += _call(29,b[29],t[29],countPlaySFX,presentTicks)
+            scoreValue += _check(29,b[29],t[29],key,presentTicks,a)
         elif a[30] == 0:
-            countPlaySFX += _callCat(30,t[30],countPlaySFX,presentTicks)
-            scoreValue += _checkCat(30,t[30],key,presentTicks,a)
+            countPlaySFX += _call(30,b[30],t[30],countPlaySFX,presentTicks)
+            scoreValue += _check(30,b[30],t[30],key,presentTicks,a)
         elif a[31] == 0:
-            countPlaySFX += _callDog(31,t[31],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(31,t[31],key,presentTicks,a)
+            countPlaySFX += _call(31,b[31],t[31],countPlaySFX,presentTicks)
+            scoreValue += _check(31,b[31],t[31],key,presentTicks,a)
         elif a[32] == 0:
-            countPlaySFX += _callCat(32,t[32],countPlaySFX,presentTicks)
-            scoreValue += _checkCat(32,t[32],key,presentTicks,a)
+            countPlaySFX += _call(32,b[32],t[32],countPlaySFX,presentTicks)
+            scoreValue += _check(32,b[32],t[32],key,presentTicks,a)
         elif a[33] == 0:
-            countPlaySFX += _callDog(33,t[33],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(33,t[33],key,presentTicks,a)
+            countPlaySFX += _call(33,b[33],t[33],countPlaySFX,presentTicks)
+            scoreValue += _check(33,b[33],t[33],key,presentTicks,a)
         elif a[34] == 0:
-            countPlaySFX += _callCat(34,t[34],countPlaySFX,presentTicks)
-            scoreValue += _checkCat(34,t[34],key,presentTicks,a)
+            countPlaySFX += _call(34,b[34],t[34],countPlaySFX,presentTicks)
+            scoreValue += _check(34,b[34],t[34],key,presentTicks,a)
         elif a[35] == 0:
-            countPlaySFX += _callDog(35,t[35],countPlaySFX,presentTicks)
-            scoreValue += _checkDog(35,t[35],key,presentTicks,a)
+            countPlaySFX += _call(35,b[35],t[35],countPlaySFX,presentTicks)
+            scoreValue += _check(35,b[35],t[35],key,presentTicks,a)
         
         #preferences
         screen.blit(gamePageBg,(0,0))
@@ -331,6 +332,39 @@ def _play(t,songName):
                 f.write(str(highestScore))
             return scoreValue
 
+def calculatePoint(endGameScore):
+    if endGameScore == 0:
+        return 0
+    elif endGameScore <= 350:
+        return 1
+    elif endGameScore <= 700:
+        return 2
+    elif endGameScore <= 1050:
+        return 3
+    elif endGameScore <= 1400:
+        return 4
+    else:
+        return 5
+        
+#totalscorepage
+def total_score_page(score,songName):
+    totalScorePagePath = mainPath + "/olavan_asset/total_score_page"
+    bg = pygame.image.load(totalScorePagePath+"/bg.png") 
+    collectButton = pygame.image.load(totalScorePagePath+"/Collect_button.png")
+    titleGetpoint = pygame.image.load(totalScorePagePath+"/getPoint.png")
+    star = pygame.image.load(totalScorePagePath+"/"+str(score)+".png")
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            
+        screen.blit(bg,(0,0))
+        screen.blit(star,(390,434))
+        screen.blit(collectButton, (512, 576))
+        screen.blit(titleGetpoint, (380, 370))
+        _showText(songName,562,260)
+        pygame.display.update()
 
 def main_page():
     while True:
@@ -351,12 +385,13 @@ def main():
     menu = main_page()
     if menu == 1:
         songName = "jinglebell"
-        endGamePoint = _play(t1,songName)
+        endGamePoint = _play(t1,b1,songName)     
     elif menu == 2:
         songName = "shutdown"
-        endGamePoint = _play(t2,songName)
+        endGamePoint = _play(t2,b2,songName)
     elif menu == 3:
         songName = "kerntarn"
-        endGamePoint = _play(t3,songName)
+        endGamePoint = _play(t3,b3,songName)
+    total_score_page(calculatePoint(endGamePoint),songName)
 
 main()
