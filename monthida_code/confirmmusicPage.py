@@ -39,8 +39,7 @@ def showStar(point):
        screen.blit(star4,(602,475))
     elif point == 5:
        screen.blit(star5,(602,475))
-    elif point == 0:
-       screen.blit(star0,(602,475))
+
 
 #game loop 
 
