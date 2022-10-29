@@ -6,6 +6,7 @@ import os
 mainPath = os.getcwd()
 print(mainPath)
 gamePagePath = mainPath + "/olavan_asset/game_page"
+exitPagePath = mainPath + "/olavan_asset/exit_page"
 tempPagePath = mainPath + "/olavan_asset/temp"
 fontPath = mainPath + "/font"
 musicPath = mainPath + "/music"
@@ -31,6 +32,7 @@ cat = pygame.image.load(gamePagePath+"/cat.png")
 sushi = pygame.image.load(gamePagePath+"/sushi.png")
 food = pygame.image.load(gamePagePath+"/food.png")
 cloud = pygame.image.load(gamePagePath+"/cloud.png")
+oops = pygame.image.load(gamePagePath+"/oops.png")
 #sound load
 hitSound = pygame.mixer.Sound(musicPath+"/hit_sound.mp3")
 missSound = pygame.mixer.Sound(musicPath+"/miss_sound.mp3")
@@ -87,12 +89,18 @@ def _check(countPlaySFX,b,recentSoundTime,key,presentTicks,a):
                 a[countPlaySFX]=1
             elif key == "j":
                 missSound.play()
+                screen.blit(oops,(532,400))
+                pygame.display.update()
                 a[countPlaySFX]=1
         elif presentTicks>recentSoundTime+1 and a[countPlaySFX]==0:
                 missSound.play()
+                screen.blit(oops,(532,400))
+                pygame.display.update()
                 a[countPlaySFX]=1
         elif a[countPlaySFX]==0 and a[countPlaySFX-1]==1 and (key=="f" or key=="j"):
                 missSound.play()
+                screen.blit(oops,(532,400))
+                pygame.display.update()
         return score
     elif b == "d":
         if presentTicks>=recentSoundTime and presentTicks<=recentSoundTime+1 and a[countPlaySFX]==0:
@@ -102,12 +110,18 @@ def _check(countPlaySFX,b,recentSoundTime,key,presentTicks,a):
                 a[countPlaySFX]=1
             elif key == "f":
                 missSound.play()
+                screen.blit(oops,(532,400))
+                pygame.display.update()
                 a[countPlaySFX]=1
         elif presentTicks>recentSoundTime+1 and a[countPlaySFX]==0:
                 missSound.play()
+                screen.blit(oops,(532,400))
+                pygame.display.update()
                 a[countPlaySFX]=1
         elif a[countPlaySFX]==0 and a[countPlaySFX-1]==1 and (key=="f" or key=="j"):
                 missSound.play()
+                screen.blit(oops,(532,400))
+                pygame.display.update()
         return score
 
 def _pauseTime():
@@ -130,6 +144,10 @@ def _pauseTime():
                     return -1
                 elif event.key == pygame.K_b:
                     return 0
+                elif event.key == pygame.K_ESCAPE:
+                    exit = _exit()
+                    if exit == 1:
+                        quit()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(425,211,430,180) == 1:
                     return pauseTime-pauseStart
@@ -151,6 +169,47 @@ def _checkClickRect(left,top,width,height):
     else:
         return 0
 
+def _exit():
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:            
+                    return 1
+                elif event.key == pygame.K_BACKSPACE:
+                    return 0
+
+        bg = pygame.image.load(exitPagePath+"/Exit_game_page.png") 
+        exitButton = pygame.image.load(exitPagePath+"/Exit.png")
+        noexitButton = pygame.image.load(exitPagePath+"/No_exit.png")
+        screen.blit(bg,(0,0))
+        screen.blit(exitButton,(431,283))
+        screen.blit(noexitButton,(431,463))
+        pygame.display.update()
+
+def _exitTime():
+    exitStart = pygame.time.get_ticks()
+    exitTime = 0
+    while True:
+        exitTime = pygame.time.get_ticks()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:            
+                    return 1
+                elif event.key == pygame.K_BACKSPACE:
+                    return exitTime-exitStart
+
+        bg = pygame.image.load(exitPagePath+"/Exit_game_page.png") 
+        exitButton = pygame.image.load(exitPagePath+"/Exit.png")
+        noexitButton = pygame.image.load(exitPagePath+"/No_exit.png")
+        screen.blit(bg,(0,0))
+        screen.blit(exitButton,(431,283))
+        screen.blit(noexitButton,(431,463))
+        pygame.display.update()
+
 def _play(t,b,songName):
     #array for counting the beat
     array.array("i")                
@@ -159,6 +218,7 @@ def _play(t,b,songName):
     #any variables
     pygame.mixer.music.load(musicPath+"/"+songName+"_music.mp3")
     pauseTime = 0
+    exitTime = 0
     pygame.mixer.music.set_volume(0.3)
     pygame.mixer.music.play(1,0.0)
     startTicks=pygame.time.get_ticks()
@@ -199,9 +259,18 @@ def _play(t,b,songName):
                             main()
                         pauseTime += pauseTemp
                         pygame.mixer.music.unpause()
+                    elif event.key == pygame.K_ESCAPE:
+                        pygame.mixer.music.pause()
+                        exitTemp = _exitTime()
+                        if exitTemp == 1:
+                            quit()
+                        exitTime += exitTemp
+                        pygame.mixer.music.unpause()
+                        
+                            
                         
                         
-        presentTicks=(pygame.time.get_ticks()-startTicks-pauseTime)/1000 
+        presentTicks=(pygame.time.get_ticks()-startTicks-pauseTime-exitTime)/1000 
         
         if a[1] == 0:       
             countPlaySFX += _call(1,b[1],t[1],countPlaySFX,presentTicks)
@@ -369,6 +438,11 @@ def total_score_page(score,songName):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    exit = _exit()
+                    if exit == 1:
+                        quit()
             
         screen.blit(bg,(0,0))
         screen.blit(star,(390,434))
@@ -390,11 +464,15 @@ def main_page():
                     return 2
                 elif event.key == pygame.K_k:
                     return 3
+                elif event.key == pygame.K_ESCAPE:
+                    exit = _exit()
+                    if exit == 1:
+                        quit()
         screen.blit(gamePageBg,(0,0))
         screen.blit(tempmenu,(390,300))
         pygame.display.update()
         
-def main():
+def main():                     
     menu = main_page()
     if menu == 1:
         songName = "jinglebell"
