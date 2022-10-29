@@ -179,13 +179,18 @@ def _exit():
                     return 1
                 elif event.key == pygame.K_BACKSPACE:
                     return 0
+            if pygame.mouse.get_pressed()[0]:
+                if _checkClickRect(431,283,430,180) == 1:
+                    return 0
+                elif _checkClickRect(431,463,430,180) == 1:
+                    return 1
 
         bg = pygame.image.load(exitPagePath+"/Exit_game_page.png") 
         exitButton = pygame.image.load(exitPagePath+"/Exit.png")
         noexitButton = pygame.image.load(exitPagePath+"/No_exit.png")
         screen.blit(bg,(0,0))
-        screen.blit(exitButton,(431,283))
-        screen.blit(noexitButton,(431,463))
+        screen.blit(noexitButton,(431,283))
+        screen.blit(exitButton,(431,463))
         pygame.display.update()
 
 def _exitTime():
@@ -201,13 +206,18 @@ def _exitTime():
                     return 1
                 elif event.key == pygame.K_BACKSPACE:
                     return exitTime-exitStart
+            if pygame.mouse.get_pressed()[0]:
+                if _checkClickRect(431,283,430,180) == 1:
+                    return exitTime-exitStart
+                elif _checkClickRect(431,463,430,180) == 1:
+                    return 1
 
         bg = pygame.image.load(exitPagePath+"/Exit_game_page.png") 
         exitButton = pygame.image.load(exitPagePath+"/Exit.png")
         noexitButton = pygame.image.load(exitPagePath+"/No_exit.png")
         screen.blit(bg,(0,0))
-        screen.blit(exitButton,(431,283))
-        screen.blit(noexitButton,(431,463))
+        screen.blit(noexitButton,(431,283))
+        screen.blit(exitButton,(431,463))
         pygame.display.update()
 
 def _play(t,b,songName):
@@ -266,10 +276,7 @@ def _play(t,b,songName):
                             quit()
                         exitTime += exitTemp
                         pygame.mixer.music.unpause()
-                        
-                            
-                        
-                        
+                                    
         presentTicks=(pygame.time.get_ticks()-startTicks-pauseTime-exitTime)/1000 
         
         if a[1] == 0:       
@@ -385,11 +392,11 @@ def _play(t,b,songName):
         _showText(songName,562,50)
         _showCloud(cloudX,111)
         if cloudX<=100 and cloudBack==0:
-            cloudX+=0.5
+            cloudX+=2
             if cloudX==100:
                 cloudBack = 1
         if cloudBack==1 and cloudX>=-100:
-            cloudX-=0.5
+            cloudX-=2
             if cloudX==-100:
                 cloudBack = 0
             
@@ -425,6 +432,51 @@ def calculatePoint(endGameScore):
     else:
         return 5
 
+def selectedMusicPage(songName):
+    selectedMusicPagePath = mainPath + "/olavan_asset/selected_music_page"
+    bg = pygame.image.load(selectedMusicPagePath+"/Confirm_music_page.png") 
+    prevBotton = pygame.image.load(selectedMusicPagePath+"/Previous_button.png")
+    startBotton = pygame.image.load(selectedMusicPagePath+"/Start_game_button.png")
+    titleMusic = pygame.image.load(selectedMusicPagePath+"/title_music.png")
+    titleTotalScore = pygame.image.load(selectedMusicPagePath+"/title_totalscore.png")
+    musicIcon = pygame.image.load(selectedMusicPagePath+"/icon_"+songName+".png")
+
+    try:
+        highestScore = int(_getHighestScore(songName))
+    except:
+        highestScore = 0
+
+    highestStar = calculatePoint(highestScore)
+    star = pygame.image.load(selectedMusicPagePath+"/"+str(highestStar)+".png")
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    return 1
+                if event.key == pygame.K_BACKSPACE:
+                    main()
+                if event.key == pygame.K_ESCAPE:
+                    exit = _exit()
+                    if exit == 1:
+                        quit()
+            if pygame.mouse.get_pressed()[0]:
+                if _checkClickRect(410,569,230,100) == 1:
+                    main()
+                elif _checkClickRect(640,569,230,100) == 1:
+                    return 1
+    
+        screen.blit(bg,(0,0))
+        screen.blit(star,(602,475))
+        screen.blit(musicIcon, (545, 225))
+        _showText(songName,511,420)
+        screen.blit(prevBotton, (410, 569))
+        screen.blit(startBotton, (640, 569))
+        screen.blit(titleMusic, (415, 437))
+        screen.blit(titleTotalScore, (415, 493))
+        pygame.display.update()
+
 
 #totalscorepage
 def total_score_page(score,songName):
@@ -443,6 +495,9 @@ def total_score_page(score,songName):
                     exit = _exit()
                     if exit == 1:
                         quit()
+            if pygame.mouse.get_pressed()[0]:
+                if _checkClickRect(525,576,230,100) == 1:
+                    main()
             
         screen.blit(bg,(0,0))
         screen.blit(star,(390,434))
@@ -476,13 +531,19 @@ def main():
     menu = main_page()
     if menu == 1:
         songName = "jinglebell"
-        endGamePoint = _play(t1,b1,songName)     
+        confirmMusic = selectedMusicPage(songName)
+        if confirmMusic == 1:
+            endGamePoint = _play(t1,b1,songName)     
     elif menu == 2:
         songName = "shutdown"
-        endGamePoint = _play(t2,b2,songName)
+        confirmMusic = selectedMusicPage(songName)
+        if confirmMusic == 1:
+            endGamePoint = _play(t2,b2,songName)
     elif menu == 3:
         songName = "kerntarn"
-        endGamePoint = _play(t3,b3,songName)
+        confirmMusic = selectedMusicPage(songName)
+        if confirmMusic == 1:
+            endGamePoint = _play(t3,b3,songName)
     total_score_page(calculatePoint(endGamePoint),songName)
 
 main()
