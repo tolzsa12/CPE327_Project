@@ -19,11 +19,11 @@ startBotton = pygame.image.load(homePagePath+"/Start_game_button.png")
 titleMusic = pygame.image.load(homePagePath+"/title_music.png")
 titleTotalScore = pygame.image.load(homePagePath+"/title_totalscore.png")
 musicIcon = pygame.image.load(homePagePath+"/icon_jinglebell.png")
-star5 = pygame.image.load(homePagePath+"/1.png") # 5 point
-star4 = pygame.image.load(homePagePath+"/2.png") # 4 point 
+star5 = pygame.image.load(homePagePath+"/5.png") # 5 point
+star4 = pygame.image.load(homePagePath+"/4.png") # 4 point 
 star3 = pygame.image.load(homePagePath+"/3.png") # 3 point
-star2 = pygame.image.load(homePagePath+"/4.png") # 2 point
-star1 = pygame.image.load(homePagePath+"/5.png") # 1 point
+star2 = pygame.image.load(homePagePath+"/2.png") # 2 point
+star1 = pygame.image.load(homePagePath+"/1.png") # 1 point
 
 
 #show highscore
