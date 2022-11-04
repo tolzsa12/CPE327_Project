@@ -30,33 +30,30 @@ def _checkClickRect(left,top,width,height):
         return 0
 
 #home
-def homePage(check):
- if check == 0:
-    screen.blit(bg,(0,0))
-    screen.blit(startButton,(210,248))
-    screen.blit(tutorialButton,(640,248))
- elif pygame.mouse.get_pressed()[0]:
-    if _checkClickRect(210,248,430,180) == 1: #select tutorial
-        return check == 1
- elif pygame.mouse.get_pressed()[0]:
-    if _checkClickRect(640,248,430,180) == 1: #select start
-        return check == 2
+def homePage():
+    while True:
+        screen.blit(bg,(0,0))
+        screen.blit(startButton,(210,248))
+        screen.blit(tutorialButton,(640,248))
+        if pygame.mouse.get_pressed()[0]:
+            if _checkClickRect(210,248,430,180) == 1: #select tutorial
+                return 1
+            elif _checkClickRect(640,248,430,180) == 1: #select start
+                return 2 #ใส่ไว้ก่อนมัน return ไม่ได้
+
 
 #tutorial
-def tutorialPage(check):
- if check == 1: #tutorialPage 1
+def tutorialPage():
     screen.blit(tutorialPage1,(0,0))
     screen.blit(homepageButton,(16,20))
     screen.blit(nextButton,(1028,685))
 
+
 #game loop 
 
-run = True
-while run:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
-    homePage(0)
-    tutorialPage(1)
-    pygame.display.update()
-pygame.quit()
+def main():
+    check1 = homePage()
+    #if check1 ==  1:
+        #check2 = tutorialPage()
+
+main()

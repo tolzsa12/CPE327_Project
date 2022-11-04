@@ -36,22 +36,22 @@ def page1(prev):
         screen.blit(tutorialPage1,(0,0))
         screen.blit(homepageButton,(16,20))
         screen.blit(nextButton,(1028,685))
-
+   
 
 #tutorial page 2
-def nextPage(next):
-    if next == 1:
+def page2(prev):
+    if prev == 2:
         screen.blit(tutorialPage2,(0,0))
         screen.blit(homepageButton,(16,20))
 
+
 #loop
-def showTutorial(show):
-    if show == 1:
-        page1(1)
-    else:
-        pygame.mouse.get_pressed()[0]
-        if _checkClickRect(1028,685,230,100) == 1: #click ต่อไป
-            nextPage(1)
+def showPage():
+    page1(1)
+    if pygame.mouse.get_pressed()[0]:
+            if _checkClickRect(1028,685,230,100) == 1:
+                page2()
+
 
 #game loop 
 
@@ -61,7 +61,6 @@ while run:
         if event.type == pygame.QUIT:
             run = False
     
-    showTutorial(1)
-    
+    showPage()
     pygame.display.update()
 pygame.quit()
