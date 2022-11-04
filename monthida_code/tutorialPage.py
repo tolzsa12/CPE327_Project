@@ -50,7 +50,7 @@ def showPage():
     page1(1)
     if pygame.mouse.get_pressed()[0]:
             if _checkClickRect(1028,685,230,100) == 1:
-                page2()
+                page2(2)
 
 
 #game loop 

@@ -47,15 +47,17 @@ def homePage():
         pygame.display.update()
 
 
-#tutorial
-def tutorialPage():
+#tutorialPage 1
+def tutorialPage_1():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                     quit()
             if pygame.mouse.get_pressed()[0]:
-                if _checkClickRect(210,248,430,180) == 1:
-                    return 1
+                if _checkClickRect(1028,685,230,100) == 1: #select next
+                    return 0
+                if _checkClickRect(16,20,230,100) == 1: #select homepage
+                    main()
                 
         screen.blit(tutorialPage1,(0,0))
         screen.blit(homepageButton,(16,20))
@@ -63,12 +65,31 @@ def tutorialPage():
         pygame.display.update()
 
 
+#tutorialPage 2
+def tutorialPage_2():
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                    quit()
+            if pygame.mouse.get_pressed()[0]:
+                if _checkClickRect(16,686,230,100) == 1: #select back
+                    tutorialPage_1()
+                if _checkClickRect(16,20,230,100) == 1: #select homepage
+                    main()
+        
+        screen.blit(tutorialPage2,(0,0))
+        screen.blit(homepageButton,(16,20))
+        screen.blit(prevButton,(16,686))
+        pygame.display.update()
+
 #game loop 
 
 def main():
     check1 = homePage()
     print(check1)
     if check1 ==  1:
-        check2 = tutorialPage()
+        check2 = tutorialPage_1()
+        if check2 == 0:
+            check3 = tutorialPage_2()
 
 main()
