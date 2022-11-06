@@ -8,6 +8,7 @@ print(mainPath)
 gamePagePath = mainPath + "/olavan_asset/game_page"
 exitPagePath = mainPath + "/olavan_asset/exit_page"
 tempPagePath = mainPath + "/olavan_asset/temp"
+soundPath = mainPath+ "/sound"
 fontPath = mainPath + "/font"
 musicPath = mainPath + "/music"
 highestScorePath = mainPath + "/highest_score"
@@ -38,6 +39,7 @@ hitSound = pygame.mixer.Sound(musicPath+"/hit_sound.mp3")
 missSound = pygame.mixer.Sound(musicPath+"/miss_sound.mp3")
 dogSound = pygame.mixer.Sound(musicPath+"/dog_sound.mp3")
 catSound = pygame.mixer.Sound(musicPath+"/cat_sound.mp3")
+clickSound = pygame.mixer.Sound(soundPath+"/click.mp3")
 #font load
 font=pygame.font.Font(fontPath+"/trebuc.ttf",32)
 #sound setting
@@ -138,22 +140,29 @@ def _pauseTime():
             if event.type == pygame.QUIT:
                     quit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_c:            
+                if event.key == pygame.K_c:
+                    clickSound.play()
                     return pauseTime-pauseStart
                 elif event.key == pygame.K_r:
+                    clickSound.play()
                     return -1
                 elif event.key == pygame.K_b:
+                    clickSound.play()
                     return 0
                 elif event.key == pygame.K_ESCAPE:
+                    clickSound.play()
                     exit = _exit()
                     if exit == 1:
                         quit()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(425,211,430,180) == 1:
+                    clickSound.play()
                     return pauseTime-pauseStart
                 elif _checkClickRect(425,391,430,180) == 1:
+                    clickSound.play()
                     return -1
                 elif _checkClickRect(425,571,430,180) == 1:
+                    clickSound.play()
                     return 0
         screen.blit(pausePageBg,(0,0))
         screen.blit(back,(425,571))
@@ -175,14 +184,18 @@ def _exit():
             if event.type == pygame.QUIT:
                 pygame.quit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:            
+                if event.key == pygame.K_RETURN:
+                    clickSound.play()
                     return 1
                 elif event.key == pygame.K_BACKSPACE:
+                    clickSound.play()
                     return 0
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(431,283,430,180) == 1:
+                    clickSound.play()
                     return 0
                 elif _checkClickRect(431,463,430,180) == 1:
+                    clickSound.play()
                     return 1
 
         bg = pygame.image.load(exitPagePath+"/Exit_game_page.png") 
@@ -202,14 +215,18 @@ def _exitTime():
             if event.type == pygame.QUIT:
                 pygame.quit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:            
+                if event.key == pygame.K_RETURN:
+                    clickSound.play()
                     return 1
                 elif event.key == pygame.K_BACKSPACE:
+                    clickSound.play()
                     return exitTime-exitStart
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(431,283,430,180) == 1:
+                    clickSound.play()
                     return exitTime-exitStart
                 elif _checkClickRect(431,463,430,180) == 1:
+                    clickSound.play()
                     return 1
 
         bg = pygame.image.load(exitPagePath+"/Exit_game_page.png") 
@@ -262,6 +279,7 @@ def _play(t,b,songName):
                         yfood = 488
                     elif event.key == pygame.K_SPACE:
                         pygame.mixer.music.pause()
+                        clickSound.play()
                         pauseTemp = _pauseTime()
                         if pauseTemp == -1:
                             _play(t,b,songName)
@@ -271,6 +289,7 @@ def _play(t,b,songName):
                         pygame.mixer.music.unpause()
                     elif event.key == pygame.K_ESCAPE:
                         pygame.mixer.music.pause()
+                        clickSound.play()
                         exitTemp = _exitTime()
                         if exitTemp == 1:
                             quit()
@@ -454,17 +473,22 @@ def selectedMusicPage(songName):
                 quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
+                    clickSound.play()
                     return 1
                 if event.key == pygame.K_BACKSPACE:
+                    clickSound.play()
                     main()
                 if event.key == pygame.K_ESCAPE:
+                    clickSound.play()
                     exit = _exit()
                     if exit == 1:
                         quit()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(410,569,230,100) == 1:
+                    clickSound.play()
                     main()
                 elif _checkClickRect(640,569,230,100) == 1:
+                    clickSound.play()
                     return 1
     
         screen.blit(bg,(0,0))
@@ -492,6 +516,7 @@ def total_score_page(score,songName):
                 quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
+                    clickSound.play()
                     exit = _exit()
                     if exit == 1:
                         quit()
@@ -513,13 +538,17 @@ def main_page():
             if event.type == pygame.QUIT:
                     quit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_j:            
+                if event.key == pygame.K_j:
+                    clickSound.play()
                     return 1
                 elif event.key == pygame.K_s:
+                    clickSound.play()
                     return 2
                 elif event.key == pygame.K_k:
+                    clickSound.play()
                     return 3
                 elif event.key == pygame.K_ESCAPE:
+                    clickSound.play()
                     exit = _exit()
                     if exit == 1:
                         quit()
