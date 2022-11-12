@@ -4,7 +4,6 @@ import array
 import os
 
 mainPath = os.getcwd()
-print(mainPath)
 gamePagePath = mainPath + "/olavan_asset/game_page"
 exitPagePath = mainPath + "/olavan_asset/exit_page"
 tempPagePath = mainPath + "/olavan_asset/temp"
@@ -12,6 +11,9 @@ soundPath = mainPath+ "/sound"
 fontPath = mainPath + "/font"
 musicPath = mainPath + "/music"
 highestScorePath = mainPath + "/highest_score"
+
+
+
 
 pygame.init()
 pygame.display.set_caption("main_test")
@@ -127,48 +129,98 @@ def _check(countPlaySFX,b,recentSoundTime,key,presentTicks,a):
         return score
 
 def _pauseTime():
-    pausePageBg=pygame.image.load(mainPath+"/olavan_asset/pause_page/pause_page.png")
+    pausePagePath = mainPath+"/olavan_asset/pause_page"
+    pauseSoundPath = soundPath+"/pause_game_page"
+    pausePageBg = pygame.image.load(pausePagePath+"/pause_page.png")
     pauseTime = 0
-    back=pygame.image.load(mainPath+"/olavan_asset/pause_page/back_select_song.png")
-    continues=pygame.image.load(mainPath+"/olavan_asset/pause_page/continue_button.png")
-    restart=pygame.image.load(mainPath+"/olavan_asset/pause_page/restart_button.png")
+    back = pygame.image.load(pausePagePath+"/back_select_song.png")
+    continues = pygame.image.load(pausePagePath+"/continue_button.png")
+    restart = pygame.image.load(pausePagePath+"/restart_button.png")
+    catFoot = pygame.image.load(pausePagePath+"/cat_foot.png")
+
+
+    
+
+    #load music
+    sound1 = pygame.mixer.music(pauseSoundPath+"/continue.mp3")
+    sound2 = pygame.mixer.music(pauseSoundPath+"/restart.mp3")
+    sound3 = pygame.mixer.music(pauseSoundPath+"/select_new_music.mp3")
+
+    countdownSound = pygame.mixer.music(pauseSoundPath+"/countdown.mp3")
+    pauseGameSound = pygame.mixer.music(pauseSoundPath+"/pausegame.mp3")
+
+    
+    catClick = 0
+    heightCat = 351.04
+    stateButton = 0
 
     pauseStart = pygame.time.get_ticks()
+
+    
     while True:
         pauseTime = pygame.time.get_ticks()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                    quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_c:
-                    clickSound.play()
-                    return pauseTime-pauseStart
-                elif event.key == pygame.K_r:
-                    clickSound.play()
-                    return -1
-                elif event.key == pygame.K_b:
-                    clickSound.play()
-                    return 0
-                elif event.key == pygame.K_ESCAPE:
-                    clickSound.play()
-                    exit = _exit()
-                    if exit == 1:
-                        quit()
-            if pygame.mouse.get_pressed()[0]:
-                if _checkClickRect(425,211,430,180) == 1:
-                    clickSound.play()
-                    return pauseTime-pauseStart
-                elif _checkClickRect(425,391,430,180) == 1:
-                    clickSound.play()
-                    return -1
-                elif _checkClickRect(425,571,430,180) == 1:
-                    clickSound.play()
-                    return 0
         screen.blit(pausePageBg,(0,0))
         screen.blit(back,(425,571))
         screen.blit(continues,(425,211))
         screen.blit(restart,(425,391))
+        screen.blit(catFoot,(783,heightCat))
+
         pygame.display.update()
+            
+
+
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                    quit()
+                    
+            if event.type == pygame.KEYDOWN:
+                #if event.key == pygame.K_c:
+                    #clickSound.play()
+                    #return pauseTime-pauseStart
+                #elif event.key == pygame.K_r:
+                    #clickSound.play()
+                    #return -1
+                #elif event.key == pygame.K_b:
+                    #clickSound.play()
+                    #return 0
+          
+                if event.key == pygame.K_ESCAPE:
+                    clickSound.play()
+                    exit = _exit()
+                    if exit == 1:
+                        quit()
+            if _checkClickRect(425,211,430,180) == 1:
+                catClick = 1
+                hieghtCat = 351.04
+                if pygame.mouse.get_pressed()[0]:
+                    pygame.mixer.stop()
+                    clickSound.play()
+                    return pauseTime-pauseStart
+            elif _checkClickRect(425,391,430,180) == 1:
+                catClick = 2
+                hieghtCat = 531.04
+                if pygame.mouse.get_pressed()[0]:
+                    pygame.mixer.stop()
+                    clickSound.play()
+                    return -1
+            elif _checkClickRect(425,571,430,180) == 1:
+                catClick = 3
+                hieghtCat = 711.04
+                if pygame.mouse.get_pressed()[0]:
+                    pygame.mixer.stop()
+                    clickSound.play()
+                    return 0
+            else: catClick = 0
+            
+                
+        if stateButton == 0:
+            sound1.play()
+            while pygame.mixer.get_busy() == True:
+                continue
+            pauseGameSound.play()
+        
+
 
 
 def _checkClickRect(left,top,width,height):
