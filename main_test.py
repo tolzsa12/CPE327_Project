@@ -137,15 +137,9 @@ def _pauseTime():
     continues = pygame.image.load(pausePagePath+"/continue_button.png")
     restart = pygame.image.load(pausePagePath+"/restart_button.png")
     catFoot = pygame.image.load(pausePagePath+"/cat_foot.png")
-
-
-    #กำลังมีปัญหาในการใส่เสียง
-    #ใช้ sound มันรันพร้อมกัน เสียงทับกัน
-    #ใช้ music มันทับกับตัวเพลงเกมหลัก
     
 
     #load music
-    print(pauseSoundPath)
     # sound1 = pygame.mixer.music.load(pauseSoundPath+"/continue.mp3")
     # sound2 = pygame.mixer.music.load(pauseSoundPath+"/restart.mp3")
     # sound3 = pygame.mixer.music.load(pauseSoundPath+"/select_new_music.mp3")
@@ -158,8 +152,8 @@ def _pauseTime():
     stateButton = 0
 
     pauseStart = pygame.time.get_ticks()
-
-    
+    temp=0
+    temp2=0
     while True:
         pauseTime = pygame.time.get_ticks()
         screen.blit(pausePageBg,(0,0))
@@ -167,57 +161,150 @@ def _pauseTime():
         screen.blit(continues,(425,211))
         screen.blit(restart,(425,391))
         
-            
-        if stateButton == 0:
-            print("222222222")
-            pygame.mixer.music.load(pauseSoundPath+"/pausegame.mp3")
-            pygame.mixer.music.play()
-            pygame.mixer.music.queue(pauseSoundPath+"/continue.mp3")
+        if stateButton == 0 and temp-temp2!=1:
+            if not pygame.mixer.music.get_busy():
+                heightCat = 250
+                pygame.mixer.music.load(pauseSoundPath+"/pausegame.mp3")
+                pygame.mixer.music.play()
+                pygame.mixer.music.queue(pauseSoundPath+"/continue.mp3")
+                temp = temp+1
+        elif stateButton == 1 and  temp-temp2!=1:
+            if not pygame.mixer.music.get_busy():
+                heightCat = 250
+          
+                pygame.mixer.music.load(pauseSoundPath+"/continue.mp3")
+                pygame.mixer.music.play()
+          
+                temp = temp+1
+        elif stateButton == 2 and  temp-temp2!=1:
+            if not pygame.mixer.music.get_busy():
+                heightCat = 430
+       
+                pygame.mixer.music.load(pauseSoundPath+"/restart.mp3")
+                pygame.mixer.music.play()
+           
+                temp = temp+1
+        elif stateButton == 3 and  temp-temp2!=1:
+            if not pygame.mixer.music.get_busy():
+                heightCat = 610
+   
+                pygame.mixer.music.load(pauseSoundPath+"/select_new_music.mp3")
+                pygame.mixer.music.play()
+   
+                temp = temp+1
 
 
+        
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                     quit()
                     
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_c: #to continue
+                if event.key == pygame.K_f: #back select
+           
+
+                    pygame.mixer.music.stop()
                     clickSound.play()
-                    return pauseTime-pauseStart
-                elif event.key == pygame.K_r: #to restart
+                    temp2=temp2+1
+                    if stateButton == 0 or stateButton == 1:
+                        stateButton = 3
+                    else: 
+                        stateButton = stateButton - 1
+                elif event.key == pygame.K_j: #to restart
+                    pygame.mixer.music.stop()
                     clickSound.play()
-                    return -1
-                elif event.key == pygame.K_b: #to back to select song
+                    temp2=temp2+1
+                    if stateButton == 3:
+                        stateButton = 1
+                    elif stateButton == 0:
+                        stateButton = 2
+                    else: 
+                        stateButton = stateButton + 1
+                if event.key == pygame.K_RETURN:
+                    pygame.mixer.music.stop()
                     clickSound.play()
-                    return 0
+                    if stateButton == 0 or stateButton == 1:
+                        pygame.mixer.music.stop()
+                        pauseTime = pygame.time.get_ticks()
+                        return pauseTime-pauseStart
+                    elif stateButton == 2:
+                        pygame.mixer.music.stop()
+                        return -1
+                    elif stateButton == 3:
+                        pygame.mixer.music.stop()
+                        return 0
+                
+
+                # if event.key == pygame.K_c: #to continue
+                #     clickSound.play()
+                #     return pauseTime-pauseStart
+                # elif event.key == pygame.K_r: #to restart
+                #     clickSound.play()
+                #     return -1
+                # elif event.key == pygame.K_b: #to back to select song
+                #     clickSound.play()
+                #     return 0
+
                 if event.key == pygame.K_ESCAPE: #exit game
                     clickSound.play()
                     exit = _exit()
                     if exit == 1:
                         quit()
-                    
-            if _checkClickRect(425,211,430,180) == 1: #if cursor above the continue button
+
+            #check for only changing status        
+            if _checkClickRect(425,211,430,180) == 1 and heightCat != 250: #if cursor above the continue button
+               
+                pygame.mixer.music.stop()
                 heightCat = 250
-                print(heightCat)
+            
+                stateButton = 1
+                temp2=temp2+1
                 if pygame.mouse.get_pressed()[0]:
-                    pygame.mixer.stop()
+                    pygame.mixer.music.stop()
                     clickSound.play()
+                    pauseTime = pygame.time.get_ticks()
                     return pauseTime-pauseStart
-            elif _checkClickRect(425,391,430,180) == 1:  #if cursor above the restart button
+            elif _checkClickRect(425,391,430,180) == 1 and heightCat != 430:  #if cursor above the restart button
+               
+                pygame.mixer.music.stop()
                 heightCat = 430
-                print(heightCat)
+                stateButton = 2
+                temp2=temp2+1
                 if pygame.mouse.get_pressed()[0]:
-                    pygame.mixer.stop()
+                    pygame.mixer.music.stop()
                     clickSound.play()
                     return -1
-            elif _checkClickRect(425,571,430,180) == 1:   #if cursor above the select new song button
+            elif _checkClickRect(425,571,430,180) == 1 and heightCat != 610:   #if cursor above the select new song button
+                print("ลากโดนนนนนนนนนนนนน")
+                pygame.mixer.music.stop()
                 heightCat = 610
                 print(heightCat)
+                stateButton = 3
+                temp2=temp2+1
                 if pygame.mouse.get_pressed()[0]:
-                    pygame.mixer.stop()
+                    pygame.mixer.music.stop()
                     clickSound.play()
                     return 0
 
+            #check for clicking status
+            if _checkClickRect(425,211,430,180) == 1:
+                if pygame.mouse.get_pressed()[0]:
+                    pygame.mixer.music.stop()
+                    clickSound.play()
+                    pauseTime = pygame.time.get_ticks()
+                    return pauseTime-pauseStart
+            elif _checkClickRect(425,391,430,180) == 1:
+                if pygame.mouse.get_pressed()[0]:
+                    pygame.mixer.music.stop()
+                    clickSound.play()
+                    return -1
+            elif _checkClickRect(425,571,430,180) == 1:
+                if pygame.mouse.get_pressed()[0]:
+                    pygame.mixer.music.stop()
+                    clickSound.play()
+                    return 0
+                
         screen.blit(catFoot,(783,heightCat))
         pygame.display.update()
             
@@ -307,7 +394,8 @@ def _play(t,b,songName):
     pauseTime = 0
     exitTime = 0
     pygame.mixer.music.set_volume(0.3)
-    pygame.mixer.music.play(1,0.0)
+    pygame.mixer.music.play()
+    #pygame.mixer.Channel(0).play(pygame.mixer.Sound(musicPath+"/"+songName+"_music.mp3"))
     startTicks=pygame.time.get_ticks()
     countPlaySFX = 0
     scoreValue = 0
@@ -338,15 +426,23 @@ def _play(t,b,songName):
                         key = "j"
                         yfood = 488
                     elif event.key == pygame.K_SPACE:
+                        
                         pygame.mixer.music.pause()
                         clickSound.play()
+                        #pygame.mixer.Channel(0).pause()
                         pauseTemp = _pauseTime()
                         if pauseTemp == -1:
                             _play(t,b,songName)
                         elif pauseTemp == 0:
                             main()
                         pauseTime += pauseTemp
-                        pygame.mixer.music.unpause()
+                        getPos=(pygame.time.get_ticks()-startTicks-pauseTime-exitTime)/1000
+                        pygame.mixer.music.load(musicPath+"/"+songName+"_music.mp3")
+                        pygame.mixer.music.play()
+                        pygame.mixer.music.set_pos(getPos)
+                        
+                        
+                        #pygame.mixer.Channel(0).unpause()
                     elif event.key == pygame.K_ESCAPE:
                         pygame.mixer.music.pause()
                         clickSound.play()
@@ -355,6 +451,7 @@ def _play(t,b,songName):
                             quit()
                         exitTime += exitTemp
                         pygame.mixer.music.unpause()
+                        #pygame.mixer.Channel(0).pause()
                                     
         presentTicks=(pygame.time.get_ticks()-startTicks-pauseTime-exitTime)/1000 
         
