@@ -139,6 +139,9 @@ def _pauseTime():
     catFoot = pygame.image.load(pausePagePath+"/cat_foot.png")
 
 
+    #กำลังมีปัญหาในการใส่เสียง
+    #ใช้ sound มันรันพร้อมกัน เสียงทับกัน
+    #ใช้ music มันทับกับตัวเพลงเกมหลัก
     
 
     #load music
