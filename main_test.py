@@ -146,15 +146,15 @@ def _pauseTime():
 
     #load music
     print(pauseSoundPath)
-    sound1 = pygame.mixer.music.load(pauseSoundPath+"/continue.mp3")
-    sound2 = pygame.mixer.music.load(pauseSoundPath+"/restart.mp3")
-    sound3 = pygame.mixer.music.load(pauseSoundPath+"/select_new_music.mp3")
+    # sound1 = pygame.mixer.music.load(pauseSoundPath+"/continue.mp3")
+    # sound2 = pygame.mixer.music.load(pauseSoundPath+"/restart.mp3")
+    # sound3 = pygame.mixer.music.load(pauseSoundPath+"/select_new_music.mp3")
 
-    countdownSound = pygame.mixer.music.load(pauseSoundPath+"/countdown.mp3")
-    pauseGameSound = pygame.mixer.music.load(pauseSoundPath+"/pausegame.mp3")
+    # countdownSound = pygame.mixer.music.load(pauseSoundPath+"/countdown.mp3")
+    # pauseGameSound = pygame.mixer.music.load(pauseSoundPath+"/pausegame.mp3")
 
 
-    heightCat = 351.04
+    heightCat = 250
     stateButton = 0
 
     pauseStart = pygame.time.get_ticks()
@@ -168,6 +168,11 @@ def _pauseTime():
         screen.blit(restart,(425,391))
         
             
+        if stateButton == 0:
+            print("222222222")
+            pygame.mixer.music.load(pauseSoundPath+"/pausegame.mp3")
+            pygame.mixer.music.play()
+            pygame.mixer.music.queue(pauseSoundPath+"/continue.mp3")
 
 
         
@@ -192,19 +197,22 @@ def _pauseTime():
                         quit()
                     
             if _checkClickRect(425,211,430,180) == 1: #if cursor above the continue button
-                hieghtCat = 351.04
+                heightCat = 250
+                print(heightCat)
                 if pygame.mouse.get_pressed()[0]:
                     pygame.mixer.stop()
                     clickSound.play()
                     return pauseTime-pauseStart
             elif _checkClickRect(425,391,430,180) == 1:  #if cursor above the restart button
-                hieghtCat = 531.04
+                heightCat = 430
+                print(heightCat)
                 if pygame.mouse.get_pressed()[0]:
                     pygame.mixer.stop()
                     clickSound.play()
                     return -1
             elif _checkClickRect(425,571,430,180) == 1:   #if cursor above the select new song button
-                hieghtCat = 711.04
+                heightCat = 610
+                print(heightCat)
                 if pygame.mouse.get_pressed()[0]:
                     pygame.mixer.stop()
                     clickSound.play()
