@@ -41,6 +41,14 @@ def showStar(point):
        screen.blit(star5,(602,475))
 
 
+def _checkClickRect(left,top,width,height):
+    pos = pygame.mouse.get_pos()
+    if (pos[0]>=left and pos[0]<=left+width) and (pos[1]>=top and pos[1]<=top+height):
+        return 1
+    else:
+        return 0
+
+
 #game loop 
 
 run = True
@@ -56,6 +64,7 @@ while run:
     screen.blit(startBotton, (640, 569))
     screen.blit(titleMusic, (415, 437))
     screen.blit(titleTotalScore, (415, 493))
+    
     pygame.display.update()
 pygame.quit()
   

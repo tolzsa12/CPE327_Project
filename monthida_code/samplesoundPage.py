@@ -1,10 +1,19 @@
-import pygame
 import os
+import pygame
+from pygame import mixer
 
 pygame.init()
 os.chdir("../")
 mainPath = os.getcwd()
 homePagePath = mainPath + "/olavan_asset/sample_sound_page"
+
+
+# add sound
+
+mixer.music.load(homePagePath+"/Sample Sound.mp3")
+mixer.music.play()
+mixer.music.queue(homePagePath+"/countdown.mp3")
+
 
 #create game window
 
@@ -22,7 +31,7 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-
+    
     screen.blit(bg,(0,0))
     pygame.display.update()
 pygame.quit()

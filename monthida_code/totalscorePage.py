@@ -1,10 +1,19 @@
 import pygame
+from pygame import mixer
 import os
 
 pygame.init()
 os.chdir("../")
 mainPath = os.getcwd()
 homePagePath = mainPath + "/olavan_asset/total_score_page"
+
+
+# add sound
+mixer.music.load(homePagePath+"/Result score sound.mp3")
+mixer.music.play()
+
+
+
 
 
 #create game window
@@ -36,8 +45,27 @@ def showStar(point):
        screen.blit(star4,(390,434))
     elif point == 5:
        screen.blit(star5,(390,434))
+       mixer.music.queue(homePagePath+"/get 5 star.mp3")
     elif point == 0:
        screen.blit(star0,(390,434))
+       mixer.music.queue(homePagePath+"/get 0 star.mp3")
+    
+    
+
+def _checkClickRect(left,top,width,height):
+    pos = pygame.mouse.get_pos()
+    if (pos[0]>=left and pos[0]<=left+width) and (pos[1]>=top and pos[1]<=top+height):
+        return 1
+    else:
+        return 0
+
+
+#collect point
+
+         
+         
+
+    
 
 
 #game loop 
@@ -49,9 +77,12 @@ while run:
             run = False
 
     screen.blit(bg,(0,0))
-    showStar(0)
+    showStar(5) 
+    #collectPoint()
     screen.blit(collectButton, (512, 576))
     screen.blit(titleGetpoint, (380, 370))
+   
     pygame.display.update()
+
 pygame.quit()
   
