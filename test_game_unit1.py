@@ -3,6 +3,8 @@ import time
 import array
 import os
 
+#Variable declaration
+
 mainPath = os.getcwd()
 gamePagePath = mainPath + "/olavan_asset/game_page"
 exitPagePath = mainPath + "/olavan_asset/exit_page"
@@ -11,9 +13,6 @@ soundPath = mainPath+ "/sound"
 fontPath = mainPath + "/font"
 musicPath = mainPath + "/music"
 highestScorePath = mainPath + "/highest_score"
-
-
-
 
 pygame.init()
 pygame.display.set_caption("main_test")
@@ -384,6 +383,20 @@ def _exitTime():
         screen.blit(exitButton,(431,463))
         pygame.display.update()
 
+
+
+#declaration for test pressing
+
+#shut down
+import pynput
+from pynput.keyboard import Key, Controller
+keyboard = Controller()
+
+
+
+
+
+
 def _play(t,b,songName):
     #array for counting the beat
     array.array("i")                
@@ -401,7 +414,11 @@ def _play(t,b,songName):
     scoreValue = 0
     cloudX = 0
     cloudBack = 0
+    #test variable
+    countTest = 1
 
+
+    
     try:
         highestScore = int(_getHighestScore(songName))
     except:
@@ -454,6 +471,25 @@ def _play(t,b,songName):
                         #pygame.mixer.Channel(0).pause()
                                     
         presentTicks=(pygame.time.get_ticks()-startTicks-pauseTime-exitTime)/1000 
+
+        #code for pressing in time test
+        if countTest <= 35:
+            if presentTicks >= t2[countTest]+0.5:
+                if b2[countTest]=='c':
+                    keyboard.press('f')
+                    keyboard.release('f')
+                    countTest=countTest+1
+                    print("press f for time "+str(countTest)+" at time "+str(presentTicks))
+                    
+                elif b2[countTest]=='d':
+                    keyboard.press('j')
+                    keyboard.release('j')
+                    countTest=countTest+1
+                    print("press j for time "+str(countTest)+" at time "+str(presentTicks))
+
+
+
+
         
         if a[1] == 0:       
             countPlaySFX += _call(1,b[1],t[1],countPlaySFX,presentTicks)
@@ -713,23 +749,18 @@ def main_page():
         screen.blit(tempmenu,(390,300))
         pygame.display.update()
         
+
+
+
 def main():                     
-    menu = main_page()
-    if menu == 1:
-        songName = "jinglebell"
-        confirmMusic = selectedMusicPage(songName)
-        if confirmMusic == 1:
-            endGamePoint = _play(t1,b1,songName)     
-    elif menu == 2:
-        songName = "shutdown"
-        confirmMusic = selectedMusicPage(songName)
-        if confirmMusic == 1:
-            endGamePoint = _play(t2,b2,songName)
-    elif menu == 3:
-        songName = "kerntarn"
-        confirmMusic = selectedMusicPage(songName)
-        if confirmMusic == 1:
-            endGamePoint = _play(t3,b3,songName)
+    songName = "shutdown"
+    endGamePoint = _play(t2,b2,songName)     
     total_score_page(calculatePoint(endGamePoint),songName)
 
 main()
+
+
+
+
+
+

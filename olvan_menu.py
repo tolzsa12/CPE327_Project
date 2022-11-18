@@ -15,12 +15,12 @@ pygame.display.set_caption("Olvan!")
 
 BLACK = (0,0,0)
 BACKGROUND = pygame.transform.scale(pygame.image.load(
-    'Olvan_Assets/Select music/Select_music_page.png'),(WIDTH,HEIGHT))
+    'olavan_asset/select_music_page/Select_music_page.png'),(WIDTH,HEIGHT))
 
 #ทุกสิ่งที่กดได้
-Blueblock = pygame.image.load('Olvan_Assets/Select music/Box.png').convert_alpha()
-homeButton = pygame.image.load('Olvan_Assets/Select music/Home_button.png').convert_alpha()
-playButton = pygame.image.load('Olvan_Assets/Select music/'+'Play_button.png').convert_alpha()
+Blueblock = pygame.image.load('olavan_asset/select_music_page/Box.png').convert_alpha()
+homeButton = pygame.image.load('olavan_asset/select_music_page/Home_button.png').convert_alpha()
+playButton = pygame.image.load('olavan_asset/select_music_page/'+'Play_button.png').convert_alpha()
 
 # Blueblock properties
 posBlueblock1_x,posBlueblock1_y =  -74,227
@@ -36,7 +36,7 @@ num_song = len(list_song)
 detailfont = pygame.font.SysFont("arialblack",40)
 # แสดงรูปภาพที่เป็นรูปเฉย ๆ
 def displayIcon(music,x,y):
-    icon = pygame.image.load('Olvan_Assets/Select Music/'+ music +'_icon.png').convert_alpha()
+    icon = pygame.image.load('olavan_asset/select_music_page/'+ music +'_icon.png').convert_alpha()
     WIN.blit(icon,(x,y))
 
 
@@ -121,8 +121,23 @@ def game_loop(state,playingGame): #game loop
                 if event.key == pygame.K_RETURN:
                     playingGame = False
         
+def showSampleMusic(state,selectMenu):
+   
+   if not pygame.mixer.music.get_busy() and selectMenu:
+    sampleMusic = list_song[state]
+    pygame.mixer.music.load("music/"+sampleMusic+"_hook.mp3")
+    pygame.mixer.music.play(-1)
 
+def clickEffect():
+    pygame.mixer.music.load("sound/click.mp3")
+    pygame.mixer.music.play()
 
+def howSelectMusic():
+    if not pygame.mixer.music.get_busy():
+        pygame.mixer.music.load("sound/select_music/Select_Music_Page.mp3")
+        pygame.mixer.music.play()
+        sampleMusic = list_song[1]
+        pygame.mixer.music.queue("music/"+sampleMusic+"_hook.mp3")
 
 
 
@@ -131,37 +146,49 @@ def main():
     programRunning,selectMenu = True,True 
     # playingGame หน้าเล่นเกม homePage หน้าแรก
     playingGame,homePage = False,False
+    FirsttimehomePage = True
     stateMusic = 1 # เพลงที่เล่น 
-    while programRunning :
+    while programRunning:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                programRunning = False
-                
+                programRunning = False 
             #print(Bluesquare_img)
             if selectMenu:
                 draw_window()
+                if FirsttimehomePage:
+                    howSelectMusic()
+                    FirsttimehomePage = False
+
                 #Part แสดงกล่องฟ้า ปุ่ม และคลิกกล่องฟ้า
                 if draw_button(-74,227,Blueblock) :
                     if stateMusic == 0:
                         stateMusic = num_song-1
                     else: 
                         stateMusic -= 1
+                    pygame.mixer.music.stop()
+
                 if draw_button(402,227,Blueblock) :
-                    playingGame = True
-                    selectMenu = False
+                    pass
+
                 if draw_button(878,227,Blueblock) :
                     if stateMusic == num_song-1:
                         stateMusic = 0
                     else: 
                         stateMusic += 1
+                    pygame.mixer.music.stop()
+
                 #แสดงปุ่ม เล่นและย้อนกลับ
                 if draw_button(16,20,homeButton):
                     homePage = True
                     selectMenu = False
+                    pygame.mixer.music.fadeout(200)
+                    clickEffect()
                 
                 if draw_button(525,532,playButton):
                     playingGame = True
                     selectMenu = False
+                    pygame.mixer.music.fadeout(200)
+                    clickEffect()
 
                 #Part กดคีย์บอร์ด
                 if event.type == pygame.KEYDOWN:
@@ -170,17 +197,23 @@ def main():
                             stateMusic = num_song-1
                         else:
                              stateMusic -= 1
+                        pygame.mixer.music.stop() # ทำการหยุดเพลงที่เล่นอยู่
+
                     if event.key == pygame.K_j:
                         if stateMusic == num_song-1:
                             stateMusic = 0
                         else: 
                             stateMusic += 1
+                        pygame.mixer.music.stop() #ทำการหยุดเพลงที่เล่นอยู่
 
                     if event.key == pygame.K_RETURN:
                         playingGame = True
                         selectMenu = False
+                        pygame.mixer.music.fadeout(200)
+                        clickEffect()
 
                 displayDetail(stateMusic)
+                showSampleMusic(stateMusic,selectMenu)
             #กรณีที่อยู่หน้าเล่นเกม
             elif not selectMenu and playingGame:
                 draw_window()
@@ -191,11 +224,13 @@ def main():
                     if event.key == pygame.K_RETURN:
                         playingGame = False
                         selectMenu = True
+                        pygame.mixer.music.stop()
             #กรณีอยู่หน้า homepage
             elif not selectMenu and homePage:
                 print("ok")
                 selectMenu = True
                 homePage = False
+                pygame.mixer.music.stop()
 
         pygame.display.update()
     pygame.quit()
