@@ -137,16 +137,6 @@ def _pauseTime():
     continues = pygame.image.load(pausePagePath+"/continue_button.png")
     restart = pygame.image.load(pausePagePath+"/restart_button.png")
     catFoot = pygame.image.load(pausePagePath+"/cat_foot.png")
-    
-
-    #load music
-    # sound1 = pygame.mixer.music.load(pauseSoundPath+"/continue.mp3")
-    # sound2 = pygame.mixer.music.load(pauseSoundPath+"/restart.mp3")
-    # sound3 = pygame.mixer.music.load(pauseSoundPath+"/select_new_music.mp3")
-
-    # countdownSound = pygame.mixer.music.load(pauseSoundPath+"/countdown.mp3")
-    # pauseGameSound = pygame.mixer.music.load(pauseSoundPath+"/pausegame.mp3")
-
 
     heightCat = 250
     stateButton = 0
@@ -234,17 +224,6 @@ def _pauseTime():
                     elif stateButton == 3:
                         pygame.mixer.music.stop()
                         return 0
-                
-
-                # if event.key == pygame.K_c: #to continue
-                #     clickSound.play()
-                #     return pauseTime-pauseStart
-                # elif event.key == pygame.K_r: #to restart
-                #     clickSound.play()
-                #     return -1
-                # elif event.key == pygame.K_b: #to back to select song
-                #     clickSound.play()
-                #     return 0
 
                 if event.key == pygame.K_ESCAPE: #exit game
                     clickSound.play()
@@ -276,7 +255,6 @@ def _pauseTime():
                     clickSound.play()
                     return -1
             elif _checkClickRect(425,571,430,180) == 1 and heightCat != 610:   #if cursor above the select new song button
-                print("ลากโดนนนนนนนนนนนนน")
                 pygame.mixer.music.stop()
                 heightCat = 610
                 print(heightCat)
@@ -308,12 +286,6 @@ def _pauseTime():
         screen.blit(catFoot,(783,heightCat))
         pygame.display.update()
             
-                
-        # if stateButton == 0:
-        #     sound1.play()
-        #     while pygame.mixer.get_busy() == True:
-        #         continue
-        #     pauseGameSound.play()
         
 
 
