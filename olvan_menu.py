@@ -86,7 +86,6 @@ def displayBox(x,y,image):
 #def button():
 
 
-
 #def selectMusic():
 def draw_window():
     WIN.blit(BACKGROUND,(0,0))
