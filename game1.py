@@ -323,6 +323,8 @@ def main():
                             selectMenu = True
                             pygame.mixer.music.stop()
                 #กรณีอยู่หน้า homepage
+                
+                
                 elif not selectMenu and homePage:
                     print("ok")
                     selectMenu = True
