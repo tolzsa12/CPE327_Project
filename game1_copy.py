@@ -136,6 +136,9 @@ def tutorialPage_1():
     tutorialPage1 = pygame.image.load(homePagePath+"/Tutorial1.png")
     homepageButton = pygame.image.load(homePagePath+"/Home_button.png")
     nextButton = pygame.image.load(homePagePath+"/next.png")
+    mixer.music.load(homePagePath+"/Click sound effect.mp3")
+    mixer.music.play()
+    mixer.music.queue(homePagePath+"/Tutorial1.mp3")
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -144,7 +147,8 @@ def tutorialPage_1():
            
             if _checkClickRect(1028,685,230,100) == 1: #select next
                 if pygame.mouse.get_pressed()[0]:
-                    return 0
+                    mixer.music.stop()
+                    tutorialPage_2()
             if _checkClickRect(16,20,230,100) == 1: #select homepage
                 if pygame.mouse.get_pressed()[0]:
                     mixer.music.load(homePagePath+"/Click sound effect.mp3")
@@ -163,12 +167,16 @@ def tutorialPage_2():
     tutorialPage2 = pygame.image.load(homePagePath+"/Tutorial2.png")
     homepageButton = pygame.image.load(homePagePath+"/Home_button.png")
     prevButton = pygame.image.load(homePagePath+"/Previous_button.png")
+    mixer.music.load(homePagePath+"/Click sound effect.mp3")
+    mixer.music.play()
+    mixer.music.queue(homePagePath+"/Tutorial 2.mp3")
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                     quit()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(16,686,230,100) == 1: #select back
+                        mixer.music.stop()
                         tutorialPage_1()
                 if _checkClickRect(16,20,230,100) == 1: #select homepage
                         main()
@@ -801,7 +809,7 @@ def _play(t,b,songName):
                     elif event.key == pygame.K_SPACE:
                         
                         pygame.mixer.music.pause()
-                        clickSound.play()
+                        xc
                         #pygame.mixer.Channel(0).pause()
                         pauseTemp = _pauseTime()
                         if pauseTemp == -1:
@@ -984,6 +992,7 @@ def total_score_page(score,songName):
                         quit()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(525,576,230,100) == 1:
+                    clickSound.play()
                     main()
             
         screen.blit(bg,(0,0))
@@ -1002,16 +1011,9 @@ def main():
     print(check1)
     if check1 ==  1:
         mixer.music.stop()
-        mixer.music.load(homePagePath+"/Click sound effect.mp3")
-        mixer.music.play()
-        mixer.music.queue(homePagePath+"/Tutorial1.mp3")
         check2 = tutorialPage_1()
-        if check2 == 0:
-            mixer.music.stop()
-            mixer.music.load(homePagePath+"/Click sound effect.mp3")
-            mixer.music.play()
-            mixer.music.queue(homePagePath+"/Tutorial 2.mp3")
-            check3 = tutorialPage_2()
+        #if check2 == 0:
+            #check3 = tutorialPage_2()
     elif check1 == 2:
         mixer.music.stop()
         selectSongVar = selectMusicPage()

@@ -1,0 +1,3 @@
+([('game1_copy',
+   '/Users/kookwangs/Documents/GitHub/CPE327_Project/dist/game1_copy',
+   'EXECUTABLE')],)
