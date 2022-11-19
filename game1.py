@@ -1,23 +1,16 @@
 from tabnanny import check
 import pygame
+from pygame import mixer
 import os
 
 pygame.init()
-
 mainPath = os.getcwd()
-gamePagePath = mainPath + "/olavan_asset/game_page"
-exitPagePath = mainPath + "/olavan_asset/exit_page"
-tempPagePath = mainPath + "/olavan_asset/temp"
-soundPath = mainPath+ "/sound"
-fontPath = mainPath + "/font"
-musicPath = mainPath + "/music"
-highestScorePath = mainPath + "/highest_score"
 homePagePath = mainPath + "/olavan_asset/home_page"
-print(homePagePath)
+SCREEN_WIDTH = 1280
+SCREEN_HEIGHT = 800
+screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
-
-
-#other function
+#create game window
 
 
 def _checkClickRect(left,top,width,height):
@@ -29,59 +22,58 @@ def _checkClickRect(left,top,width,height):
 
 #home
 def homePage():
-    SCREEN_WIDTH = 1280
-    SCREEN_HEIGHT = 800
-    screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
     pygame.display.set_caption("OLAVAN")
     bg = pygame.image.load(homePagePath+"/HomePageBG.png") 
     startButton = pygame.image.load(homePagePath+"/Start_button.png")
     tutorialButton = pygame.image.load(homePagePath+"/Tutorial_button.png")
-    tutorialPage1 = pygame.image.load(homePagePath+"/Tutorial1.png")
-    tutorialPage2 = pygame.image.load(homePagePath+"/Tutorial2.png")
-    homepageButton = pygame.image.load(homePagePath+"/Home_button.png")
-    nextButton = pygame.image.load(homePagePath+"/next.png")
-    prevButton = pygame.image.load(homePagePath+"/Previous_button.png")
-    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                     quit()
-            if pygame.mouse.get_pressed()[0]:
-                if _checkClickRect(210,248,430,180) == 1: #select tutorial
-                    return 2
-                elif _checkClickRect(640,248,430,180) == 1: #select start
+
+            if _checkClickRect(210,248,430,180) == 1: #select tutorial
+                if pygame.mouse.get_pressed()[0]:
                     return 1
-                
+
+            elif _checkClickRect(640,248,430,180) == 1: #select start
+                if pygame.mouse.get_pressed()[0]:
+                    return 2
+
+            #if pygame.mouse.get_pressed()[0]:
+                #if _checkClickRect(210,248,430,180) == 1: #select tutorial
+                    #return 1
+                #elif _checkClickRect(640,248,430,180) == 1: #select start
+                    #return 2
+
         screen.blit(bg,(0,0))
-        screen.blit(startButton,(210,248))
-        screen.blit(tutorialButton,(640,248))
+        screen.blit(startButton,(640,248))
+        screen.blit(tutorialButton,(210,248))
         pygame.display.update()
+#mixer.music.load(homePagePath+"/MusicHomePage.mp3")
+#mixer.music.play()
 
 
 #tutorialPage 1
 def tutorialPage_1():
-    SCREEN_WIDTH = 1280
-    SCREEN_HEIGHT = 800
-    screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
     pygame.display.set_caption("OLAVAN")
-    bg = pygame.image.load(homePagePath+"/HomePageBG.png") 
-    startButton = pygame.image.load(homePagePath+"/Start_button.png")
-    tutorialButton = pygame.image.load(homePagePath+"/Tutorial_button.png")
     tutorialPage1 = pygame.image.load(homePagePath+"/Tutorial1.png")
-    tutorialPage2 = pygame.image.load(homePagePath+"/Tutorial2.png")
     homepageButton = pygame.image.load(homePagePath+"/Home_button.png")
     nextButton = pygame.image.load(homePagePath+"/next.png")
-    prevButton = pygame.image.load(homePagePath+"/Previous_button.png")
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                     quit()
-            if pygame.mouse.get_pressed()[0]:
-                if _checkClickRect(1028,685,230,100) == 1: #select next
+           
+           
+            if _checkClickRect(1028,685,230,100) == 1: #select next
+                if pygame.mouse.get_pressed()[0]:
                     return 0
-                if _checkClickRect(16,20,230,100) == 1: #select homepage
+            if _checkClickRect(16,20,230,100) == 1: #select homepage
+                if pygame.mouse.get_pressed()[0]:
+                    mixer.music.load(homePagePath+"/Click sound effect.mp3")
+                    mixer.music.play()
                     main()
-                
+    
         screen.blit(tutorialPage1,(0,0))
         screen.blit(homepageButton,(16,20))
         screen.blit(nextButton,(1028,685))
@@ -90,18 +82,9 @@ def tutorialPage_1():
 
 #tutorialPage 2
 def tutorialPage_2():
-    SCREEN_WIDTH = 1280
-    SCREEN_HEIGHT = 800
-    homePagePath = mainPath + "/olavan_asset/home_page"
-    screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
     pygame.display.set_caption("OLAVAN")
-    bg = pygame.image.load(homePagePath+"/HomePageBG.png") 
-    startButton = pygame.image.load(homePagePath+"/Start_button.png")
-    tutorialButton = pygame.image.load(homePagePath+"/Tutorial_button.png")
-    tutorialPage1 = pygame.image.load(homePagePath+"/Tutorial1.png")
     tutorialPage2 = pygame.image.load(homePagePath+"/Tutorial2.png")
     homepageButton = pygame.image.load(homePagePath+"/Home_button.png")
-    nextButton = pygame.image.load(homePagePath+"/next.png")
     prevButton = pygame.image.load(homePagePath+"/Previous_button.png")
     while True:
         for event in pygame.event.get():
@@ -109,9 +92,11 @@ def tutorialPage_2():
                     quit()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(16,686,230,100) == 1: #select back
-                    tutorialPage_1()
+                    if pygame.mouse.get_pressed()[0]:
+                        tutorialPage_1()
                 if _checkClickRect(16,20,230,100) == 1: #select homepage
-                    main()
+                    if pygame.mouse.get_pressed()[0]:
+                        main()
         
         screen.blit(tutorialPage2,(0,0))
         screen.blit(homepageButton,(16,20))
@@ -119,19 +104,33 @@ def tutorialPage_2():
         pygame.display.update()
 
 
-
-
-
-
-#main function
+#game loop 
 
 def main():
+    mixer.music.load(homePagePath+"/MusicHomePage.mp3")
+    mixer.music.play()
     check1 = homePage()
     print(check1)
     if check1 ==  1:
+        mixer.music.stop()
+        mixer.music.load(homePagePath+"/Click sound effect.mp3")
+        mixer.music.play()
+        mixer.music.queue(homePagePath+"/Tutorial1.mp3")
         check2 = tutorialPage_1()
         if check2 == 0:
+            mixer.music.stop()
+            mixer.music.load(homePagePath+"/Click sound effect.mp3")
+            mixer.music.play()
+            mixer.music.queue(homePagePath+"/Tutorial 2.mp3")
             check3 = tutorialPage_2()
+    elif check1 == 2:
+        
 
 
+
+
+
+
+
+        
 main()
