@@ -845,7 +845,7 @@ def _play(t,b,songName):
                     elif event.key == pygame.K_SPACE:
                         
                         pygame.mixer.music.pause()
-                        xc
+                        
                         #pygame.mixer.Channel(0).pause()
                         pauseTemp = _pauseTime()
                         if pauseTemp == -1:
