@@ -6,13 +6,18 @@ import os
 pygame.init()
 mainPath = os.getcwd()
 homePagePath = mainPath + "/olavan_asset/home_page"
+confirmPagePath = mainPath + "/olavan_asset/selected_music_page"
+
+
+
+
+
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 800
 screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
 
-list_song = ["Jingle Bell","Shutdown",
-                "Too Cute"] #เวลาจะเพิ่มหรือลด มาแก้ตรงนี้พอ
+list_song = ["Jingle Bell","Shutdown","Too Cute"] #เวลาจะเพิ่มหรือลด มาแก้ตรงนี้พอ
 num_song = len(list_song)
 BLACK = (0,0,0)
 
@@ -167,6 +172,7 @@ def clickEffect():
 
 def displayDetail(state):
     
+    
     if state == 0:
 
         Music1name = list_song[num_song-1]
@@ -214,6 +220,60 @@ def showSampleMusic(state,selectMenu): #เล่นเพลงตัวอย�
     pygame.mixer.music.play(-1)
 
 
+def calculatePoint(endGameScore):
+    if endGameScore == 0:
+        return 0
+    elif endGameScore <= 350:
+        return 1
+    elif endGameScore <= 700:
+        return 2
+    elif endGameScore <= 1050:
+        return 3
+    elif endGameScore <= 1400:
+        return 4
+    else:
+        return 5
+
+
+def confirmMusicPage(stateMusic):
+    
+    bg = pygame.image.load(confirmPagePath+"/Confirm_music_page.png") 
+    prevButton = pygame.image.load(confirmPagePath+"/Previous_button.png")
+    titleMusic = pygame.image.load(confirmPagePath+"/title_music.png")
+    titleTotalScore = pygame.image.load(confirmPagePath+"/title_totalscore.png")
+    startButton = pygame.image.load(confirmPagePath+"/Start_game_button.png")
+
+    musicName = list_song(stateMusic)
+
+    try:
+        highestScore = int(_getHighestScore(songName))
+    except:
+        highestScore = 0
+        
+    highestStar = calculatePoint(highestScore)
+    
+    
+
+    #music & score variable
+    musicIcon = pygame.image.load(confirmPagePath+"/icon_"+musicName+".png")
+    star = pygame.image.load(confirmPagePath+"/"+str(highestStar)+".png")
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+    
+        screen.blit(bg,(0,0))
+        screen.blit(musicIcon, (545, 225))
+        screen.blit(prevButton, (410, 569))
+        screen.blit(startButton, (640, 569))
+        screen.blit(titleMusic, (415, 437))
+        screen.blit(titleTotalScore, (415, 493))
+        screen.blit(star,(602,477))
+
+        
+        pygame.display.update()
+        
 
 def main():
     mixer.music.load(homePagePath+"/MusicHomePage.mp3")
@@ -233,13 +293,14 @@ def main():
             mixer.music.queue(homePagePath+"/Tutorial 2.mp3")
             check3 = tutorialPage_2()
     elif check1 == 2:
+        print("ma")
         # ตัวบอกสเตตัส programRunning คือ โปรแกรมทั้งหมด selectMenu = หน้าเลือกเพลง
         programRunning,selectMenu = True,True 
         # playingGame หน้าเล่นเกม homePage หน้าแรก
         playingGame,homePage = False,False
         FirsttimehomePage = True
         stateMusic = 1 # เพลงที่เล่น 
-        while programRunning:
+        while programRunning :
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     programRunning = False 
@@ -311,7 +372,7 @@ def main():
 
                     displayDetail(stateMusic)
                     showSampleMusic(stateMusic,selectMenu)
-                #กรณีที่อยู่หน้าเล่นเกม
+
                 elif not selectMenu and playingGame:
                     draw_window()
                     Music = detailfont.render(list_song[stateMusic],True,BLACK)
@@ -330,6 +391,12 @@ def main():
                     selectMenu = True
                     homePage = False
                     pygame.mixer.music.stop()
+
+
+        if playingGame:
+            confirmMusicPage(stateMusic)
+            
+
 
             pygame.display.update()
         pygame.quit()

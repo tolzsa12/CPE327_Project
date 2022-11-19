@@ -5,7 +5,20 @@ import os
 
 pygame.init()
 mainPath = os.getcwd()
+
 homePagePath = mainPath + "/olavan_asset/home_page"
+confirmPagePath = mainPath + "/olavan_asset/selected_music_page"
+highestScorePath = mainPath + "/highest_score"
+fontPath = mainPath + "/font"
+sampleSoundPagePath = mainPath + "/olavan_asset/sample_sound_page"
+
+
+
+#font load
+font=pygame.font.Font(fontPath+"/trebuc.ttf",32)
+
+
+print(homePagePath)
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 800
 screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
@@ -114,10 +127,8 @@ def tutorialPage_2():
                     quit()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(16,686,230,100) == 1: #select back
-                    if pygame.mouse.get_pressed()[0]:
                         tutorialPage_1()
                 if _checkClickRect(16,20,230,100) == 1: #select homepage
-                    if pygame.mouse.get_pressed()[0]:
                         main()
         
         screen.blit(tutorialPage2,(0,0))
@@ -213,6 +224,208 @@ def showSampleMusic(state,selectMenu): #เล่นเพลงตัวอย�
     pygame.mixer.music.load("music/"+sampleMusic+"_hook.mp3")
     pygame.mixer.music.play(-1)
 
+def calculatePoint(endGameScore):
+    if endGameScore == 0:
+        return 0
+    elif endGameScore <= 350:
+        return 1
+    elif endGameScore <= 700:
+        return 2
+    elif endGameScore <= 1050:
+        return 3
+    elif endGameScore <= 1400:
+        return 4
+    else:
+        return 5
+
+    
+def _getHighestScore(songName):
+    with open(highestScorePath+"/highest_score_"+songName+".txt","r") as f:
+        return f.read()
+
+
+    
+def _showText(text,x,y):
+    showText=font.render(text,True,(0,0,0))
+    screen.blit(showText, (x,y))
+
+
+    
+def confirmMusicPage(stateMusic):
+    print("This"+str(stateMusic))
+    bg = pygame.image.load(confirmPagePath+"/Confirm_music_page.png") 
+    prevButton = pygame.image.load(confirmPagePath+"/Previous_button.png")
+    titleMusic = pygame.image.load(confirmPagePath+"/title_music.png")
+    titleTotalScore = pygame.image.load(confirmPagePath+"/title_totalscore.png")
+    startButton = pygame.image.load(confirmPagePath+"/Start_game_button.png")
+
+    musicName = list_song[stateMusic]
+
+    try:
+        highestScore = int(_getHighestScore(musicName))
+    except:
+        highestScore = 0
+        
+    highestStar = calculatePoint(highestScore)
+    
+    
+
+    #music & score variable
+    musicIcon = pygame.image.load(confirmPagePath+"/icon_"+musicName+".png")
+    
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+            if pygame.mouse.get_pressed()[0]:
+                if _checkClickRect(410,569,230,100) == 1: #select back
+                        selectMusicPage()
+                if _checkClickRect(640,569,230,100) == 1: #select play
+                        sampleSoundPage()
+                        return stateMusic
+            
+    
+        screen.blit(bg,(0,0))
+        screen.blit(musicIcon, (545, 225))
+        screen.blit(prevButton, (410, 569))
+        screen.blit(startButton, (640, 569))
+        screen.blit(titleMusic, (415, 437))
+        _showText(musicName,511,425)
+        screen.blit(titleTotalScore, (415, 493))
+
+        if highestStar !=0:
+            star = pygame.image.load(confirmPagePath+"/"+str(highestStar)+".png")
+            screen.blit(star,(602,477))
+
+        
+        pygame.display.update()
+
+
+def selectMusicPage():
+    # ตัวบอกสเตตัส programRunning คือ โปรแกรมทั้งหมด selectMenu = หน้าเลือกเพลง
+    programRunning,selectMenu = True,True 
+    # playingGame หน้าเล่นเกม homePage หน้าแรก
+    playingGame,homePage = False,False
+    FirsttimehomePage = True
+    stateMusic = 1 # เพลงที่เล่น 
+
+
+
+
+    while programRunning:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                programRunning = False 
+            #print(Bluesquare_img)
+
+
+            if selectMenu:
+                draw_window()
+                if FirsttimehomePage:
+                    howSelectMusic(stateMusic)
+                    FirsttimehomePage = False
+
+                #Part แสดงกล่องฟ้า ปุ่ม และคลิกกล่องฟ้า
+                if draw_button(-74,227,Blueblock) :
+                    if stateMusic == 0:
+                        stateMusic = num_song-1
+                    else: 
+                        stateMusic -= 1
+                    pygame.mixer.music.stop()
+
+                if draw_button(402,227,Blueblock) :
+                    pass
+
+                if draw_button(878,227,Blueblock) :
+                    if stateMusic == num_song-1:
+                        stateMusic = 0
+                    else: 
+                        stateMusic += 1
+                    pygame.mixer.music.stop()
+
+                #แสดงปุ่ม เล่นและย้อนกลับ
+                if draw_button(16,20,homeButton):
+                    homePage = True
+                    selectMenu = False
+                    pygame.mixer.music.fadeout(200)
+                    clickEffect()
+                    main()
+                
+                if draw_button(525,532,playButton):
+                    playingGame = True
+                    selectMenu = False
+                    pygame.mixer.music.fadeout(200)
+                    clickEffect()
+
+                #Part กดคีย์บอร์ด
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_f:
+                        pygame.K_BACKSPACE
+                        if stateMusic == 0:
+                            stateMusic = num_song-1
+                        else:
+                            stateMusic -= 1
+                        pygame.mixer.music.stop() # ทำการหยุดเพลงที่เล่นอยู่
+
+                    if event.key == pygame.K_j:
+                        if stateMusic == num_song-1:
+                            stateMusic = 0
+                        else: 
+                            stateMusic += 1
+                        pygame.mixer.music.stop() #ทำการหยุดเพลงที่เล่นอยู่
+
+                    if event.key == pygame.K_RETURN:
+                        playingGame = True
+                        selectMenu = False
+                        pygame.mixer.music.fadeout(200)
+                        clickEffect()
+                    if not event.key == pygame.K_f and not event.key == pygame.K_j and not event.key == pygame.K_RETURN:
+                        FirsttimehomePage = True
+                        pygame.mixer.music.stop() 
+                        howSelectMusic(stateMusic)
+
+                displayDetail(stateMusic)
+                showSampleMusic(stateMusic,selectMenu)
+            #กรณีที่อยู่หน้าเล่นเกม
+            elif not selectMenu and playingGame:
+                print("eiei")
+                break
+            #กรณีอยู่หน้า homepage
+            
+            
+            elif not selectMenu and homePage:
+                print("ok")
+                selectMenu = True
+                homePage = False
+                pygame.mixer.music.stop()
+
+        pygame.display.update()
+        if playingGame:
+            return stateMusic
+        
+
+def sampleSoundPage():
+    bg = pygame.image.load(sampleSoundPagePath+"/Sample_sound_page.png")
+    mixer.music.load(sampleSoundPagePath+"/Sample Sound.mp3")
+    mixer.music.play()
+    mixer.music.queue(sampleSoundPagePath+"/countdown.mp3")
+    a=0
+        
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+        
+        screen.blit(bg,(0,0))
+        pygame.display.update()
+        if a==0:
+            pygame.time.wait(16000)
+            break
+        
+        
+
+    
 
 
 def main():
@@ -233,108 +446,15 @@ def main():
             mixer.music.queue(homePagePath+"/Tutorial 2.mp3")
             check3 = tutorialPage_2()
     elif check1 == 2:
-        # ตัวบอกสเตตัส programRunning คือ โปรแกรมทั้งหมด selectMenu = หน้าเลือกเพลง
-        programRunning,selectMenu = True,True 
-        # playingGame หน้าเล่นเกม homePage หน้าแรก
-        playingGame,homePage = False,False
-        FirsttimehomePage = True
-        stateMusic = 1 # เพลงที่เล่น 
-        while programRunning:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    programRunning = False 
-                #print(Bluesquare_img)
-
-
-                if selectMenu:
-                    draw_window()
-                    if FirsttimehomePage:
-                        howSelectMusic(stateMusic)
-                        FirsttimehomePage = False
-
-                    #Part แสดงกล่องฟ้า ปุ่ม และคลิกกล่องฟ้า
-                    if draw_button(-74,227,Blueblock) :
-                        if stateMusic == 0:
-                            stateMusic = num_song-1
-                        else: 
-                            stateMusic -= 1
-                        pygame.mixer.music.stop()
-
-                    if draw_button(402,227,Blueblock) :
-                        pass
-
-                    if draw_button(878,227,Blueblock) :
-                        if stateMusic == num_song-1:
-                            stateMusic = 0
-                        else: 
-                            stateMusic += 1
-                        pygame.mixer.music.stop()
-
-                    #แสดงปุ่ม เล่นและย้อนกลับ
-                    if draw_button(16,20,homeButton):
-                        homePage = True
-                        selectMenu = False
-                        pygame.mixer.music.fadeout(200)
-                        clickEffect()
-                    
-                    if draw_button(525,532,playButton):
-                        playingGame = True
-                        selectMenu = False
-                        pygame.mixer.music.fadeout(200)
-                        clickEffect()
-
-                    #Part กดคีย์บอร์ด
-                    if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_f:
-                            pygame.K_BACKSPACE
-                            if stateMusic == 0:
-                                stateMusic = num_song-1
-                            else:
-                                stateMusic -= 1
-                            pygame.mixer.music.stop() # ทำการหยุดเพลงที่เล่นอยู่
-
-                        if event.key == pygame.K_j:
-                            if stateMusic == num_song-1:
-                                stateMusic = 0
-                            else: 
-                                stateMusic += 1
-                            pygame.mixer.music.stop() #ทำการหยุดเพลงที่เล่นอยู่
-
-                        if event.key == pygame.K_RETURN:
-                            playingGame = True
-                            selectMenu = False
-                            pygame.mixer.music.fadeout(200)
-                            clickEffect()
-                        if not event.key == pygame.K_f and not event.key == pygame.K_j and not event.key == pygame.K_RETURN:
-                            FirsttimehomePage = True
-                            pygame.mixer.music.stop() 
-                            howSelectMusic(stateMusic)
-
-                    displayDetail(stateMusic)
-                    showSampleMusic(stateMusic,selectMenu)
-                #กรณีที่อยู่หน้าเล่นเกม
-                elif not selectMenu and playingGame:
-                    draw_window()
-                    Music = detailfont.render(list_song[stateMusic],True,BLACK)
-                    screen.blit(Music ,(posBlueblock2_x+Blueblock_weight/2 - Music.get_width()/2
-                    ,posBlueblock2_y + Blueblock_height/2 - Music.get_height()/2 + 50))
-                    if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_RETURN:
-                            playingGame = False
-                            selectMenu = True
-                            pygame.mixer.music.stop()
-                #กรณีอยู่หน้า homepage
-                
-                
-                elif not selectMenu and homePage:
-                    print("ok")
-                    selectMenu = True
-                    homePage = False
-                    pygame.mixer.music.stop()
-
-            pygame.display.update()
-        pygame.quit()
-        quit()
+        mixer.music.stop()
+        selectSongVar = selectMusicPage()
+        stateMusicConfirm = confirmMusicPage(selectSongVar)
+        
+        endGamePoint = _play(t3,b3,stateMusicConfirm)
+        
+        
+        
+        
             
 
 
