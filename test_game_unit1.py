@@ -233,17 +233,7 @@ def _pauseTime():
                     elif stateButton == 3:
                         pygame.mixer.music.stop()
                         return 0
-                
-
-                # if event.key == pygame.K_c: #to continue
-                #     clickSound.play()
-                #     return pauseTime-pauseStart
-                # elif event.key == pygame.K_r: #to restart
-                #     clickSound.play()
-                #     return -1
-                # elif event.key == pygame.K_b: #to back to select song
-                #     clickSound.play()
-                #     return 0
+            
 
                 if event.key == pygame.K_ESCAPE: #exit game
                     clickSound.play()
