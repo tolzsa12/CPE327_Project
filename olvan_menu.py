@@ -132,11 +132,11 @@ def clickEffect():
     pygame.mixer.music.load("sound/click.mp3")
     pygame.mixer.music.play()
 
-def howSelectMusic():
+def howSelectMusic(state):
     if not pygame.mixer.music.get_busy():
         pygame.mixer.music.load("sound/select_music/Select_Music_Page.mp3")
         pygame.mixer.music.play()
-        sampleMusic = list_song[1]
+        sampleMusic = list_song[state]
         pygame.mixer.music.queue("music/"+sampleMusic+"_hook.mp3")
 
 
@@ -156,7 +156,7 @@ def main():
             if selectMenu:
                 draw_window()
                 if FirsttimehomePage:
-                    howSelectMusic()
+                    howSelectMusic(stateMusic)
                     FirsttimehomePage = False
 
                 #Part แสดงกล่องฟ้า ปุ่ม และคลิกกล่องฟ้า
@@ -211,6 +211,10 @@ def main():
                         selectMenu = False
                         pygame.mixer.music.fadeout(200)
                         clickEffect()
+                    if not event.key == pygame.K_f and not event.key == pygame.K_j and not event.key == pygame.K_RETURN:
+                        FirsttimehomePage = True
+                        pygame.mixer.music.stop() 
+                        howSelectMusic(stateMusic)
 
                 displayDetail(stateMusic)
                 showSampleMusic(stateMusic,selectMenu)
