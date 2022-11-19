@@ -116,6 +116,13 @@ def home_Page():
                 if pygame.mouse.get_pressed()[0]:
                     return 2
 
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    clickSound.play()
+                    exit = _exit()
+                    if exit == 1:
+                        pygame.quit()
+
             #if pygame.mouse.get_pressed()[0]:
                 #if _checkClickRect(210,248,430,180) == 1: #select tutorial
                     #return 1
@@ -143,6 +150,12 @@ def tutorialPage_1():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                     quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    clickSound.play()
+                    exit = _exit()
+                    if exit == 1:
+                        pygame.quit()
            
            
             if _checkClickRect(1028,685,230,100) == 1: #select next
@@ -180,6 +193,12 @@ def tutorialPage_2():
                         tutorialPage_1()
                 if _checkClickRect(16,20,230,100) == 1: #select homepage
                         main()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    clickSound.play()
+                    exit = _exit()
+                    if exit == 1:
+                        pygame.quit()
         
         screen.blit(tutorialPage2,(0,0))
         screen.blit(homepageButton,(16,20))
@@ -334,6 +353,12 @@ def confirmMusicPage(stateMusic):
                 if _checkClickRect(640,569,230,100) == 1: #select play
                         sampleSoundPage()
                         return stateMusic
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    clickSound.play()
+                    exit = _exit()
+                    if exit == 1:
+                        pygame.quit()
             
     
         screen.blit(bg,(0,0))
@@ -368,6 +393,12 @@ def selectMusicPage():
             if event.type == pygame.QUIT:
                 programRunning = False 
             #print(Bluesquare_img)
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    clickSound.play()
+                    exit = _exit()
+                    if exit == 1:
+                        pygame.quit()
 
 
             if selectMenu:
@@ -410,6 +441,11 @@ def selectMusicPage():
 
                 #Part กดคีย์บอร์ด
                 if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        clickSound.play()
+                        exit = _exit()
+                        if exit == 1:
+                            pygame.quit()
                     if event.key == pygame.K_f:
                         pygame.K_BACKSPACE
                         if stateMusic == 0:
@@ -989,7 +1025,7 @@ def total_score_page(score,songName):
                     clickSound.play()
                     exit = _exit()
                     if exit == 1:
-                        quit()
+                        pygame.quit()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(525,576,230,100) == 1:
                     clickSound.play()
