@@ -38,13 +38,13 @@ def homePage():
                     quit()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(210,248,430,180) == 1: #select tutorial
-                    return 2
-                elif _checkClickRect(640,248,430,180) == 1: #select start
                     return 1
+                elif _checkClickRect(640,248,430,180) == 1: #select start
+                    return 2
 
         screen.blit(bg,(0,0))
-        screen.blit(startButton,(210,248))
-        screen.blit(tutorialButton,(640,248))
+        screen.blit(startButton,(640,248))
+        screen.blit(tutorialButton,(210,248))
         pygame.display.update()
 #mixer.music.load(homePagePath+"/MusicHomePage.mp3")
 #mixer.music.play()
