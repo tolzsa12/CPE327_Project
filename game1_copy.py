@@ -106,7 +106,7 @@ def home_Page():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                    quit()
+                    pygame.quit()
 
             if _checkClickRect(210,248,430,180) == 1: #select tutorial
                 if pygame.mouse.get_pressed()[0]:
@@ -983,7 +983,7 @@ def total_score_page(score,songName):
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                quit()
+                pygame.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     clickSound.play()
