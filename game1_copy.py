@@ -104,7 +104,22 @@ def home_Page():
     bg = pygame.image.load(homePagePath+"/HomePageBG.png") 
     startButton = pygame.image.load(homePagePath+"/Start_button.png")
     tutorialButton = pygame.image.load(homePagePath+"/Tutorial_button.png")
+
+
+    bgSound = pygame.mixer.Sound(homePagePath+"/MusicHomePage.mp3")
+    bgSound.play()
+    
+    startT = pygame.time.get_ticks()/1000
+    endT=0
+    a=0    
     while True:
+        if endT-startT<3 and a==0:
+            endT=pygame.time.get_ticks()/1000
+        elif a==0:
+            mixer.music.load(homePagePath+"/Start_HomePage.mp3")
+            mixer.music.play()
+            a=1
+           
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                     pygame.quit()
@@ -1120,8 +1135,6 @@ def total_score_page(score,songName):
 
 def main():
     #check1 = home_Page()
-    pygame.mixer.Channel(0).play(pygame.mixer.Sound(homePagePath+"/MusicHomePage.mp3"), maxtime=500000)
-    pygame.mixer.Channel(1).play(pygame.mixer.Sound(homePagePath+"/Start_HomePage.mp3"), maxtime=9000)
     check1 = home_Page()
     print(check1)
     if check1 ==  1:
