@@ -325,7 +325,8 @@ def confirmMusicPage(stateMusic):
 
     try:
         highestScore = int(_getHighestScore(musicName))
-        #mixer.music.load(confirmMusicPage+"")
+        soundScore = mixer.music.load(confirmPagePath+"/"+str(highestStar)+".mp3")
+        mixer.music.play(soundScore)
     except:
         highestScore = 0
         mixer.music.queue(confirmPagePath+"/NoRecordScore.mp3")
