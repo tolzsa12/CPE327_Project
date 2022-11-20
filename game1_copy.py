@@ -1,3 +1,4 @@
+
 from tabnanny import check
 import pygame
 from pygame import mixer
@@ -337,6 +338,7 @@ def confirmMusicPage(stateMusic):
     titleMusic = pygame.image.load(confirmPagePath+"/title_music.png")
     titleTotalScore = pygame.image.load(confirmPagePath+"/title_totalscore.png")
     startButton = pygame.image.load(confirmPagePath+"/Start_game_button.png")
+
     
     
     musicName = list_song[stateMusic]
@@ -363,6 +365,8 @@ def confirmMusicPage(stateMusic):
 
     #music & score variable
     musicIcon = pygame.image.load(confirmPagePath+"/icon_"+musicName+".png")
+    
+
       
     while True:
         for event in pygame.event.get():
@@ -370,6 +374,7 @@ def confirmMusicPage(stateMusic):
                 run = False
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(410,569,230,100) == 1: #select back
+                        selectMusicPage()
                         pygame.mixer.music.stop()
                         clickSound.play()
                         return -1
@@ -1108,6 +1113,8 @@ def main():
             #check3 = tutorialPage_2()
     elif check1 == 2:
         mixer.music.stop()
+        selectSongVar = selectMusicPage()
+        stateMusicConfirm = confirmMusicPage(selectSongVar)
         while stateMusicConfirm == -1:
             selectSongVar = selectMusicPage()
             stateMusicConfirm = confirmMusicPage(selectSongVar)
