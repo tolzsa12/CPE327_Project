@@ -127,7 +127,6 @@ def home_Page():
 
             if event.type == pygame.KEYDOWN:  
                 if event.key == pygame.K_f: #select tutorial
-                    print('oo')
                     pygame.mixer.pause()
                     return 1
 
@@ -192,12 +191,21 @@ def tutorialPage_1():
                         pygame.quit()
                         exit()
                     mixer.music.unpause()
-           
+        
+                if event.key == pygame.K_BACKSPACE:
+                    mixer.music.load(homePagePath+"/Click sound effect.mp3")
+                    mixer.music.play()
+                    main()
+                
+                if event.key == pygame.K_j:
+                    mixer.music.stop()
+                    tutorialPage_2()
            
             if _checkClickRect(1028,685,230,100) == 1: #select next
                 if pygame.mouse.get_pressed()[0]:
                     mixer.music.stop()
                     tutorialPage_2()
+
             if _checkClickRect(16,20,230,100) == 1: #select homepage
                 if pygame.mouse.get_pressed()[0]:
                     mixer.music.load(homePagePath+"/Click sound effect.mp3")
@@ -238,6 +246,13 @@ def tutorialPage_2():
                         pygame.quit()
                         exit()
                     mixer.music.unpause()
+                if event.key == pygame.K_f: #select back
+                    mixer.music.stop()
+                    tutorialPage_1()
+                if event.key == pygame.K_BACKSPACE: #select homepage
+                    mixer.music.load(homePagePath+"/Click sound effect.mp3")
+                    mixer.music.play()
+                    main()
         
         screen.blit(tutorialPage2,(0,0))
         screen.blit(homepageButton,(16,20))
