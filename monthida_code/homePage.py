@@ -2,6 +2,7 @@ from tabnanny import check
 import pygame
 from pygame import mixer
 import os
+import time
 
 pygame.init()
 os.chdir("../")
@@ -93,8 +94,14 @@ def tutorialPage_2():
 #game loop 
 
 def main():
-    mixer.music.load(homePagePath+"/MusicHomePage.mp3")
-    mixer.music.play()
+
+    bgSound = mixer.music.load(homePagePath+"/MusicHomePage.mp3")
+    homeSound = mixer.music.load(homePagePath+"/Start_HomePage.mp3")
+    pygame.mixer.Channel(0).play(pygame.mixer.Sound(homePagePath+"/MusicHomePage.mp3"), maxtime=500000)
+    pygame.mixer.Channel(1).play(pygame.mixer.Sound(homePagePath+"/Start_HomePage.mp3"), maxtime=9000)
+
+    #mixer.music.load(homePagePath+"/MusicHomePage.mp3")
+    #mixer.music.play()
     check1 = homePage()
     print(check1)
     if check1 ==  1:

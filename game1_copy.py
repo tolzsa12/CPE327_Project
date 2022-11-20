@@ -110,18 +110,30 @@ def home_Page():
                     pygame.quit()
                     exit()
 
+            if event.type == pygame.KEYDOWN:  
+                if event.key == pygame.K_f: #select tutorial
+                    print('oo')
+                    pygame.mixer.pause()
+                    return 1
+
+                if event.key == pygame.K_j: #select start
+                    pygame.mixer.pause()
+                    return 2
+
             if _checkClickRect(210,248,430,180) == 1: #select tutorial
                 if pygame.mouse.get_pressed()[0]:
+                    pygame.mixer.pause()
                     return 1
 
             elif _checkClickRect(640,248,430,180) == 1: #select start
                 if pygame.mouse.get_pressed()[0]:
+                    pygame.mixer.pause()
                     return 2
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     clickSound.play()
-                    pygame.mixer.music.pause()
+                    pygame.mixer.pause()
                     exit = _exit()
                     if exit == 1:
                         pygame.quit()
@@ -148,6 +160,7 @@ def tutorialPage_1():
     tutorialPage1 = pygame.image.load(homePagePath+"/Tutorial1.png")
     homepageButton = pygame.image.load(homePagePath+"/Home_button.png")
     nextButton = pygame.image.load(homePagePath+"/next.png")
+    
     mixer.music.load(homePagePath+"/Click sound effect.mp3")
     mixer.music.play()
     mixer.music.queue(homePagePath+"/Tutorial1.mp3")
@@ -1090,20 +1103,25 @@ def total_score_page(score,songName):
                 if _checkClickRect(525,576,230,100) == 1:
                     clickSound.play()
                     main()
-            
+
+        
+
         screen.blit(bg,(0,0))
         screen.blit(star,(390,434))
         screen.blit(collectButton, (512, 576))
         screen.blit(titleGetpoint, (380, 370))
         _showText(songName,562,260)
+        pygame.mixer.music.load(totalScorePagePath+"/Result score sound.mp3")  
+        pygame.mixer.music.queue(totalScorePagePath+"/"+str(score)+".mp3")
+        pygame.mixer.music.play()
         pygame.display.update()
 
         
 
 def main():
-    stateMusicConfirm=-1
-    mixer.music.load(homePagePath+"/MusicHomePage.mp3")
-    mixer.music.play()
+    #check1 = home_Page()
+    pygame.mixer.Channel(0).play(pygame.mixer.Sound(homePagePath+"/MusicHomePage.mp3"), maxtime=500000)
+    pygame.mixer.Channel(1).play(pygame.mixer.Sound(homePagePath+"/Start_HomePage.mp3"), maxtime=9000)
     check1 = home_Page()
     print(check1)
     if check1 ==  1:
