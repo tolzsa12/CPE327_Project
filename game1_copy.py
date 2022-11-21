@@ -1117,6 +1117,10 @@ def total_score_page(score,songName):
     titleGetpoint = pygame.image.load(totalScorePagePath+"/getPoint.png")
     star = pygame.image.load(totalScorePagePath+"/"+str(score)+".png")
 
+    pygame.mixer.music.load(totalScorePagePath+"/Result score sound.mp3")  
+    pygame.mixer.music.queue(totalScorePagePath+"/"+str(score)+".mp3")
+    pygame.mixer.music.play()
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -1141,9 +1145,6 @@ def total_score_page(score,songName):
         screen.blit(collectButton, (512, 576))
         screen.blit(titleGetpoint, (380, 370))
         _showText(songName,562,260)
-        pygame.mixer.music.load(totalScorePagePath+"/Result score sound.mp3")  
-        pygame.mixer.music.queue(totalScorePagePath+"/"+str(score)+".mp3")
-        pygame.mixer.music.play()
         pygame.display.update()
 
         
