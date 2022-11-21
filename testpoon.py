@@ -69,16 +69,21 @@ def total_score_page(score,songName):
     collectButton = pygame.image.load(totalScorePagePath+"/Collect_button.png")
     titleGetpoint = pygame.image.load(totalScorePagePath+"/getPoint.png")
     star = pygame.image.load(totalScorePagePath+"/"+str(score)+".png")
+
     
-    soundTotal = pygame.mixer.Sound(totalScorePagePath+"/Result score sound.mp3")  
-    soundTotal.play()
+    soundT = pygame.mixer.Sound(totalScorePagePath+"/result_score.mp3")
+    soundT.play()
+    #pygame.mixer.music.play()
     
     startT = pygame.time.get_ticks()/1000
     endT=0
     a=0    
+        
+
     while True:
-        if endT-startT<4 and a==0:
+        if a==0 and endT-startT<4:
             endT=pygame.time.get_ticks()/1000
+            print(endT)
         elif a==0:
             print('jdjis')
             pygame.mixer.music.load(totalScorePagePath+"/"+str(score)+".mp3")
@@ -86,34 +91,31 @@ def total_score_page(score,songName):
             pygame.mixer.music.queue(totalScorePagePath+"/Collect_TotalScore.mp3")
             a=1
   
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    clickSound.play()
+                    exit = _exit()
+                    if exit == 1:
+                        pygame.quit()
+                        exit()
+            if pygame.mouse.get_pressed()[0]:
+                if _checkClickRect(525,576,230,100) == 1:
+                    clickSound.play()
+                    main()
 
-        while True:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    exit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        clickSound.play()
-                        exit = _exit()
-                        if exit == 1:
-                            pygame.quit()
-                            exit()
-                if pygame.mouse.get_pressed()[0]:
-                    if _checkClickRect(525,576,230,100) == 1:
-                        clickSound.play()
-                        main()
-
-            
-            screen.blit(bg,(0,0))
-            screen.blit(star,(390,434))
-            screen.blit(collectButton, (512, 576))
-            screen.blit(titleGetpoint, (380, 370))
-            _showText(songName,562,260)
-            pygame.display.update()
+    
+        screen.blit(bg,(0,0))
+        screen.blit(star,(390,434))
+        screen.blit(collectButton, (512, 576))
+        screen.blit(titleGetpoint, (380, 370))
+        _showText(songName,562,260)
+        pygame.display.update()
 
 def main():
-    pygame.mixer.music.load(totalScorePagePath+"/Result score sound.mp3")  
-    pygame.mixer.music.play()
-    total_score_page("2","Too Cute") 
+    pygame.init()
+    total_score_page(2,"Too Cute") 
 main()
