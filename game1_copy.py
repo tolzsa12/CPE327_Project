@@ -595,7 +595,9 @@ def sampleSoundPage():
     mixer.music.play()
     mixer.music.queue(sampleSoundPagePath+"/countdown.mp3")
     a=0
-        
+
+    startT=pygame.time.get_ticks()/1000
+    endT=0
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -603,9 +605,9 @@ def sampleSoundPage():
         
         screen.blit(bg,(0,0))
         pygame.display.update()
-        if a==0:
-            pygame.time.wait(16000)
-            a=1
+        if a==0 and endT-startT<16:
+            endT=pygame.time.get_ticks()/1000
+        else:
             break
         
 
@@ -902,6 +904,33 @@ def _exitTime():
         screen.blit(exitButton,(431,463))
         pygame.display.update()
 
+def countdownPage(songName):
+    bg = pygame.image.load(gamePagePath+"/game_page.png")
+    mixer.music.load(soundPath+"/sample_sound/countdown.mp3")
+    startT=pygame.time.get_ticks()/1000
+    mixer.music.play()
+    a=0
+    endT=0    
+    while True:
+        if a==0 and endT-startT<3.9:
+            endT=pygame.time.get_ticks()/1000
+        elif a==0:
+            return endT*1000-startT*1000
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit()
+        
+        screen.blit(bg,(0,0))
+        _showCat(497,400)
+        _showDog(666,400)
+        _showCloud(0,111)
+        _showText(songName,562,50)
+        screen.blit(sushi,(138,495))
+        screen.blit(food,(1047,495))
+        pygame.display.update()
+        
+        
+
 def _play(t,b,songName):
     #array for counting the beat
     array.array("i")                
@@ -944,21 +973,18 @@ def _play(t,b,songName):
                         key = "j"
                         yfood = 488
                     elif event.key == pygame.K_SPACE:
-                        
                         pygame.mixer.music.pause()
-                        
-                        #pygame.mixer.Channel(0).pause()
                         pauseTemp = _pauseTime()
                         if pauseTemp == -1:
-                            _play(t,b,songName)
+                            return -1
                         elif pauseTemp == 0:
                             main()
-                        pauseTime += pauseTemp
+                        tempC = countdownPage(songName)
+                        pauseTime += pauseTemp+tempC
                         getPos=(pygame.time.get_ticks()-startTicks-pauseTime-exitTime)/1000
                         pygame.mixer.music.load(musicPath+"/"+songName+"_music.mp3")
                         pygame.mixer.music.play()
                         pygame.mixer.music.set_pos(getPos)
-                        
                         
                         #pygame.mixer.Channel(0).unpause()
                     elif event.key == pygame.K_ESCAPE:
@@ -1147,10 +1173,9 @@ def total_score_page(score,songName):
         _showText(songName,562,260)
         pygame.display.update()
 
-        
+     
 
 def main():
-    #check1 = home_Page()
     check1 = home_Page()
     print(check1)
     if check1 ==  1:
@@ -1167,7 +1192,9 @@ def main():
             stateMusicConfirm = confirmMusicPage(selectSongVar)
         t=tempt[stateMusicConfirm]
         b=tempb[stateMusicConfirm]
-        endGamePoint = _play(t,b,list_song[stateMusicConfirm])
+        endGamePoint =-1  
+        while endGamePoint == -1:
+            endGamePoint = _play(t,b,list_song[stateMusicConfirm])
         total_score_page(calculatePoint(endGamePoint),list_song[stateMusicConfirm])
         
 main()
