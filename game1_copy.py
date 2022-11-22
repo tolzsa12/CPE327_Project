@@ -121,7 +121,7 @@ def home_Page():
             a=1
            
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:                    
+            if event.type == pygame.QUIT:
                     quit()
 
             if event.type == pygame.KEYDOWN:  
@@ -149,8 +149,7 @@ def home_Page():
                     pygame.mixer.pause()
                     exit = _exit()
                     if exit == 1:
-                        pygame.quit()
-                        exit()
+                        quit()
                     else:
                         main()
                 
@@ -187,10 +186,9 @@ def tutorialPage_1():
                 if event.key == pygame.K_ESCAPE:
                     clickSound.play()
                     mixer.music.pause()
-                    exit = _exit()
-                    if exit == 1:
-                        pygame.quit()
-                        exit()
+                    exitt = _exit()
+                    if exitt == 1:
+                        quit()
                     else:
                         mixer.music.unpause()
                         return -1
@@ -244,10 +242,9 @@ def tutorialPage_2():
                 if event.key == pygame.K_ESCAPE:
                     clickSound.play()
                     mixer.music.pause()
-                    exit = _exit()
-                    if exit == 1:
-                        pygame.quit()
-                        exit()
+                    exitt = _exit()
+                    if exitt == 1:
+                        quit()
                     return -1
                 if event.key == pygame.K_f: #select back
                     mixer.music.stop()
@@ -384,9 +381,6 @@ def confirmMusicPage(stateMusic):
     titleMusic = pygame.image.load(confirmPagePath+"/title_music.png")
     titleTotalScore = pygame.image.load(confirmPagePath+"/title_totalscore.png")
     startButton = pygame.image.load(confirmPagePath+"/Start_game_button.png")
-
-    
-    
     musicName = list_song[stateMusic]
 
     try:
@@ -401,23 +395,13 @@ def confirmMusicPage(stateMusic):
     pygame.mixer.music.load(confirmPagePath+"/"+musicName+".mp3")
     pygame.mixer.music.queue(confirmPagePath+"/"+str(highestStar)+"Star.mp3")
     pygame.mixer.music.play()
-
     a=0
-    
-    
-    
-        
-    
-
     #music & score variable
     musicIcon = pygame.image.load(confirmPagePath+"/icon_"+musicName+".png")
-    
-
-      
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                run = False
+                quit()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(410,569,230,100) == 1: #select back
                         selectMusicPage()
@@ -428,21 +412,18 @@ def confirmMusicPage(stateMusic):
                 if _checkClickRect(640,569,230,100) == 1: #select play
                         pygame.mixer.music.stop()
                         clickSound.play()
-                        sampleSoundPage()
                         return stateMusic
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     pygame.mixer.music.pause()
                     clickSound.play()
-                    exit = _exit()
-                    if exit == 1:
-                        pygame.quit()
-                        exit()
-                    pygame.mixer.music.unpause()
+                    exitt = _exit()
+                    if exitt == 1:
+                        quit()
+                    return -2
                 if event.key == pygame.K_RETURN:
                     pygame.mixer.music.stop()
                     clickSound.play()
-                    sampleSoundPage()
                     return stateMusic
                 if event.key == pygame.K_BACKSPACE:
                     pygame.mixer.music.stop()
@@ -489,16 +470,14 @@ def selectMusicPage():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 programRunning = False 
-                quit()
             #print(Bluesquare_img)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     clickSound.play()
                     pygame.mixer.music.pause()
-                    exit = _exit()
-                    if exit == 1:
-                        pygame.quit()
-                        exit()
+                    exitt = _exit()
+                    if exitt == 1:
+                        quit()
                     pygame.mixer.music.unpause()
 
 
@@ -544,10 +523,9 @@ def selectMusicPage():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         clickSound.play()
-                        exit = _exit()
-                        if exit == 1:
-                            pygame.quit()
-                            exit()
+                        exitt = _exit()
+                        if exitt == 1:
+                            quit()
                     if event.key == pygame.K_f:
                         pygame.K_BACKSPACE
                         if stateMusic == 0:
@@ -585,13 +563,11 @@ def selectMusicPage():
                 showSampleMusic(stateMusic,selectMenu)
             #กรณีที่อยู่หน้าเล่นเกม
             elif not selectMenu and playingGame:
-                print("eiei")
                 break
             #กรณีอยู่หน้า homepage
             
             
             elif not selectMenu and homePage:
-                print("ok")
                 selectMenu = True
                 homePage = False
                 pygame.mixer.music.stop()
@@ -613,18 +589,7 @@ def sampleSoundPage():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                run = False
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                            clickSound.play()
-                            pygame.mixer.pause()
-                            exit = _exit()
-                            if exit == 1:
-                                pygame.quit()
-                                exit()
-                            else:
-                                sampleSoundPage()
-        
+                quit()
         screen.blit(bg,(0,0))
         pygame.display.update()
         if a==0 and endT-startT<16:
@@ -803,8 +768,8 @@ def _pauseTime():
 
                 if event.key == pygame.K_ESCAPE: #exit game
                     clickSound.play()
-                    exit = _exit()
-                    if exit == 1:
+                    exitt = _exit()
+                    if exitt == 1:
                         quit()
 
             #check for only changing status        
@@ -871,8 +836,7 @@ def _exit():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
-                exit()
+                quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     pygame.mixer.music.stop()
@@ -909,8 +873,7 @@ def _exitTime():
         exitTime = pygame.time.get_ticks()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
-                exit()
+                quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     clickSound.play()
@@ -1196,19 +1159,16 @@ def total_score_page(score,songName):
             a=1
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
-                exit()
+                quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     clickSound.play()
-                    exit = _exit()
-                    if exit == 1:
-                        pygame.quit()
-                        exit()
+                    exitt = _exit()
+                    if exitt == 1:
+                        quit()
                     else:
                         return -1
                 if event.key == pygame.K_RETURN:
-                    mixer.music.stop()
                     main()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(525,576,230,100) == 1:
@@ -1226,9 +1186,9 @@ def total_score_page(score,songName):
 
 def main():
     check0 = home_Page()
-    print(check0)
     check2=-1
     tempTotal=-1
+    stateMusicConfirm=-1
     if check0 ==  1:
         mixer.music.stop()
         while check2 == -1 or check2==-2:
@@ -1239,24 +1199,23 @@ def main():
                     check2=-1
                     while check2==-1:
                         check2 = tutorialPage_2()
-        
-            
-         
-            
+             
             
     elif check0 == 2:
         mixer.music.stop()
-        selectSongVar = selectMusicPage()
-        stateMusicConfirm = confirmMusicPage(selectSongVar)
         while stateMusicConfirm == -1:
             selectSongVar = selectMusicPage()
-            stateMusicConfirm = confirmMusicPage(selectSongVar)
+            stateMusicConfirm = -2
+            while stateMusicConfirm == -2:
+                stateMusicConfirm = confirmMusicPage(selectSongVar)
         t=tempt[stateMusicConfirm]
         b=tempb[stateMusicConfirm]
         endGamePoint =-1  
         while endGamePoint == -1:
+            sampleSoundPage()
             endGamePoint = _play(t,b,list_song[stateMusicConfirm])
-            while tempTotal == -1:
-                tempTotal=total_score_page(calculatePoint(endGamePoint),list_song[stateMusicConfirm])
+            if endGamePoint != -1:
+                while tempTotal == -1:
+                    tempTotal=total_score_page(calculatePoint(endGamePoint),list_song[stateMusicConfirm])
         
 main()
