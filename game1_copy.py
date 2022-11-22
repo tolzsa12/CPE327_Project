@@ -152,7 +152,9 @@ def home_Page():
                     if exit == 1:
                         pygame.quit()
                         exit()
-                    pygame.mixer.music.unpause()
+                    else:
+                        main()
+                
 
             #if pygame.mouse.get_pressed()[0]:
                 #if _checkClickRect(210,248,430,180) == 1: #select tutorial
@@ -190,7 +192,8 @@ def tutorialPage_1():
                     if exit == 1:
                         pygame.quit()
                         exit()
-                    mixer.music.unpause()
+                    else:
+                        mixer.music.unpause()
         
                 if event.key == pygame.K_BACKSPACE:
                     mixer.music.load(homePagePath+"/Click sound effect.mp3")
@@ -853,16 +856,20 @@ def _exit():
                 exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
+                    pygame.mixer.music.stop()
                     clickSound.play()
                     return 1
                 elif event.key == pygame.K_BACKSPACE:
+                    pygame.mixer.music.stop()
                     clickSound.play()
                     return 0
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(431,283,430,180) == 1:
+                    pygame.mixer.music.stop()
                     clickSound.play()
                     return 0
                 elif _checkClickRect(431,463,430,180) == 1:
+                    pygame.mixer.music.stop()
                     clickSound.play()
                     return 1
 
