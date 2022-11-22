@@ -121,9 +121,8 @@ def home_Page():
             a=1
            
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                    pygame.quit()
-                    exit()
+            if event.type == pygame.QUIT:                    
+                    quit()
 
             if event.type == pygame.KEYDOWN:  
                 if event.key == pygame.K_f: #select tutorial
@@ -490,6 +489,7 @@ def selectMusicPage():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 programRunning = False 
+                quit()
             #print(Bluesquare_img)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
@@ -1200,6 +1200,7 @@ def total_score_page(score,songName):
                     else:
                         return -1
                 if event.key == pygame.K_RETURN:
+                    mixer.music.stop()
                     main()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(525,576,230,100) == 1:
