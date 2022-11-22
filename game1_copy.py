@@ -611,6 +611,16 @@ def sampleSoundPage():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                            clickSound.play()
+                            pygame.mixer.pause()
+                            exit = _exit()
+                            if exit == 1:
+                                pygame.quit()
+                                exit()
+                            else:
+                                sampleSoundPage()
         
         screen.blit(bg,(0,0))
         pygame.display.update()
