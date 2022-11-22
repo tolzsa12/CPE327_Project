@@ -568,13 +568,7 @@ def selectMusicPage():
                         selectMenu = False
                         pygame.mixer.music.fadeout(200)
                         clickEffect()
-                    if event.key == pygame.K_BACKSPACE:
-                        selectMenu = False
-                        pygame.mixer.music.stop()
-                        clickEffect()
-                        main()
-
-                    if not event.key == pygame.K_f and not event.key == pygame.K_j and not event.key == pygame.K_RETURN and not event.key == pygame.K_ESCAPE:
+                    if not event.key == pygame.K_f and not event.key == pygame.K_j and not event.key == pygame.K_RETURN:
                         FirsttimehomePage = True
                         pygame.mixer.music.stop() 
                         howSelectMusic(stateMusic)
@@ -1188,6 +1182,10 @@ def total_score_page(score,songName):
                     if exit == 1:
                         pygame.quit()
                         exit()
+                    else:
+                        return -1
+                if event.key == pygame.K_RETURN:
+                    main()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(525,576,230,100) == 1:
                     clickSound.play()
@@ -1206,6 +1204,7 @@ def main():
     check0 = home_Page()
     print(check0)
     check2=-1
+    tempTotal=-1
     if check0 ==  1:
         mixer.music.stop()
         while check2 == -1 or check2==-2:
@@ -1233,6 +1232,7 @@ def main():
         endGamePoint =-1  
         while endGamePoint == -1:
             endGamePoint = _play(t,b,list_song[stateMusicConfirm])
-        total_score_page(calculatePoint(endGamePoint),list_song[stateMusicConfirm])
+            while tempTotal == -1:
+                tempTotal=total_score_page(calculatePoint(endGamePoint),list_song[stateMusicConfirm])
         
 main()
