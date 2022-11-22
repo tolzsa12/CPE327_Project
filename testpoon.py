@@ -116,6 +116,5 @@ def total_score_page(score,songName):
         pygame.display.update()
 
 def main():
-    pygame.init()
     total_score_page(2,"Too Cute") 
 main()
