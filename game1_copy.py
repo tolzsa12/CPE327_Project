@@ -492,13 +492,17 @@ def selectMusicPage():
                 programRunning = False 
             #print(Bluesquare_img)
             if event.type == pygame.KEYDOWN:
+                print(event)
                 if event.key == pygame.K_ESCAPE:
+                    selectMenu = False
                     clickSound.play()
                     pygame.mixer.music.pause()
                     exit = _exit()
                     if exit == 1:
                         pygame.quit()
                         exit()
+                    else:
+                        selectMenu = True
                     pygame.mixer.music.unpause()
 
 
@@ -542,14 +546,7 @@ def selectMusicPage():
 
                 #Part กดคีย์บอร์ด
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        clickSound.play()
-                        exit = _exit()
-                        if exit == 1:
-                            pygame.quit()
-                            exit()
                     if event.key == pygame.K_f:
-                        pygame.K_BACKSPACE
                         if stateMusic == 0:
                             stateMusic = num_song-1
                         else:
