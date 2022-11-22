@@ -121,9 +121,8 @@ def home_Page():
             a=1
            
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                    pygame.quit()
-                    exit()
+            if event.type == pygame.QUIT:                    
+                    quit()
 
             if event.type == pygame.KEYDOWN:  
                 if event.key == pygame.K_f: #select tutorial
@@ -490,9 +489,9 @@ def selectMusicPage():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 programRunning = False 
+                quit()
             #print(Bluesquare_img)
             if event.type == pygame.KEYDOWN:
-                print(event)
                 if event.key == pygame.K_ESCAPE:
                     selectMenu = False
                     clickSound.play()
