@@ -493,15 +493,12 @@ def selectMusicPage():
             #print(Bluesquare_img)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    selectMenu = False
                     clickSound.play()
                     pygame.mixer.music.pause()
                     exit = _exit()
                     if exit == 1:
                         pygame.quit()
                         exit()
-                    else:
-                        selectMenu = True
                     pygame.mixer.music.unpause()
 
 
@@ -545,7 +542,14 @@ def selectMusicPage():
 
                 #Part กดคีย์บอร์ด
                 if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        clickSound.play()
+                        exit = _exit()
+                        if exit == 1:
+                            pygame.quit()
+                            exit()
                     if event.key == pygame.K_f:
+                        pygame.K_BACKSPACE
                         if stateMusic == 0:
                             stateMusic = num_song-1
                         else:
@@ -899,6 +903,8 @@ def _exit():
 def _exitTime():
     exitStart = pygame.time.get_ticks()
     exitTime = 0
+    mixer.music.load(homePagePath+"/Exit_Game.mp3")
+    mixer.music.play()
     while True:
         exitTime = pygame.time.get_ticks()
         for event in pygame.event.get():
@@ -911,6 +917,7 @@ def _exitTime():
                     return 1
                 elif event.key == pygame.K_BACKSPACE:
                     clickSound.play()
+                    mixer.music.stop()
                     return exitTime-exitStart
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(431,283,430,180) == 1:
@@ -1009,15 +1016,15 @@ def _play(t,b,songName):
                         pygame.mixer.music.load(musicPath+"/"+songName+"_music.mp3")
                         pygame.mixer.music.play()
                         pygame.mixer.music.set_pos(getPos)
-                        
-                        #pygame.mixer.Channel(0).unpause()
                     elif event.key == pygame.K_ESCAPE:
                         pygame.mixer.music.pause()
                         clickSound.play()
                         exitTemp = _exitTime()
                         if exitTemp == 1:
                             quit()
-                        exitTime += exitTemp
+                        tempC = countdownPage(songName)
+                        exitTime = exitTime+exitTemp+tempC
+                        pygame.mixer.music.unpause()
                         getPos=(pygame.time.get_ticks()-startTicks-pauseTime-exitTime)/1000
                         pygame.mixer.music.load(musicPath+"/"+songName+"_music.mp3")
                         pygame.mixer.music.play()
@@ -1201,6 +1208,7 @@ def total_score_page(score,songName):
                     else:
                         return -1
                 if event.key == pygame.K_RETURN:
+                    mixer.music.stop()
                     main()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(525,576,230,100) == 1:
