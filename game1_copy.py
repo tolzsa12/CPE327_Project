@@ -104,8 +104,8 @@ def home_Page():
     bg = pygame.image.load(homePagePath+"/HomePageBG.png") 
     startButton = pygame.image.load(homePagePath+"/Start_button.png")
     tutorialButton = pygame.image.load(homePagePath+"/Tutorial_button.png")
-
-
+    
+    
     bgSound = pygame.mixer.Sound(homePagePath+"/MusicHomePage.mp3")
     bgSound.play()
     
@@ -844,6 +844,8 @@ def _pauseTime():
 
 
 def _exit():
+    mixer.music.load(homePagePath+"/Exit_Game.mp3")
+    mixer.music.play()
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
