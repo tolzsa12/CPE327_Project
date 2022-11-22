@@ -573,7 +573,7 @@ def selectMusicPage():
                         clickEffect()
                         main()
 
-                    if not event.key == pygame.K_f and not event.key == pygame.K_j and not event.key == pygame.K_RETURN:
+                    if not event.key == pygame.K_f and not event.key == pygame.K_j and not event.key == pygame.K_RETURN and not event.key == pygame.K_ESCAPE:
                         FirsttimehomePage = True
                         pygame.mixer.music.stop() 
                         howSelectMusic(stateMusic)
