@@ -194,6 +194,7 @@ def tutorialPage_1():
                         exit()
                     else:
                         mixer.music.unpause()
+                        return -1
         
                 if event.key == pygame.K_BACKSPACE:
                     mixer.music.load(homePagePath+"/Click sound effect.mp3")
@@ -202,12 +203,12 @@ def tutorialPage_1():
                 
                 if event.key == pygame.K_j:
                     mixer.music.stop()
-                    tutorialPage_2()
+                    return 2
            
             if _checkClickRect(1028,685,230,100) == 1: #select next
                 if pygame.mouse.get_pressed()[0]:
                     mixer.music.stop()
-                    tutorialPage_2()
+                    return 2
 
             if _checkClickRect(16,20,230,100) == 1: #select homepage
                 if pygame.mouse.get_pressed()[0]:
@@ -237,7 +238,7 @@ def tutorialPage_2():
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(16,686,230,100) == 1: #select back
                         mixer.music.stop()
-                        tutorialPage_1()
+                        return -2
                 if _checkClickRect(16,20,230,100) == 1: #select homepage
                         main()
             if event.type == pygame.KEYDOWN:
@@ -248,10 +249,10 @@ def tutorialPage_2():
                     if exit == 1:
                         pygame.quit()
                         exit()
-                    mixer.music.unpause()
+                    return -1
                 if event.key == pygame.K_f: #select back
                     mixer.music.stop()
-                    tutorialPage_1()
+                    return -2
                 if event.key == pygame.K_BACKSPACE: #select homepage
                     mixer.music.load(homePagePath+"/Click sound effect.mp3")
                     mixer.music.play()
@@ -1196,14 +1197,25 @@ def total_score_page(score,songName):
      
 
 def main():
-    check1 = home_Page()
-    print(check1)
-    if check1 ==  1:
+    check0 = home_Page()
+    print(check0)
+    check2=-1
+    if check0 ==  1:
         mixer.music.stop()
-        check2 = tutorialPage_1()
-        #if check2 == 0:
-            #check3 = tutorialPage_2()
-    elif check1 == 2:
+        while check2 == -1 or check2==-2:
+            check1 =-1
+            while check1==-1:
+                check1 = tutorialPage_1()
+                if check1==2:
+                    check2=-1
+                    while check2==-1:
+                        check2 = tutorialPage_2()
+        
+            
+         
+            
+            
+    elif check0 == 2:
         mixer.music.stop()
         selectSongVar = selectMusicPage()
         stateMusicConfirm = confirmMusicPage(selectSongVar)
