@@ -558,12 +558,20 @@ def selectMusicPage():
                         else: 
                             stateMusic += 1
                         pygame.mixer.music.stop() #ทำการหยุดเพลงที่เล่นอยู่
+                    
+                    if event.key == pygame.K_BACKSPACE:
+                        
+                        pygame.mixer.music.stop()
+                        clickEffect() 
+                        main()
+
 
                     if event.key == pygame.K_RETURN:
                         playingGame = True
                         selectMenu = False
                         pygame.mixer.music.fadeout(200)
                         clickEffect()
+
                     if not event.key == pygame.K_f and not event.key == pygame.K_j and not event.key == pygame.K_RETURN:
                         FirsttimehomePage = True
                         pygame.mixer.music.stop() 
