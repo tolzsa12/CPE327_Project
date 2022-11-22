@@ -57,10 +57,6 @@ b2 = ["n", c, c, c, d, d, d, c, d, d, d, d, c, d, c, d, d, c, d, d, c, c, d, d, 
 b3 = ["n", c, c, c, d, d, d, c, d, d, c, d, c, d, c, d, d, c, c, d, c, c, d, d, d, c, d, d, c, d, c, d, c, d, c, d]
 
 
-
-
-
-
 tempt=[t0,t1,t2]
 tempb=[b0,b1,b2]
 
@@ -74,8 +70,7 @@ SCREEN_HEIGHT = 800
 screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
 
-list_song = ["Jingle Bell","Shutdown",
-                "Too Cute"] #เวลาจะเพิ่มหรือลด มาแก้ตรงนี้พอ
+list_song = ["Jingle Bell","Shutdown","Too Cute"] #เวลาจะเพิ่มหรือลด มาแก้ตรงนี้พอ
 num_song = len(list_song)
 BLACK = (0,0,0)
 
