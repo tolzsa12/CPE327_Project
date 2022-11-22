@@ -564,6 +564,12 @@ def selectMusicPage():
                         selectMenu = False
                         pygame.mixer.music.fadeout(200)
                         clickEffect()
+                    if event.key == pygame.K_BACKSPACE:
+                        selectMenu = False
+                        pygame.mixer.music.stop()
+                        clickEffect()
+                        main()
+
                     if not event.key == pygame.K_f and not event.key == pygame.K_j and not event.key == pygame.K_RETURN:
                         FirsttimehomePage = True
                         pygame.mixer.music.stop() 
