@@ -1008,17 +1008,15 @@ def _play(t,b,songName):
                         pygame.mixer.music.load(musicPath+"/"+songName+"_music.mp3")
                         pygame.mixer.music.play()
                         pygame.mixer.music.set_pos(getPos)
-                        
-                        #pygame.mixer.Channel(0).unpause()
                     elif event.key == pygame.K_ESCAPE:
                         pygame.mixer.music.pause()
                         clickSound.play()
                         exitTemp = _exitTime()
                         if exitTemp == 1:
                             quit()
-                        exitTime += exitTemp
+                        tempC = countdownPage(songName)
+                        exitTime = exitTime+exitTemp+tempC
                         pygame.mixer.music.unpause()
-                        #pygame.mixer.Channel(0).pause()
                         getPos=(pygame.time.get_ticks()-startTicks-pauseTime-exitTime)/1000
                         pygame.mixer.music.load(musicPath+"/"+songName+"_music.mp3")
                         pygame.mixer.music.play()
