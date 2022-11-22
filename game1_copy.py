@@ -412,7 +412,6 @@ def confirmMusicPage(stateMusic):
                 if _checkClickRect(640,569,230,100) == 1: #select play
                         pygame.mixer.music.stop()
                         clickSound.play()
-                        sampleSoundPage()
                         return stateMusic
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
@@ -425,7 +424,6 @@ def confirmMusicPage(stateMusic):
                 if event.key == pygame.K_RETURN:
                     pygame.mixer.music.stop()
                     clickSound.play()
-                    sampleSoundPage()
                     return stateMusic
                 if event.key == pygame.K_BACKSPACE:
                     pygame.mixer.music.stop()
@@ -591,17 +589,7 @@ def sampleSoundPage():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                run = False
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                            clickSound.play()
-                            pygame.mixer.pause()
-                            exitt = _exit()
-                            if exitt == 1:
-                                quit()
-                            else:
-                                sampleSoundPage()
-        
+                quit()
         screen.blit(bg,(0,0))
         pygame.display.update()
         if a==0 and endT-startT<16:
@@ -1224,8 +1212,10 @@ def main():
         b=tempb[stateMusicConfirm]
         endGamePoint =-1  
         while endGamePoint == -1:
+            sampleSoundPage()
             endGamePoint = _play(t,b,list_song[stateMusicConfirm])
-            while tempTotal == -1:
-                tempTotal=total_score_page(calculatePoint(endGamePoint),list_song[stateMusicConfirm])
+            if endGamePoint != -1:
+                while tempTotal == -1:
+                    tempTotal=total_score_page(calculatePoint(endGamePoint),list_song[stateMusicConfirm])
         
 main()
