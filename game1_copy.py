@@ -1195,6 +1195,7 @@ def total_score_page(score,songName):
                     else:
                         return -1
                 if event.key == pygame.K_RETURN:
+                    mixer.music.stop()
                     main()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(525,576,230,100) == 1:
