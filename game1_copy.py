@@ -121,8 +121,9 @@ def home_Page():
             a=1
            
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:                    
-                    quit()
+            if event.type == pygame.QUIT:
+                    pygame.quit()
+                    exit()
 
             if event.type == pygame.KEYDOWN:  
                 if event.key == pygame.K_f: #select tutorial
@@ -384,9 +385,6 @@ def confirmMusicPage(stateMusic):
     titleMusic = pygame.image.load(confirmPagePath+"/title_music.png")
     titleTotalScore = pygame.image.load(confirmPagePath+"/title_totalscore.png")
     startButton = pygame.image.load(confirmPagePath+"/Start_game_button.png")
-
-    
-    
     musicName = list_song[stateMusic]
 
     try:
@@ -401,23 +399,13 @@ def confirmMusicPage(stateMusic):
     pygame.mixer.music.load(confirmPagePath+"/"+musicName+".mp3")
     pygame.mixer.music.queue(confirmPagePath+"/"+str(highestStar)+"Star.mp3")
     pygame.mixer.music.play()
-
     a=0
-    
-    
-    
-        
-    
-
     #music & score variable
     musicIcon = pygame.image.load(confirmPagePath+"/icon_"+musicName+".png")
-    
-
-      
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                run = False
+                quit()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(410,569,230,100) == 1: #select back
                         selectMusicPage()
@@ -434,11 +422,10 @@ def confirmMusicPage(stateMusic):
                 if event.key == pygame.K_ESCAPE:
                     pygame.mixer.music.pause()
                     clickSound.play()
-                    exit = _exit()
-                    if exit == 1:
-                        pygame.quit()
-                        exit()
-                    pygame.mixer.music.unpause()
+                    exitt = _exit()
+                    if exitt == 1:
+                        quit()
+                    return -2
                 if event.key == pygame.K_RETURN:
                     pygame.mixer.music.stop()
                     clickSound.play()
@@ -489,7 +476,6 @@ def selectMusicPage():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 programRunning = False 
-                quit()
             #print(Bluesquare_img)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
@@ -863,8 +849,7 @@ def _exit():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
-                exit()
+                quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     pygame.mixer.music.stop()
@@ -1200,7 +1185,6 @@ def total_score_page(score,songName):
                     else:
                         return -1
                 if event.key == pygame.K_RETURN:
-                    mixer.music.stop()
                     main()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(525,576,230,100) == 1:
@@ -1221,6 +1205,7 @@ def main():
     print(check0)
     check2=-1
     tempTotal=-1
+    stateMusicConfirm=-1
     if check0 ==  1:
         mixer.music.stop()
         while check2 == -1 or check2==-2:
@@ -1231,18 +1216,15 @@ def main():
                     check2=-1
                     while check2==-1:
                         check2 = tutorialPage_2()
-        
-            
-         
-            
+             
             
     elif check0 == 2:
         mixer.music.stop()
-        selectSongVar = selectMusicPage()
-        stateMusicConfirm = confirmMusicPage(selectSongVar)
         while stateMusicConfirm == -1:
             selectSongVar = selectMusicPage()
-            stateMusicConfirm = confirmMusicPage(selectSongVar)
+            stateMusicConfirm = -2
+            while stateMusicConfirm == -2:
+                stateMusicConfirm = confirmMusicPage(selectSongVar)
         t=tempt[stateMusicConfirm]
         b=tempb[stateMusicConfirm]
         endGamePoint =-1  
