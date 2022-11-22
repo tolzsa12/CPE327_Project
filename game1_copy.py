@@ -349,7 +349,19 @@ def displayDetail(state):
     displayIcon(Music1name,69,272)
     displayIcon(Music2name,545,272)
     displayIcon(Music3name,1021,272)
+
+    #ลูกศรซ้ายขวา
+    
+    displayArrow()
     #แสดง icon
+
+def displayArrow():
+    left_arrow = pygame.image.load('olavan_asset/select_music_page/left_arrow.png').convert_alpha()
+    right_arrow = pygame.image.load('olavan_asset/select_music_page/right_arrow.png').convert_alpha()
+    screen.blit(left_arrow,(115,550))
+    screen.blit(right_arrow,(1070,550))
+
+
 
 def displayIcon(music,x,y):
     icon = pygame.image.load('olavan_asset/select_music_page/'+ music +'_icon.png').convert_alpha()
