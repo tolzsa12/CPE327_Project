@@ -521,11 +521,7 @@ def selectMusicPage():
 
                 #Part กดคีย์บอร์ด
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        clickSound.play()
-                        exitt = _exit()
-                        if exitt == 1:
-                            quit()
+                    
                     if event.key == pygame.K_f:
                         pygame.K_BACKSPACE
                         if stateMusic == 0:
