@@ -617,12 +617,21 @@ def sampleSoundPage():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
+            
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    print('kdjil')
+                    break
+                
+                            
+                        
         screen.blit(bg,(0,0))
         pygame.display.update()
         if a==0 and endT-startT<16:
             endT=pygame.time.get_ticks()/1000
         else:
-            break
+            break  
+        
         
 
 
