@@ -621,7 +621,7 @@ def sampleSoundPage():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     print('kdjil')
-                    break
+                    a = 1
                 
                             
                         
@@ -629,6 +629,8 @@ def sampleSoundPage():
         pygame.display.update()
         if a==0 and endT-startT<16:
             endT=pygame.time.get_ticks()/1000
+        elif a==1:
+            break
         else:
             break  
         
