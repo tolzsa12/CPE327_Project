@@ -714,7 +714,7 @@ def _pauseTime():
     pauseSoundPath = soundPath+"/pause_game_page"
     pausePageBg = pygame.image.load(pausePagePath+"/pause_page.png")
     pauseTime = 0
-    back = pygame.image.load(pausePagePath+"/back_select_song.png")
+    back = pygame.image.load(pausePagePath+"/BackToHome_Pause page.png")
     continues = pygame.image.load(pausePagePath+"/continue_button.png")
     restart = pygame.image.load(pausePagePath+"/restart_button.png")
     catFoot = pygame.image.load(pausePagePath+"/cat_foot.png")
@@ -759,7 +759,7 @@ def _pauseTime():
             if not pygame.mixer.music.get_busy():
                 heightCat = 610
    
-                pygame.mixer.music.load(pauseSoundPath+"/select_new_music.mp3")
+                pygame.mixer.music.load(pauseSoundPath+"/BackHomePage_PauseGame.mp3")
                 pygame.mixer.music.play()
                 temp = temp+1
 
