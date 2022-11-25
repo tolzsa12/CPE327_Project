@@ -1,0 +1,3 @@
+([('OLAVAN',
+   '/Users/kookwangs/Documents/GitHub/CPE327_Project/olavan/dist/OLAVAN',
+   'EXECUTABLE')],)
