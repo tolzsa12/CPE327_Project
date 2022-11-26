@@ -146,6 +146,10 @@ def home_Page():
                 if event.key == pygame.K_j: #select start
                     pygame.mixer.pause()
                     return 2
+                
+                if event.key == pygame.K_SPACE: 
+                    mixer.music.load(homePagePath+"/Start_HomePage.mp3")
+                    mixer.music.play()
 
             if _checkClickRect(210,248,430,180) == 1: #select tutorial
                 if pygame.mouse.get_pressed()[0]:
@@ -215,6 +219,10 @@ def tutorialPage_1():
                 if event.key == pygame.K_j:
                     mixer.music.stop()
                     return 2
+
+                if event.key == pygame.K_SPACE:
+                    mixer.music.load(homePagePath+"/Tutorial1.mp3")
+                    mixer.music.play()
            
             if _checkClickRect(1028,685,230,100) == 1: #select next
                 if pygame.mouse.get_pressed()[0]:
@@ -267,6 +275,9 @@ def tutorialPage_2():
                     mixer.music.load(homePagePath+"/Click sound effect.mp3")
                     mixer.music.play()
                     main()
+                if event.key == pygame.K_SPACE:
+                    mixer.music.load(homePagePath+"/Tutorial 2.mp3")
+                    mixer.music.play()
         
         screen.blit(tutorialPage2,(0,0))
         screen.blit(homepageButton,(16,20))
@@ -453,6 +464,8 @@ def confirmMusicPage(stateMusic):
                     pygame.mixer.music.stop()
                     clickSound.play()
                     return -1
+                if event.key == pygame.K_SPACE:
+                    confirmMusicPage(stateMusic)
             
 
         if not pygame.mixer.music.get_busy() and a==0:
@@ -796,8 +809,10 @@ def _pauseTime():
                     elif stateButton == 3:
                         pygame.mixer.music.stop()
                         main()
+                if event.key == pygame.K_SPACE:
+                    pygame.mixer.music.load(pauseSoundPath+"/pausegame.mp3")
+                    pygame.mixer.music.play()
                         
-
                 if event.key == pygame.K_ESCAPE: #exit game
                     clickSound.play()
                     exitt = _exit()
@@ -873,6 +888,9 @@ def _exit():
                     pygame.mixer.music.stop()
                     clickSound.play()
                     return 1
+                if event.key == pygame.K_SPACE:
+                    mixer.music.load(homePagePath+"/Exit_Game.mp3")
+                    mixer.music.play()
                 elif event.key == pygame.K_BACKSPACE:
                     pygame.mixer.music.stop()
                     clickSound.play()
@@ -1196,6 +1214,9 @@ def total_score_page(score,songName):
                         quit()
                     else:
                         return -1
+                if event.key == pygame.K_SPACE:
+                    pygame.mixer.music.load(totalScorePagePath+"/Collect_TotalScore.mp3")
+                    pygame.mixer.music.play()
                 if event.key == pygame.K_RETURN:
                     main()
             if pygame.mouse.get_pressed()[0]:
