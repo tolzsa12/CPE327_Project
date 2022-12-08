@@ -249,7 +249,7 @@ def tutorialPage_2():
     prevButton = pygame.image.load(homePagePath+"/Previous_button.png")
     mixer.music.load(homePagePath+"/Click sound effect.mp3")
     mixer.music.play()
-    mixer.music.queue(homePagePath+"/Tutorial 2.mp3")
+    mixer.music.queue(homePagePath+"/Tutorial2.mp3")
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
