@@ -1,10 +1,15 @@
-#why2
-from tabnanny import check
+### OLAVAN.py
+###     main code of the game
+###
+### create by Kunanya Khuntiptong
+###     8 December 2022
+
+
+
 import pygame
-from pygame import mixer
 import os
 import array
-
+from tabnanny import check
 
 pygame.init()
 mainPath = os.getcwd()+"/data"
@@ -102,7 +107,6 @@ detailfont = pygame.font.SysFont("arialblack",40)
 
 
 #create game window
-
 BG_SELECTMUSIC = pygame.transform.scale(pygame.image.load(
     'data/olavan_asset/select_music_page/Select_music_page.png'),(SCREEN_WIDTH,SCREEN_HEIGHT))
 def _checkClickRect(left,top,width,height):
@@ -118,8 +122,11 @@ def home_Page():
     bg = pygame.image.load(homePagePath+"/HomePageBG.png") 
     startButton = pygame.image.load(homePagePath+"/Start_button.png")
     tutorialButton = pygame.image.load(homePagePath+"/Tutorial_button.png")
+    
+    
     bgSound = pygame.mixer.Sound(homePagePath+"/MusicHomePage.mp3")
     bgSound.play()
+    
     startT = pygame.time.get_ticks()/1000
     endT=0
     a=0    
@@ -130,27 +137,34 @@ def home_Page():
             mixer.music.load(homePagePath+"/Start_HomePage.mp3")
             mixer.music.play()
             a=1
+           
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                     quit()
+
             if event.type == pygame.KEYDOWN:  
                 if event.key == pygame.K_f: #select tutorial
                     pygame.mixer.pause()
                     return 1
+
                 if event.key == pygame.K_j: #select start
                     pygame.mixer.pause()
                     return 2
+                
                 if event.key == pygame.K_SPACE: 
                     mixer.music.load(homePagePath+"/Start_HomePage.mp3")
                     mixer.music.play()
+
             if _checkClickRect(210,248,430,180) == 1: #select tutorial
                 if pygame.mouse.get_pressed()[0]:
                     pygame.mixer.pause()
                     return 1
+
             elif _checkClickRect(640,248,430,180) == 1: #select start
                 if pygame.mouse.get_pressed()[0]:
                     pygame.mixer.pause()
                     return 2
+
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     clickSound.play()
@@ -160,10 +174,20 @@ def home_Page():
                         quit()
                     else:
                         main()
+                
+
+            #if pygame.mouse.get_pressed()[0]:
+                #if _checkClickRect(210,248,430,180) == 1: #select tutorial
+                    #return 1
+                #elif _checkClickRect(640,248,430,180) == 1: #select start
+                    #return 2
+
         screen.blit(bg,(0,0))
         screen.blit(startButton,(640,248))
         screen.blit(tutorialButton,(210,248))
         pygame.display.update()
+#mixer.music.load(homePagePath+"/MusicHomePage.mp3")
+#mixer.music.play()
 
 
 #tutorialPage 1
@@ -172,6 +196,7 @@ def tutorialPage_1():
     tutorialPage1 = pygame.image.load(homePagePath+"/Tutorial1.png")
     homepageButton = pygame.image.load(homePagePath+"/Home_button.png")
     nextButton = pygame.image.load(homePagePath+"/next.png")
+    
     mixer.music.load(homePagePath+"/Click sound effect.mp3")
     mixer.music.play()
     mixer.music.queue(homePagePath+"/Tutorial1.mp3")
@@ -189,25 +214,31 @@ def tutorialPage_1():
                     else:
                         mixer.music.unpause()
                         return -1
+        
                 if event.key == pygame.K_BACKSPACE:
                     mixer.music.load(homePagePath+"/Click sound effect.mp3")
                     mixer.music.play()
                     main()
+                
                 if event.key == pygame.K_j:
                     mixer.music.stop()
                     return 2
+
                 if event.key == pygame.K_SPACE:
                     mixer.music.load(homePagePath+"/Tutorial1.mp3")
                     mixer.music.play()
+           
             if _checkClickRect(1028,685,230,100) == 1: #select next
                 if pygame.mouse.get_pressed()[0]:
                     mixer.music.stop()
                     return 2
+
             if _checkClickRect(16,20,230,100) == 1: #select homepage
                 if pygame.mouse.get_pressed()[0]:
                     mixer.music.load(homePagePath+"/Click sound effect.mp3")
                     mixer.music.play()
                     main()
+    
         screen.blit(tutorialPage1,(0,0))
         screen.blit(homepageButton,(16,20))
         screen.blit(nextButton,(1028,685))
@@ -251,6 +282,7 @@ def tutorialPage_2():
                 if event.key == pygame.K_SPACE:
                     mixer.music.load(homePagePath+"/Tutorial 2.mp3")
                     mixer.music.play()
+        
         screen.blit(tutorialPage2,(0,0))
         screen.blit(homepageButton,(16,20))
         screen.blit(prevButton,(16,686))
@@ -270,6 +302,7 @@ def howSelectMusic(state):
         pygame.mixer.music.queue("data/music/"+sampleMusic+"_hook.mp3")
 
 
+
 def draw_button(x,y,image): #วาดกล่องสี่เหลี่ยม ที่กดแล้วจะเกิด action
     display_blueblock = image.get_rect()
     display_blueblock.topleft = (x,y)
@@ -282,7 +315,9 @@ def draw_button(x,y,image): #วาดกล่องสี่เหลี่ย
             action = True
     if pygame.mouse.get_pressed()[0] == 0:
         clicked = False
+    
     screen.blit(image,(display_blueblock.x,display_blueblock.y))
+
     return action 
 
 
@@ -353,7 +388,12 @@ def showSampleMusic(state,selectMenu): #เล่นเพลงตัวอย�
     pygame.mixer.music.load("data/music/"+sampleMusic+"_hook.mp3")
     pygame.mixer.music.play(-1)
 
-def calculatePoint(endGameScore):
+
+### _calculatePoint
+###     calculating the star from the raw points
+###    INPUT endGameScore - raw score
+###    OUTPUT int
+def _calculatePoint(endGameScore):
     if endGameScore == 0:
         return 0
     elif endGameScore <= 350:
@@ -367,18 +407,21 @@ def calculatePoint(endGameScore):
     else:
         return 5
 
-    
+### _getHighestScore
+###     reading the raw points from .txt file
+###    INPUT songName - name of the song
+###    OUTPUT int  
 def _getHighestScore(songName):
     with open(highestScorePath+"/highest_score_"+songName+".txt","r") as f:
         return f.read()
 
-
-    
+### _showText
+###     print text in the screen
+###    INPUT text, x, y - text want to show, text position
+###    OUTPUT void  
 def _showText(text,x,y):
     showText=font.render(text,True,(0,0,0))
     screen.blit(showText, (x,y))
-
-
     
 def confirmMusicPage(stateMusic):
     bg = pygame.image.load(confirmPagePath+"/Confirm_music_page.png") 
@@ -387,12 +430,15 @@ def confirmMusicPage(stateMusic):
     titleTotalScore = pygame.image.load(confirmPagePath+"/title_totalscore.png")
     startButton = pygame.image.load(confirmPagePath+"/Start_game_button.png")
     musicName = list_song[stateMusic]
+
     try:
         highestScore = int(_getHighestScore(musicName))
     except:
         highestScore = 0
         
-    highestStar = calculatePoint(highestScore)
+    highestStar = _calculatePoint(highestScore)
+
+    
     pygame.mixer.music.load(confirmPagePath+"/"+musicName+".mp3")
     pygame.mixer.music.queue(confirmPagePath+"/"+str(highestStar)+"Star.mp3")
     pygame.mixer.music.play()
@@ -408,7 +454,8 @@ def confirmMusicPage(stateMusic):
                         selectMusicPage()
                         pygame.mixer.music.stop()
                         clickSound.play()
-                        return -1   
+                        return -1
+                        
                 if _checkClickRect(640,569,230,100) == 1: #select play
                         pygame.mixer.music.stop()
                         clickSound.play()
@@ -431,10 +478,15 @@ def confirmMusicPage(stateMusic):
                     return -1
                 if event.key == pygame.K_SPACE:
                     confirmMusicPage(stateMusic)
+            
+
         if not pygame.mixer.music.get_busy() and a==0:
             pygame.mixer.music.load(confirmPagePath+"/ConfirmSelectMusic.mp3")
             pygame.mixer.music.play()
             a=1
+
+            
+    
         screen.blit(bg,(0,0))
         screen.blit(musicIcon, (545, 225))
         screen.blit(prevButton, (410, 569))
@@ -442,9 +494,12 @@ def confirmMusicPage(stateMusic):
         screen.blit(titleMusic, (415, 437))
         _showText(musicName,511,425)
         screen.blit(titleTotalScore, (415, 493))
+
         if highestStar !=0:
             star = pygame.image.load(confirmPagePath+"/"+str(highestStar)+".png")
             screen.blit(star,(602,477))
+
+        
         pygame.display.update()
 
 
@@ -455,9 +510,6 @@ def selectMusicPage():
     playingGame,homePage = False,False
     FirsttimehomePage = True
     stateMusic = 1 # เพลงที่เล่น 
-
-
-
 
     while programRunning:
         for event in pygame.event.get():
@@ -586,9 +638,7 @@ def sampleSoundPage():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     a = 1
-                
-                            
-                        
+                                 
         screen.blit(bg,(0,0))
         pygame.display.update()
         if a==0 and endT-startT<16:
@@ -597,27 +647,32 @@ def sampleSoundPage():
             break
         else:
             break  
-        
-        
 
-
-def _showText(text,x,y):
-    showText=font.render(text,True,(0,0,0))
-    screen.blit(showText, (x,y))
-
+### _showCat
+###     show the cat in the specific position
+###    INPUT x, y - cat position
+###    OUTPUT void  
 def _showCat(x,y):
     screen.blit(cat,(x,y))
 
+### _showDog
+###     show the dog in the specific position
+###    INPUT x, y - dog position
+###    OUTPUT void  
 def _showDog(x,y):
     screen.blit(dog,(x,y))
 
+### _showCloud
+###     show the cloud in the specific position
+###    INPUT x, y - cloud position
+###    OUTPUT void  
 def _showCloud(x,y):
     screen.blit(cloud,(x,y))
 
-#def testText(x):
-        #text=font.render(str(x),True,(0,0,0))
-        #screen.blit(text, (400,300))
-
+### _call
+###     call the pet to bark
+###    INPUT n, b, t, countPlaySFX, presentTicks - beat order, type, time and present beat, time
+###    OUTPUT int
 def _call(n,b,t,countPlaySFX,presentTicks):
     count = 0
     if presentTicks >= t and countPlaySFX<n and b == 'c':
@@ -628,6 +683,10 @@ def _call(n,b,t,countPlaySFX,presentTicks):
         count+=1   
     return count
 
+### _check
+###     check the beat whether hit or miss
+###    INPUT countPlaySFX, b, recentSoundTime, key, presentTicks, a
+###    OUTPUT int
 def _check(countPlaySFX,b,recentSoundTime,key,presentTicks,a):
     score = 0
     if b == "c":
@@ -673,6 +732,10 @@ def _check(countPlaySFX,b,recentSoundTime,key,presentTicks,a):
                 pygame.display.update()
         return score
 
+### _pauseTime
+###     pause page for the game
+###    INPUT -
+###    OUTPUT double
 def _pauseTime():
     pausePagePath = mainPath+"/olavan_asset/pause_page"
     pauseSoundPath = soundPath+"/pause_game_page"
@@ -727,9 +790,6 @@ def _pauseTime():
                 pygame.mixer.music.play()
                 temp = temp+1
 
-
-        
-        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                     quit()
@@ -830,9 +890,10 @@ def _pauseTime():
         screen.blit(catFoot,(783,heightCat))
         pygame.display.update()
             
-        
-
-
+### _exit
+###     exit page for normal page
+###    INPUT -
+###    OUTPUT void       
 def _exit():
     mixer.music.load(homePagePath+"/Exit_Game.mp3")
     mixer.music.play()
@@ -861,6 +922,7 @@ def _exit():
                     pygame.mixer.music.stop()
                     clickSound.play()
                     return 1
+
         bg = pygame.image.load(exitPagePath+"/Exit_game_page.png") 
         exitButton = pygame.image.load(exitPagePath+"/Exit.png")
         noexitButton = pygame.image.load(exitPagePath+"/No_exit.png")
@@ -869,7 +931,10 @@ def _exit():
         screen.blit(exitButton,(431,463))
         pygame.display.update()
 
-
+### _exitTime
+###     exit page for game page
+###    INPUT -
+###    OUTPUT double  
 def _exitTime():
     exitStart = pygame.time.get_ticks()
     exitTime = 0
@@ -895,6 +960,7 @@ def _exitTime():
                 elif _checkClickRect(431,463,430,180) == 1:
                     clickSound.play()
                     return 1
+
         bg = pygame.image.load(exitPagePath+"/Exit_game_page.png") 
         exitButton = pygame.image.load(exitPagePath+"/Exit.png")
         noexitButton = pygame.image.load(exitPagePath+"/No_exit.png")
@@ -902,6 +968,7 @@ def _exitTime():
         screen.blit(noexitButton,(431,283))
         screen.blit(exitButton,(431,463))
         pygame.display.update()
+
 
 
 def countdownPage(songName):
@@ -919,6 +986,7 @@ def countdownPage(songName):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
+        
         screen.blit(bg,(0,0))
         _showCat(497,400)
         _showDog(666,400)
@@ -927,8 +995,11 @@ def countdownPage(songName):
         screen.blit(sushi,(138,495))
         screen.blit(food,(1047,495))
         pygame.display.update()
-        
-        
+           
+### _play
+###     game page
+###    INPUT t, b, songName - time array, beat type array, name of song
+###    OUTPUT int 
 def _play(t,b,songName):
     #array for counting the beat
     array.array("i")                
@@ -1137,17 +1208,19 @@ def _play(t,b,songName):
                 f.write(str(highestScore))
             return scoreValue
 
-
 def total_score_page(score,songName):
     bg = pygame.image.load(totalScorePagePath+"/bg.png") 
     collectButton = pygame.image.load(totalScorePagePath+"/Collect_button.png")
     titleGetpoint = pygame.image.load(totalScorePagePath+"/getPoint.png")
     star = pygame.image.load(totalScorePagePath+"/"+str(score)+".png")
+
     soundT = pygame.mixer.Sound(totalScorePagePath+"/result_score.mp3")
     soundT.play()
+    
     startT = pygame.time.get_ticks()/1000
     endT=0
     a=0    
+        
     while True:
         if a==0 and endT-startT<4:
             endT=pygame.time.get_ticks()/1000
@@ -1176,6 +1249,7 @@ def total_score_page(score,songName):
                 if _checkClickRect(525,576,230,100) == 1:
                     clickSound.play()
                     main()
+
         screen.blit(bg,(0,0))
         screen.blit(star,(390,434))
         screen.blit(collectButton, (512, 576))
@@ -1183,6 +1257,7 @@ def total_score_page(score,songName):
         _showText(songName,562,260)
         pygame.display.update()
 
+     
 
 def main():
     check0 = home_Page()
@@ -1199,6 +1274,8 @@ def main():
                     check2=-1
                     while check2==-1:
                         check2 = tutorialPage_2()
+             
+            
     elif check0 == 2:
         mixer.music.stop()
         while stateMusicConfirm == -1:
@@ -1214,5 +1291,6 @@ def main():
             endGamePoint = _play(t,b,list_song[stateMusicConfirm])
             if endGamePoint != -1:
                 while tempTotal == -1:
-                    tempTotal=total_score_page(calculatePoint(endGamePoint),list_song[stateMusicConfirm])
+                    tempTotal=total_score_page(_calculatePoint(endGamePoint),list_song[stateMusicConfirm])
+        
 main()
