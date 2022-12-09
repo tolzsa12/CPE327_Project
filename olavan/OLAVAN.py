@@ -70,10 +70,10 @@ t3 = [0, 3.5, 4.6, 6.8, 9.7, 11.7, 13.8, 16, 18.5, 20.3, 22.4, 27.8, 29.7, 31.4,
 # ฝากคอมเมนต์ชื่อเพลงด้านหลังอาเรย์ด้วย จะได้ไม่สับสน
 c = 'c'
 d = 'd'
-b0 = ["n", c, d, c, d, d, c, d, c, d, d, c, c, d, d, d, d, c, c, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, c]
-b1 = ["n", d, c, d, c, d, d, c, c, d, c, d, c, d, c, d, d, c, c, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, c]
-b2 = ["n", c, c, c, d, d, d, c, d, d, d, d, c, d, c, d, d, c, d, d, c, c, d, d, d, c, d, d, c, d, c, d, c, d, c, d]
-b3 = ["n", c, d, c, d, c, d, c, d, d, c, d, c, d, c, d, d, c, c, d, c, d, d, c, d, c, d, d, c, d, c, d, c, d, d, d]  
+b0 = ["n", c, d, c, d, d, c, d, c, d, d, c, c, d, d, d, d, c, c, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, c] # Jingle Bell
+b1 = ["n", d, c, d, c, d, d, c, c, d, c, d, c, d, c, d, d, c, c, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, c] # Shutdown
+b2 = ["n", c, c, c, d, d, d, c, d, d, d, d, c, d, c, d, d, c, d, d, c, c, d, d, d, c, d, d, c, d, c, d, c, d, c, d] # Too cute
+b3 = ["n", c, d, c, d, c, d, c, d, d, c, d, c, d, c, d, d, c, c, d, c, d, d, c, d, c, d, d, c, d, c, d, c, d, d, d] # Antifragile
 b4 = ["n", c, d, c, d, d, c, c, d, d, c, d, c, d, c, d, c, d, d, c, c, d, d, c, d, c, d, c, d, c, d, c, c, d, d, c] # Tokyo drift
 #น่าจะเขียนผิด แต่ต้อลแก้เป็น 3 นะ # update by Nonthapat Thongpant 9/12/2022
 
