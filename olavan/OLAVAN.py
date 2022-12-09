@@ -4,13 +4,17 @@
 ### create by Kunanya Khuntiptong
 ###     8 December 2022
 
-
-
+### update by Nonthapat Thongpant
+### if not export the program, have no error
+### export, have error when closing program
 import pygame
 import os
 import array
 from tabnanny import check
 from pygame import mixer
+import sys
+
+
 
 pygame.init()
 mainPath = os.getcwd()+"/data"
@@ -433,6 +437,7 @@ def confirmMusicPage(stateMusic):
     titleMusic = pygame.image.load(confirmPagePath+"/title_music.png")
     titleTotalScore = pygame.image.load(confirmPagePath+"/title_totalscore.png")
     startButton = pygame.image.load(confirmPagePath+"/Start_game_button.png")
+    #print(stateMusic)
     musicName = list_song[stateMusic]
 
     try:
@@ -517,21 +522,22 @@ def _selectMusicPage():
     playingGame,homePage = False,False
     firstTimeHomePage = True
     stateMusic = 1 # เพลงที่เล่น 
-
-
-
-
     while programRunning:
         for event in pygame.event.get():
+        
             if event.type == pygame.QUIT:
-                programRunning = False 
+                programRunning = False
+                selectMenu = False
+                pygame.quit()
+                exit()
+                
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     clickSound.play()
                     pygame.mixer.music.pause()
                     exitt = _exit()
                     if exitt == 1:
-                        quit()
+                        pygame.quit()
                     pygame.mixer.music.unpause()
 
             # ถ้าอยู่หน้า selectMenu อยู่ให้ทำคำสั่งนี้         
@@ -576,13 +582,8 @@ def _selectMusicPage():
 
                 #Part กดคีย์บอร์ด
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        clickSound.play()
-                        exitt = _exit()
-                        if exitt == 1:
-                            quit()
+                    
                     if event.key == pygame.K_f:
-                        pygame.K_BACKSPACE
                         if stateMusic == 0:
                             stateMusic = num_song-1
                         else:
@@ -614,19 +615,21 @@ def _selectMusicPage():
 
                 _displayDetail(stateMusic)
                 _showSampleMusic(stateMusic,selectMenu)
+                pygame.display.update()
             #กรณีที่อยู่หน้าเล่นเกม
             elif not selectMenu and playingGame:
-                break
+                return stateMusic
 
             #กรณีอยู่หน้า homepage
             elif not selectMenu and homePage:
                 selectMenu = True
                 homePage = False
                 pygame.mixer.music.stop()
+           # if not(programRunning):
+              #  pygame.quit()
+    
+            
 
-        pygame.display.update()
-        if playingGame:
-            return stateMusic
         
 
 def sampleSoundPage():
@@ -641,7 +644,7 @@ def sampleSoundPage():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                quit()
+                pygame.quit()
             
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
