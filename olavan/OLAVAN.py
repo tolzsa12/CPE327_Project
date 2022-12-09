@@ -10,6 +10,7 @@ import pygame
 import os
 import array
 from tabnanny import check
+from pygame import mixer
 
 pygame.init()
 mainPath = os.getcwd()+"/data"
@@ -306,7 +307,7 @@ def _howSelectMusic(state):
         pygame.mixer.music.queue("data/music/"+sampleMusic+"_hook.mp3")
 
 
-def draw_button(x,y,image): #วาดกล่องสี่เหลี่ยม ที่กดแล้วจะเกิด action
+def _draw_button(x,y,image): #วาดกล่องสี่เหลี่ยม ที่กดแล้วจะเกิด action
     display_blueblock = image.get_rect()
     display_blueblock.topleft = (x,y)
     clicked = False
