@@ -86,6 +86,7 @@ tempb=[b0,b1,b2]
 
 #font load
 font=pygame.font.Font(fontPath+"/trebuc.ttf",32)
+detailfont = pygame.font.SysFont("arialblack",40)
 
 
 SCREEN_WIDTH = 1280
@@ -107,9 +108,6 @@ posBlueblock1_x,posBlueblock1_y =  -74,227
 posBlueblock2_x,posBlueblock2_y =  402,227
 posBlueblock3_x,posBlueblock3_y =  878,227
 Blueblock_weight , Blueblock_height = 465,445
-
-# ฟ้อนที่ใช้แสดง
-detailfont = pygame.font.SysFont("arialblack",40)
 
 
 #create game window
@@ -386,12 +384,8 @@ def _displayDetail(state):
 
     _displayIcon(Music1name,69,272)
     _displayIcon(Music2name,545,272)
-    _displayIcon(Music3name,1021,272)
-
-    #ลูกศรซ้ายขวา
-    
+    _displayIcon(Music3name,1021,272)  
     _displayArrow()
-    #แสดง icon
 
 ### _displayArrow()
 ###     displaying 2 arrows
@@ -422,7 +416,7 @@ def _showSampleMusic(state,selectMenu):
     pygame.mixer.music.load("data/music/"+sampleMusic+"_hook.mp3")
     pygame.mixer.music.play(-1)
 
-### _calculatePoint
+### _calculatePoint()
 ###     calculating the star from the raw points
 ###    INPUT endGameScore - raw score
 ###    OUTPUT int
@@ -440,7 +434,7 @@ def _calculatePoint(endGameScore):
     else:
         return 5
 
-### _getHighestScore
+### _getHighestScore()
 ###     reading the raw points from .txt file
 ###    INPUT songName - name of the song
 ###    OUTPUT int  
@@ -448,7 +442,7 @@ def _getHighestScore(songName):
     with open(highestScorePath+"/highest_score_"+songName+".txt","r") as f:
         return f.read()
 
-### _showText
+### _showText()
 ###     print text in the screen
 ###    INPUT text, x, y - text want to show, text position
 ###    OUTPUT void  
@@ -456,7 +450,7 @@ def _showText(text,x,y):
     showText=font.render(text,True,(0,0,0))
     screen.blit(showText, (x,y))
 
-### _confirmMusicPage
+### _confirmMusicPage()
 ###     confirm music page
 ###    INPUT stateMusic - number of selected music
 ###    OUTPUT int  
@@ -536,7 +530,7 @@ def _confirmMusicPage(stateMusic):
 
         pygame.display.update()
 
-### _selectMusicPage
+### _selectMusicPage()
 ###     select the music and confirm when the needed song is in the center
 ###    INPUT -
 ###    OUTPUT int  
@@ -652,7 +646,7 @@ def _selectMusicPage():
                 homePage = False
                 pygame.mixer.music.stop()
 
-### _sampleSoundPage
+### _sampleSoundPage()
 ###     page that inform before start the game
 ###    INPUT -
 ###    OUTPUT void 
@@ -683,28 +677,28 @@ def _sampleSoundPage():
         else:
             break  
 
-### _showCat
+### _showCat()
 ###     show the cat in the specific position
 ###    INPUT x, y - cat position
 ###    OUTPUT void  
 def _showCat(x,y):
     screen.blit(cat,(x,y))
 
-### _showDog
+### _showDog()
 ###     show the dog in the specific position
 ###    INPUT x, y - dog position
 ###    OUTPUT void  
 def _showDog(x,y):
     screen.blit(dog,(x,y))
 
-### _showCloud
+### _showCloud()
 ###     show the cloud in the specific position
 ###    INPUT x, y - cloud position
 ###    OUTPUT void  
 def _showCloud(x,y):
     screen.blit(cloud,(x,y))
 
-### _call
+### _call()
 ###     call the pet to bark
 ###    INPUT n, b, t, countPlaySFX, presentTicks - beat order, type, time and present beat, time
 ###    OUTPUT int
@@ -718,7 +712,7 @@ def _call(n,b,t,countPlaySFX,presentTicks):
         count+=1   
     return count
 
-### _check
+### _check()
 ###     check the beat whether hit or miss
 ###    INPUT countPlaySFX, b, recentSoundTime, key, presentTicks, a
 ###    OUTPUT int
@@ -767,7 +761,7 @@ def _check(countPlaySFX,b,recentSoundTime,key,presentTicks,a):
                 pygame.display.update()
         return score
 
-### _pauseTime
+### _pauseTime()
 ###     pause page for the game
 ###    INPUT -
 ###    OUTPUT double
@@ -925,7 +919,7 @@ def _pauseTime():
         screen.blit(catFoot,(783,heightCat))
         pygame.display.update()
             
-### _exit
+### _exit()
 ###     exit page for normal page
 ###    INPUT -
 ###    OUTPUT void       
@@ -966,7 +960,7 @@ def _exit():
         screen.blit(exitButton,(431,463))
         pygame.display.update()
 
-### _exitTime
+### _exitTime()
 ###     exit page for game page
 ###    INPUT -
 ###    OUTPUT double  
