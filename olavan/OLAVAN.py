@@ -32,6 +32,7 @@ gamePagePath = mainPath + "/olavan_asset/game_page"
 exitPagePath = mainPath + "/olavan_asset/exit_page"
 tempPagePath = mainPath + "/olavan_asset/temp"
 totalScorePagePath = mainPath + "/olavan_asset/total_score_page"
+
 soundPath = mainPath+ "/sound"
 
 
@@ -77,6 +78,7 @@ t0 = [0, 4.4, 9.1, 11.3, 13.7, 16, 18.3, 22.9, 25.1, 28.8, 31.1, 37.9, 38.9, 41.
 t1 = [0, 3.2, 6.5, 9.8, 13.1, 16.32, 17.9, 19.6, 21.2, 24.5, 26.14, 29.4, 31, 32.6, 34.3, 37.65, 39.25, 42.55, 44.2, 47.45, 50.74, 52.3, 54.7, 57.23, 58.9, 60.5, 62.2, 63.7, 67, 68.6, 70.26, 71.98, 73.56, 75.2, 76.7, 80.2, 89]
 t2 = [0, 10.77, 12.15, 13.35, 14.86, 16.12, 17.5, 19.9, 22.84, 24.11, 25.28, 26.8, 28.02, 29.266, 30.783, 32.19, 33.498, 34.856, 36.157, 37.525, 40.746, 42.771, 44.132, 45.4, 46.4, 48.172, 49.47, 50.7, 52.03, 53.429, 54.8, 57.45, 58.8, 60.043, 61.37, 64.78, 75]
 t3 = [0, 3.5, 4.6, 6.8, 9.7, 11.7, 13.8, 16, 18.5, 20.3, 22.4, 27.8, 29.7, 31.4, 33.8, 35.7, 37.1, 38.3, 39.7, 40.7, 41.8, 46.3, 47.4, 48.5, 50.5, 52, 53.2, 54.3, 55.4, 56.5, 57.5, 59.6, 64.2, 66.6, 68.5, 70.5, 82]
+t4 = [0, 4.4, 6.4, 8.3, 13.25, 15.15, 18.8, 21.7, 22.5, 25.2, 26.5, 28.4, 30.2, 35.8, 37.6, 40, 42.2, 49.9, 51.7, 59.1, 60.1, 64.6, 66.2, 68.4, 71.6, 75.4, 79.5, 82.3, 86.5, 88.8, 90.3, 92.3, 96.8, 98, 100.6, 102]
 #t5 = [11.7 14.9 17.3 18.6 19.5 21.1 23.5 24.3 26.7 29.1 30.2 31.6 33.5 36.0 38.4 39.7 40.9 43.4 45.8 48.3 50.8 53.7 54.8 56.9 58.3 60.6 63.2 65.7 70.9 73.6 75.6 83.0 85.4 87.9 90.4] #bootybomb
 
 # Beat type array has 36 index [35]
@@ -113,16 +115,12 @@ detailFont = pygame.font.SysFont("arialblack",40)
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 800
 screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
-<<<<<<< Updated upstream
-=======
+BLACK = (0,0,0)
+BG_SELECTMUSIC = pygame.transform.scale(pygame.image.load('data/olavan_asset/select_music_page/Select_music_page.png'),(SCREEN_WIDTH,SCREEN_HEIGHT))
 
 #add the song
 listSong = ["Jingle Bell","Shutdown","Too Cute"] #เวลาจะเพิ่มหรือลด มาแก้ตรงนี้พอ เวลาตั้งชื่อไฟล์ให้ตั้งด้วยชื่อเพลงนี้ ตามด้วย_ 
 numSong = len(listSong)
->>>>>>> Stashed changes
-BLACK = (0,0,0)
-BG_SELECTMUSIC = pygame.transform.scale(pygame.image.load(
-    'data/olavan_asset/select_music_page/Select_music_page.png'),(SCREEN_WIDTH,SCREEN_HEIGHT))
 
 
 # Touchable elements
@@ -142,7 +140,7 @@ Blueblock_weight , Blueblock_height = 465,445
 ### _checkClickRect()
 ###     checking the current mouse pointer is in the button area or not
 ###    INPUT left, top, width, height - position and size of button
-###    OUTPUT int   
+###    OUTPUT int      
    
 def _checkClickRect(left,top,width,height):
     pos = pygame.mouse.get_pos()
@@ -155,7 +153,7 @@ def _checkClickRect(left,top,width,height):
 ### _homePage()
 ###     homepage function
 ###    INPUT -
-###    OUTPUT int 
+###    OUTPUT int  
  
 def _homePage():
     pygame.display.set_caption("OLAVAN")
@@ -223,7 +221,7 @@ def _homePage():
 ### _tutorialPage1()
 ###     tutorial page 1
 ###    INPUT -
-###    OUTPUT int 
+###    OUTPUT int  
  
 def _tutorialPage1():
     pygame.display.set_caption("OLAVAN")
@@ -283,7 +281,7 @@ def _tutorialPage1():
 ### _tutorialPage2()
 ###     tutorial page 2
 ###    INPUT -
-###    OUTPUT int 
+###    OUTPUT int  
  
 def _tutorialPage2():
     pygame.display.set_caption("OLAVAN")
@@ -342,7 +340,7 @@ def _drawWindow():
 ### _howSelectMusic
 ###     tutorial page 1
 ###    INPUT -
-###    OUTPUT int
+###    OUTPUT int  
 
 def _howSelectMusic(state):
     if not pygame.mixer.music.get_busy():
@@ -355,22 +353,22 @@ def _howSelectMusic(state):
 ### _drawButton()
 ###     drawing button
 ###    INPUT x,y,image
-###    OUTPUT boolean
+###    OUTPUT boolean 
 
 def _drawButton(x,y,image): 
-    display_blueblock = image.get_rect()
-    display_blueblock.topleft = (x,y)
+    displayBlueblock = image.get_rect()
+    displayBlueblock.topleft = (x,y)
     clicked = False
     action = False
     pos = pygame.mouse.get_pos()
-    if display_blueblock.collidepoint(pos):
+    if displayBlueblock.collidepoint(pos):
         if pygame.mouse.get_pressed()[0] == 1 and clicked == False:
             clicked = True
             action = True
     if pygame.mouse.get_pressed()[0] == 0:
         clicked = False
     
-    screen.blit(image,(display_blueblock.x,display_blueblock.y))
+    screen.blit(image,(displayBlueblock.x,displayBlueblock.y))
     return action 
 
 
@@ -407,22 +405,7 @@ def _displayDetail(state):
         music2Name = listSong[state]
         music3Name = listSong[0]
 
-<<<<<<< Updated upstream
-    Music1 = detailfont.render(Music1name,True,BLACK)
-    Music2 = detailfont.render(Music2name,True,BLACK)
-    Music3 = detailfont.render(Music3name,True,BLACK)
-   
-    screen.blit(Music1 ,(posBlueblock1_x+Blueblock_weight/2 - Music1.get_width()/2
-    ,posBlueblock1_y + Blueblock_height/2 - Music1.get_height()/2 + 50))
-    screen.blit(Music2 ,(posBlueblock2_x+Blueblock_weight/2 - Music2.get_width()/2
-    ,posBlueblock2_y + Blueblock_height/2 - Music2.get_height()/2 + 50))
-    screen.blit(Music3 ,(posBlueblock3_x+Blueblock_weight/2 - Music3.get_width()/2
-    ,posBlueblock3_y + Blueblock_height/2 - Music3.get_height()/2 + 50))
 
-    _displayIcon(Music1name,69,272)
-    _displayIcon(Music2name,545,272)
-    _displayIcon(Music3name,1021,272)  
-=======
     music1 = detailFont.render(music1Name,True,BLACK)
     music2 = detailFont.render(music2Name,True,BLACK)
     music3 = detailFont.render(music3Name,True,BLACK)
@@ -437,7 +420,6 @@ def _displayDetail(state):
     _displayIcon(music1Name,69,272)
     _displayIcon(music2Name,545,272)
     _displayIcon(music3Name,1021,272)  
->>>>>>> Stashed changes
     _displayArrow()
 
 
@@ -508,7 +490,7 @@ def _getHighestScore(songName):
 ### _showText()
 ###     print text in the screen
 ###    INPUT text, x, y - text want to show, text position
-###    OUTPUT void
+###    OUTPUT void  
 
 def _showText(text,x,y):
     showText=font.render(text,True,(0,0,0))
@@ -518,7 +500,7 @@ def _showText(text,x,y):
 ### _confirmMusicPage()
 ###     confirm music page
 ###    INPUT stateMusic - number of selected music
-###    OUTPUT int
+###    OUTPUT int  
 
 def _confirmMusicPage(stateMusic):
     bg = pygame.image.load(confirmPagePath+"/Confirm_music_page.png") 
@@ -750,7 +732,7 @@ def _sampleSoundPage():
 ### _showCat()
 ###     show the cat in the specific position
 ###    INPUT x, y - cat position
-###    OUTPUT void
+###    OUTPUT void  
   
 def _showCat(x,y):
     screen.blit(cat,(x,y))
@@ -759,7 +741,7 @@ def _showCat(x,y):
 ### _showDog()
 ###     show the dog in the specific position
 ###    INPUT x, y - dog position
-###    OUTPUT void
+###    OUTPUT void  
 
 def _showDog(x,y):
     screen.blit(dog,(x,y))
@@ -1000,7 +982,7 @@ def _pauseTime():
 ### _exit()
 ###     exit page for normal page
 ###    INPUT -
-###    OUTPUT void   
+###    OUTPUT void       
     
 def _exit():
     mixer.music.load(homePagePath+"/Exit_Game.mp3")
@@ -1313,17 +1295,14 @@ def _play(t,b,songName):
                 cloudBack = 0
             
         _showText("Score: "+str(scoreValue),554,730)
+        
         pygame.time.delay(10)
         catX = 497
         dogX = 666
-<<<<<<< Updated upstream
-        screen.blit(sushi,(138,ysushi))
-        screen.blit(food,(1047,yfood))
-=======
         
         screen.blit(sushi,(138,ySushi))
         screen.blit(food,(1047,yFood))
->>>>>>> Stashed changes
+
         pygame.display.update()
 
         if presentTicks >= t[36]:
@@ -1349,7 +1328,6 @@ def _totalScorePage(score,songName):
     startT = pygame.time.get_ticks()/1000
     endT=0
     a=0    
-        
     while True:
         if a==0 and endT-startT<4:
             endT=pygame.time.get_ticks()/1000
@@ -1393,7 +1371,6 @@ def _totalScorePage(score,songName):
 ###     main function to play game
 ###    INPUT -
 ###    OUTPUT void 
-
 def _main():
     check0 = _homePage()
     check2=-1
@@ -1427,5 +1404,4 @@ def _main():
                 while tempTotal == -1:
                     tempTotal=_totalScorePage(_calculatePoint(endGamePoint),listSong[stateMusicConfirm])
         
-
 _main()
