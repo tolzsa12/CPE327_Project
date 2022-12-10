@@ -1169,110 +1169,110 @@ def _play(t, b, songName):
         presentTicks = (pygame.time.get_ticks()-startTicks-pauseTime-exitTime)/1000 
         
         if a[1] == 0:       
-            countPlaySFX += _call(1,b[1],t[1],countPlaySFX,presentTicks)
-            scoreValue += _check(1,b[1],t[1],key,presentTicks,a)
+            countPlaySFX += _call(1, b[1], t[1], countPlaySFX, presentTicks)
+            scoreValue += _check(1, b[1], t[1], key, presentTicks, a)
         elif a[2] == 0:
-            countPlaySFX += _call(2,b[2],t[2],countPlaySFX,presentTicks)
-            scoreValue += _check(2,b[2],t[2],key,presentTicks,a)
+            countPlaySFX += _call(2, b[2], t[2], countPlaySFX, presentTicks)
+            scoreValue += _check(2, b[2], t[2], key, presentTicks, a)
         elif a[3] == 0:
-            countPlaySFX += _call(3,b[3],t[3],countPlaySFX,presentTicks)
-            scoreValue += _check(3,b[3],t[3],key,presentTicks,a) 
+            countPlaySFX += _call(3, b[3], t[3], countPlaySFX, presentTicks)
+            scoreValue += _check(3, b[3], t[3], key, presentTicks, a) 
         elif a[4] == 0:
-            countPlaySFX += _call(4,b[4],t[4],countPlaySFX,presentTicks)
-            scoreValue += _check(4,b[4],t[4],key,presentTicks,a)
+            countPlaySFX += _call(4, b[4], t[4], countPlaySFX, presentTicks)
+            scoreValue += _check(4, b[4], t[4], key, presentTicks, a)
         elif a[5] == 0:
-            countPlaySFX += _call(5,b[5],t[5],countPlaySFX,presentTicks)
-            scoreValue += _check(5,b[5],t[5],key,presentTicks,a)
+            countPlaySFX += _call(5, b[5], t[5], countPlaySFX, presentTicks)
+            scoreValue += _check(5, b[5], t[5], key, presentTicks, a)
         elif a[6] == 0:
-            countPlaySFX += _call(6,b[6],t[6],countPlaySFX,presentTicks)
-            scoreValue += _check(6,b[6],t[6],key,presentTicks,a)
+            countPlaySFX += _call(6, b[6], t[6], countPlaySFX, presentTicks)
+            scoreValue += _check(6, b[6], t[6], key, presentTicks, a)
         elif a[7] == 0:
-            countPlaySFX += _call(7,b[7],t[7],countPlaySFX,presentTicks)
-            scoreValue += _check(7,b[7],t[7],key,presentTicks,a)
+            countPlaySFX += _call(7, b[7], t[7], countPlaySFX, presentTicks)
+            scoreValue += _check(7, b[7], t[7], key, presentTicks, a)
         elif a[8] == 0:
-            countPlaySFX += _call(8,b[8],t[8],countPlaySFX,presentTicks)
-            scoreValue += _check(8,b[8],t[8],key,presentTicks,a)
+            countPlaySFX += _call(8, b[8], t[8], countPlaySFX, presentTicks)
+            scoreValue += _check(8, b[8], t[8], key, presentTicks, a)
         elif a[9] == 0:
-            countPlaySFX += _call(9,b[9],t[9],countPlaySFX,presentTicks)
-            scoreValue += _check(9,b[9],t[9],key,presentTicks,a)
+            countPlaySFX += _call(9, b[9], t[9], countPlaySFX, presentTicks)
+            scoreValue += _check(9, b[9], t[9], key, presentTicks, a)
         elif a[10] == 0:
-            countPlaySFX += _call(10,b[10],t[10],countPlaySFX,presentTicks)
-            scoreValue += _check(10,b[10],t[10],key,presentTicks,a)
+            countPlaySFX += _call(10, b[10], t[10], countPlaySFX, presentTicks)
+            scoreValue += _check(10, b[10], t[10], key, presentTicks, a)
         elif a[11] == 0:
-            countPlaySFX += _call(11,b[11],t[11],countPlaySFX,presentTicks)
-            scoreValue += _check(11,b[11],t[11],key,presentTicks,a)
+            countPlaySFX += _call(11, b[11], t[11], countPlaySFX, presentTicks)
+            scoreValue += _check(11, b[11], t[11], key, presentTicks, a)
         elif a[12] == 0:
-            countPlaySFX += _call(12,b[12],t[12],countPlaySFX,presentTicks)
-            scoreValue += _check(12,b[12],t[12],key,presentTicks,a)
+            countPlaySFX += _call(12, b[12], t[12], countPlaySFX, presentTicks)
+            scoreValue += _check(12, b[12], t[12], key, presentTicks, a)
         elif a[13] == 0:
-            countPlaySFX += _call(13,b[13],t[13],countPlaySFX,presentTicks)
-            scoreValue += _check(13,b[13],t[13],key,presentTicks,a)
+            countPlaySFX += _call(13, b[13], t[13], countPlaySFX, presentTicks)
+            scoreValue += _check(13, b[13], t[13], key, presentTicks, a)
         elif a[14] == 0:
-            countPlaySFX += _call(14,b[14],t[14],countPlaySFX,presentTicks)
-            scoreValue += _check(14,b[14],t[14],key,presentTicks,a)
+            countPlaySFX += _call(14, b[14], t[14], countPlaySFX, presentTicks)
+            scoreValue += _check(14, b[14], t[14], key, presentTicks, a)
         elif a[15] == 0:
-            countPlaySFX += _call(15,b[15],t[15],countPlaySFX,presentTicks)
-            scoreValue += _check(15,b[15],t[15],key,presentTicks,a)
+            countPlaySFX += _call(15, b[15], t[15], countPlaySFX, presentTicks)
+            scoreValue += _check(15, b[15], t[15], key, presentTicks, a)
         elif a[16] == 0:
-            countPlaySFX += _call(16,b[16],t[16],countPlaySFX,presentTicks)
-            scoreValue += _check(16,b[16],t[16],key,presentTicks,a)
+            countPlaySFX += _call(16, b[16], t[16], countPlaySFX, presentTicks)
+            scoreValue += _check(16, b[16], t[16], key, presentTicks, a)
         elif a[17] == 0:
-            countPlaySFX += _call(17,b[17],t[17],countPlaySFX,presentTicks)
-            scoreValue += _check(17,b[17],t[17],key,presentTicks,a)
+            countPlaySFX += _call(17, b[17], t[17], countPlaySFX, presentTicks)
+            scoreValue += _check(17, b[17], t[17], key, presentTicks, a)
         elif a[18] == 0:
-            countPlaySFX += _call(18,b[18],t[18],countPlaySFX,presentTicks)
-            scoreValue += _check(18,b[18],t[18],key,presentTicks,a)
+            countPlaySFX += _call(18, b[18], t[18], countPlaySFX, presentTicks)
+            scoreValue += _check(18, b[18], t[18], key, presentTicks, a)
         elif a[19] == 0:
-            countPlaySFX += _call(19,b[19],t[19],countPlaySFX,presentTicks)
-            scoreValue += _check(19,b[19],t[19],key,presentTicks,a)
+            countPlaySFX += _call(19, b[19], t[19], countPlaySFX, presentTicks)
+            scoreValue += _check(19, b[19], t[19], key, presentTicks, a)
         elif a[20] == 0:
-            countPlaySFX += _call(20,b[20],t[20],countPlaySFX,presentTicks)
-            scoreValue += _check(20,b[20],t[20],key,presentTicks,a)
+            countPlaySFX += _call(20, b[20], t[20], countPlaySFX, presentTicks)
+            scoreValue += _check(20, b[20], t[20], key, presentTicks, a)
         elif a[21] == 0:
-            countPlaySFX += _call(21,b[21],t[21],countPlaySFX,presentTicks)
-            scoreValue += _check(21,b[21],t[21],key,presentTicks,a)
+            countPlaySFX += _call(21, b[21], t[21], countPlaySFX, presentTicks)
+            scoreValue += _check(21, b[21], t[21], key, presentTicks, a)
         elif a[22] == 0:
-            countPlaySFX += _call(22,b[22],t[22],countPlaySFX,presentTicks)
-            scoreValue += _check(22,b[22],t[22],key,presentTicks,a)
+            countPlaySFX += _call(22, b[22], t[22], countPlaySFX, presentTicks)
+            scoreValue += _check(22, b[22], t[22], key, presentTicks, a)
         elif a[23] == 0:
-            countPlaySFX += _call(23,b[23],t[23],countPlaySFX,presentTicks)
-            scoreValue += _check(23,b[23],t[23],key,presentTicks,a)
+            countPlaySFX += _call(23, b[23], t[23], countPlaySFX, presentTicks)
+            scoreValue += _check(23, b[23], t[23], key, presentTicks, a)
         elif a[24] == 0:
-            countPlaySFX += _call(24,b[24],t[24],countPlaySFX,presentTicks)
-            scoreValue += _check(24,b[24],t[24],key,presentTicks,a)
+            countPlaySFX += _call(24, b[24], t[24], countPlaySFX, presentTicks)
+            scoreValue += _check(24, b[24], t[24], key, presentTicks, a)
         elif a[25] == 0:
-            countPlaySFX += _call(25,b[25],t[25],countPlaySFX,presentTicks)
-            scoreValue += _check(25,b[25],t[25],key,presentTicks,a)
+            countPlaySFX += _call(25, b[25], t[25], countPlaySFX, presentTicks)
+            scoreValue += _check(25, b[25], t[25], key, presentTicks, a)
         elif a[26] == 0:
-            countPlaySFX += _call(26,b[26],t[26],countPlaySFX,presentTicks)
-            scoreValue += _check(26,b[26],t[26],key,presentTicks,a)
+            countPlaySFX += _call(26, b[26], t[26], countPlaySFX, presentTicks)
+            scoreValue += _check(26, b[26], t[26], key, presentTicks, a)
         elif a[27] == 0:
-            countPlaySFX += _call(27,b[27],t[27],countPlaySFX,presentTicks)
-            scoreValue += _check(27,b[27],t[27],key,presentTicks,a)
+            countPlaySFX += _call(27, b[27], t[27], countPlaySFX, presentTicks)
+            scoreValue += _check(27, b[27], t[27], key, presentTicks, a)
         elif a[28] == 0:
-            countPlaySFX += _call(28,b[28],t[28],countPlaySFX,presentTicks)
-            scoreValue += _check(28,b[28],t[28],key,presentTicks,a)
+            countPlaySFX += _call(28, b[28], t[28], countPlaySFX, presentTicks)
+            scoreValue += _check(28, b[28], t[28], key, presentTicks, a)
         elif a[29] == 0:
-            countPlaySFX += _call(29,b[29],t[29],countPlaySFX,presentTicks)
-            scoreValue += _check(29,b[29],t[29],key,presentTicks,a)
+            countPlaySFX += _call(29, b[29], t[29], countPlaySFX, presentTicks)
+            scoreValue += _check(29, b[29], t[29], key, presentTicks,a)
         elif a[30] == 0:
-            countPlaySFX += _call(30,b[30],t[30],countPlaySFX,presentTicks)
-            scoreValue += _check(30,b[30],t[30],key,presentTicks,a)
+            countPlaySFX += _call(30, b[30], t[30], countPlaySFX, presentTicks)
+            scoreValue += _check(30, b[30], t[30], key, presentTicks, a)
         elif a[31] == 0:
-            countPlaySFX += _call(31,b[31],t[31],countPlaySFX,presentTicks)
-            scoreValue += _check(31,b[31],t[31],key,presentTicks,a)
+            countPlaySFX += _call(31, b[31], t[31], countPlaySFX, presentTicks)
+            scoreValue += _check(31, b[31], t[31], key, presentTicks, a)
         elif a[32] == 0:
-            countPlaySFX += _call(32,b[32],t[32],countPlaySFX,presentTicks)
-            scoreValue += _check(32,b[32],t[32],key,presentTicks,a)
+            countPlaySFX += _call(32, b[32], t[32], countPlaySFX, presentTicks)
+            scoreValue += _check(32, b[32], t[32], key, presentTicks, a)
         elif a[33] == 0:
-            countPlaySFX += _call(33,b[33],t[33],countPlaySFX,presentTicks)
-            scoreValue += _check(33,b[33],t[33],key,presentTicks,a)
+            countPlaySFX += _call(33, b[33], t[33], countPlaySFX, presentTicks)
+            scoreValue += _check(33, b[33], t[33], key, presentTicks, a)
         elif a[34] == 0:
-            countPlaySFX += _call(34,b[34],t[34],countPlaySFX,presentTicks)
-            scoreValue += _check(34,b[34],t[34],key,presentTicks,a)
+            countPlaySFX += _call(34, b[34], t[34], countPlaySFX, presentTicks)
+            scoreValue += _check(34, b[34], t[34], key, presentTicks, a)
         elif a[35] == 0:
-            countPlaySFX += _call(35,b[35],t[35],countPlaySFX,presentTicks)
-            scoreValue += _check(35,b[35],t[35],key,presentTicks,a)
+            countPlaySFX += _call(35, b[35], t[35], countPlaySFX, presentTicks)
+            scoreValue += _check(35, b[35], t[35], key, presentTicks, a)
         
         #preferences
         screen.blit(gamePageBg, (0, 0))
