@@ -1,12 +1,9 @@
 ### OLAVAN.py
 ###     main code of the game
 ###
-### create by Kunanya Khuntiptong
+### create by ชาติ ศาสนา SoftEn
 ###     8 December 2022
 
-### update by Nonthapat Thongpant
-### if not export the program, have no error
-### export, have error when closing program
 import pygame
 import os
 import array
@@ -72,7 +69,7 @@ t3 = [0, 3.5, 4.6, 6.8, 9.7, 11.7, 13.8, 16, 18.5, 20.3, 22.4, 27.8, 29.7, 31.4,
 #index 0 always be "n"
 #index 1 - 35 is the type of beat
 # c is cat/ d is dog
-# ฝากคอมเมนต์ชื่อเพลงด้านหลังอาเรย์ด้วย จะได้ไม่สับสน
+
 c = 'c'
 d = 'd'
 b0 = ["n", c, d, c, d, d, c, d, c, d, d, c, c, d, d, d, d, c, c, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, c] # Jingle Bell
@@ -80,7 +77,7 @@ b1 = ["n", d, c, d, c, d, d, c, c, d, c, d, c, d, c, d, d, c, c, c, d, c, d, c, 
 b2 = ["n", c, c, c, d, d, d, c, d, d, d, d, c, d, c, d, d, c, d, d, c, c, d, d, d, c, d, d, c, d, c, d, c, d, c, d] # Too cute
 b3 = ["n", c, d, c, d, c, d, c, d, d, c, d, c, d, c, d, d, c, c, d, c, d, d, c, d, c, d, d, c, d, c, d, c, d, d, d] # Antifragile
 b4 = ["n", c, d, c, d, d, c, c, d, d, c, d, c, d, c, d, c, d, d, c, c, d, d, c, d, c, d, c, d, c, d, c, c, d, d, c] # Tokyo drift
-#น่าจะเขียนผิด แต่ต้อลแก้เป็น 3 นะ # update by Nonthapat Thongpant 9/12/2022
+
 
 
 #add the song
@@ -118,6 +115,11 @@ detailfont = pygame.font.SysFont("arialblack",40)
 #create game window
 BG_SELECTMUSIC = pygame.transform.scale(pygame.image.load(
     'data/olavan_asset/select_music_page/Select_music_page.png'),(SCREEN_WIDTH,SCREEN_HEIGHT))
+
+### _checkClickRect
+###     checking the current mouse pointer is in the button area or not
+###    INPUT left, top, width, height - position and size of button
+###    OUTPUT int      
 def _checkClickRect(left,top,width,height):
     pos = pygame.mouse.get_pos()
     if (pos[0]>=left and pos[0]<=left+width) and (pos[1]>=top and pos[1]<=top+height):
@@ -125,8 +127,11 @@ def _checkClickRect(left,top,width,height):
     else:
         return 0
 
-#home
-def home_Page():
+### _homePage()
+###     homepage function
+###    INPUT -
+###    OUTPUT int  
+def _homePage():
     pygame.display.set_caption("OLAVAN")
     bg = pygame.image.load(homePagePath+"/HomePageBG.png") 
     startButton = pygame.image.load(homePagePath+"/Start_button.png")
@@ -182,25 +187,20 @@ def home_Page():
                     if exit == 1:
                         quit()
                     else:
-                        main()
+                        _main()
                 
-
-            #if pygame.mouse.get_pressed()[0]:
-                #if _checkClickRect(210,248,430,180) == 1: #select tutorial
-                    #return 1
-                #elif _checkClickRect(640,248,430,180) == 1: #select start
-                    #return 2
-
         screen.blit(bg,(0,0))
         screen.blit(startButton,(640,248))
         screen.blit(tutorialButton,(210,248))
         pygame.display.update()
-#mixer.music.load(homePagePath+"/MusicHomePage.mp3")
-#mixer.music.play()
 
 
-#tutorialPage 1
-def tutorialPage_1():
+
+### _tutorialPage1
+###     tutorial page 1
+###    INPUT -
+###    OUTPUT int  
+def _tutorialPage1():
     pygame.display.set_caption("OLAVAN")
     tutorialPage1 = pygame.image.load(homePagePath+"/Tutorial1.png")
     homepageButton = pygame.image.load(homePagePath+"/Home_button.png")
@@ -227,7 +227,7 @@ def tutorialPage_1():
                 if event.key == pygame.K_BACKSPACE:
                     mixer.music.load(homePagePath+"/Click sound effect.mp3")
                     mixer.music.play()
-                    main()
+                    _main()
                 
                 if event.key == pygame.K_j:
                     mixer.music.stop()
@@ -246,7 +246,7 @@ def tutorialPage_1():
                 if pygame.mouse.get_pressed()[0]:
                     mixer.music.load(homePagePath+"/Click sound effect.mp3")
                     mixer.music.play()
-                    main()
+                    _main()
     
         screen.blit(tutorialPage1,(0,0))
         screen.blit(homepageButton,(16,20))
@@ -254,8 +254,11 @@ def tutorialPage_1():
         pygame.display.update()
 
 
-#tutorialPage 2
-def tutorialPage_2():
+### _tutorialPage2
+###     tutorial page 2
+###    INPUT -
+###    OUTPUT int  
+def _tutorialPage2():
     pygame.display.set_caption("OLAVAN")
     tutorialPage2 = pygame.image.load(homePagePath+"/Tutorial2.png")
     homepageButton = pygame.image.load(homePagePath+"/Home_button.png")
@@ -272,7 +275,7 @@ def tutorialPage_2():
                         mixer.music.stop()
                         return -2
                 if _checkClickRect(16,20,230,100) == 1: #select homepage
-                        main()
+                        _main()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     clickSound.play()
@@ -287,7 +290,7 @@ def tutorialPage_2():
                 if event.key == pygame.K_BACKSPACE: #select homepage
                     mixer.music.load(homePagePath+"/Click sound effect.mp3")
                     mixer.music.play()
-                    main()
+                    _main()
                 if event.key == pygame.K_SPACE:
                     mixer.music.load(homePagePath+"/Tutorial 2.mp3")
                     mixer.music.play()
@@ -297,12 +300,18 @@ def tutorialPage_2():
         screen.blit(prevButton,(16,686))
         pygame.display.update()
 
-
-def draw_window():
+### _drawWindow()
+###     drawing window
+###    INPUT -
+###    OUTPUT void 
+def _drawWindow():
     screen.blit(BG_SELECTMUSIC,(0,0))
 
 
-# เลือกเพลง
+### _howSelectMusic
+###     tutorial page 1
+###    INPUT -
+###    OUTPUT int  
 def _howSelectMusic(state):
     if not pygame.mixer.music.get_busy():
         pygame.mixer.music.load("data/sound/select_music/Select_Music_Page.mp3")
@@ -310,8 +319,11 @@ def _howSelectMusic(state):
         sampleMusic = list_song[state]
         pygame.mixer.music.queue("data/music/"+sampleMusic+"_hook.mp3")
 
-
-def _draw_button(x,y,image): #วาดกล่องสี่เหลี่ยม ที่กดแล้วจะเกิด action
+### _drawButton()
+###     drawing button
+###    INPUT x,y,image
+###    OUTPUT boolean 
+def _drawButton(x,y,image): 
     display_blueblock = image.get_rect()
     display_blueblock.topleft = (x,y)
     clicked = False
@@ -328,18 +340,22 @@ def _draw_button(x,y,image): #วาดกล่องสี่เหลี่�
 
     return action 
 
-
+### _clickEffect()
+###     clicking sound effect function
+###    INPUT -
+###    OUTPUT void
 def _clickEffect():
     pygame.mixer.music.load("data/sound/click.mp3")
     pygame.mixer.music.play()
 
 
-#game loop 
-
+### _displayDetail()
+###     selecting music carousel loop
+###    INPUT state
+###    OUTPUT void
 def _displayDetail(state):
     
     if state == 0:
-
         Music1name = list_song[num_song-1]
         Music2name = list_song[state]
         Music3name = list_song[state+1]
@@ -368,34 +384,43 @@ def _displayDetail(state):
     screen.blit(Music3 ,(posBlueblock3_x+Blueblock_weight/2 - Music3.get_width()/2
     ,posBlueblock3_y + Blueblock_height/2 - Music3.get_height()/2 + 50))
 
-    displayIcon(Music1name,69,272)
-    displayIcon(Music2name,545,272)
-    displayIcon(Music3name,1021,272)
+    _displayIcon(Music1name,69,272)
+    _displayIcon(Music2name,545,272)
+    _displayIcon(Music3name,1021,272)
 
     #ลูกศรซ้ายขวา
     
-    displayArrow()
+    _displayArrow()
     #แสดง icon
 
-def displayArrow():
+### _displayArrow()
+###     displaying 2 arrows
+###    INPUT -
+###    OUTPUT void
+def _displayArrow():
     left_arrow = pygame.image.load('data/olavan_asset/select_music_page/left_arrow.png').convert_alpha()
     right_arrow = pygame.image.load('data/olavan_asset/select_music_page/right_arrow.png').convert_alpha()
     screen.blit(left_arrow,(115,550))
     screen.blit(right_arrow,(1070,550))
 
 
-
-def displayIcon(music,x,y):
+### _displayIcon()
+###     displaying icon
+###    INPUT -
+###    OUTPUT void
+def _displayIcon(music,x,y):
     icon = pygame.image.load('data/olavan_asset/select_music_page/'+ music +'_icon.png').convert_alpha()
     screen.blit(icon,(x,y))
 
-def _showSampleMusic(state,selectMenu): #เล่นเพลงตัวอย่าง
-   
+### _showSampleMusic()
+###     playing sample music before selection
+###    INPUT state, selectMenu
+###    OUTPUT void
+def _showSampleMusic(state,selectMenu): 
    if not pygame.mixer.music.get_busy() and selectMenu:
     sampleMusic = list_song[state]
     pygame.mixer.music.load("data/music/"+sampleMusic+"_hook.mp3")
     pygame.mixer.music.play(-1)
-
 
 ### _calculatePoint
 ###     calculating the star from the raw points
@@ -430,14 +455,17 @@ def _getHighestScore(songName):
 def _showText(text,x,y):
     showText=font.render(text,True,(0,0,0))
     screen.blit(showText, (x,y))
-    
-def confirmMusicPage(stateMusic):
+
+### _confirmMusicPage
+###     confirm music page
+###    INPUT stateMusic - number of selected music
+###    OUTPUT int  
+def _confirmMusicPage(stateMusic):
     bg = pygame.image.load(confirmPagePath+"/Confirm_music_page.png") 
     prevButton = pygame.image.load(confirmPagePath+"/Previous_button.png")
     titleMusic = pygame.image.load(confirmPagePath+"/title_music.png")
     titleTotalScore = pygame.image.load(confirmPagePath+"/title_totalscore.png")
     startButton = pygame.image.load(confirmPagePath+"/Start_game_button.png")
-    #print(stateMusic)
     musicName = list_song[stateMusic]
 
     try:
@@ -446,12 +474,11 @@ def confirmMusicPage(stateMusic):
         highestScore = 0
         
     highestStar = _calculatePoint(highestScore)
-
-    
     pygame.mixer.music.load(confirmPagePath+"/"+musicName+".mp3")
     pygame.mixer.music.queue(confirmPagePath+"/"+str(highestStar)+"Star.mp3")
     pygame.mixer.music.play()
     a=0
+
     #music & score variable
     musicIcon = pygame.image.load(confirmPagePath+"/icon_"+musicName+".png")
     while True:
@@ -485,8 +512,9 @@ def confirmMusicPage(stateMusic):
                     pygame.mixer.music.stop()
                     clickSound.play()
                     return -1
-                if event.key == pygame.K_SPACE:
-                    confirmMusicPage(stateMusic)
+                #if event.key == pygame.K_SPACE:
+                    #_confirmMusicPage(stateMusic)
+                    #เรียกซ้ำแบบนี้ไม่ได้นะ ขอคอมเม้นไว้ก่อน
             
 
         if not pygame.mixer.music.get_busy() and a==0:
@@ -494,8 +522,6 @@ def confirmMusicPage(stateMusic):
             pygame.mixer.music.play()
             a=1
 
-            
-    
         screen.blit(bg,(0,0))
         screen.blit(musicIcon, (545, 225))
         screen.blit(prevButton, (410, 569))
@@ -508,13 +534,12 @@ def confirmMusicPage(stateMusic):
             star = pygame.image.load(confirmPagePath+"/"+str(highestStar)+".png")
             screen.blit(star,(602,477))
 
-        
         pygame.display.update()
 
-# _selectMusicPage เป็นหน้าให้ผู้ใช้ได้เลือกเพลง
-# ผู้ใช้สามารถเลือกเพลงที่อยู่ตรงกลางของหน้าจอได้ 
-# ผู้ใช้สามารถเลื่อนซ้าย เลื่อนขวา และฟังเพลงตัวอย่างของเพลงที่อยู่ตรงกลางหน้าจอได้
-
+### _selectMusicPage
+###     select the music and confirm when the needed song is in the center
+###    INPUT -
+###    OUTPUT int  
 def _selectMusicPage():
     # ตัวบอกสเตตัส programRunning คือ โปรแกรมทั้งหมด selectMenu = หน้าเลือกเพลง
     programRunning,selectMenu = True,True 
@@ -522,11 +547,11 @@ def _selectMusicPage():
     playingGame,homePage = False,False
     firstTimeHomePage = True
     stateMusic = 1 # เพลงที่เล่น 
+
     while programRunning:
         for event in pygame.event.get():
-        
             if event.type == pygame.QUIT:
-                programRunning = False
+                programRunning = False 
                 selectMenu = False
                 pygame.quit()
                 exit()
@@ -542,23 +567,23 @@ def _selectMusicPage():
 
             # ถ้าอยู่หน้า selectMenu อยู่ให้ทำคำสั่งนี้         
             if selectMenu:
-                draw_window()
+                _drawWindow()
                 if firstTimeHomePage:
                     _howSelectMusic(stateMusic)
                     firstTimeHomePage = False
 
                 #Part แสดงกล่องฟ้า ปุ่ม และคลิกกล่องฟ้า
-                if _draw_button(-74,227,Blueblock):
+                if _drawButton(-74,227,Blueblock):
                     if stateMusic == 0:
                         stateMusic = num_song-1
                     else: 
                         stateMusic -= 1
                     pygame.mixer.music.stop()
 
-                if _draw_button(402,227,Blueblock):
+                if _drawButton(402,227,Blueblock):
                     pass
 
-                if _draw_button(878,227,Blueblock):
+                if _drawButton(878,227,Blueblock):
                     if stateMusic == num_song-1:
                         stateMusic = 0
                     else: 
@@ -566,15 +591,15 @@ def _selectMusicPage():
                     pygame.mixer.music.stop()
 
                 #แสดงปุ่ม เล่นและย้อนกลับ
-                if _draw_button(16,20,homeButton):
+                if _drawButton(16,20,homeButton):
                     homePage = True
                     selectMenu = False
                     pygame.mixer.music.fadeout(200)
                     _clickEffect()
-                    main()
+                    _main()
 
                 #แสดงปุ่มเล่น
-                if _draw_button(525,532,playButton):
+                if _drawButton(525,532,playButton):
                     playingGame = True
                     selectMenu = False
                     pygame.mixer.music.fadeout(200)
@@ -584,6 +609,7 @@ def _selectMusicPage():
                 if event.type == pygame.KEYDOWN:
                     
                     if event.key == pygame.K_f:
+                        pygame.K_BACKSPACE
                         if stateMusic == 0:
                             stateMusic = num_song-1
                         else:
@@ -600,7 +626,7 @@ def _selectMusicPage():
                     if event.key == pygame.K_BACKSPACE:
                         pygame.mixer.music.stop()
                         _clickEffect() 
-                        main()
+                        _main()
 
                     if event.key == pygame.K_RETURN:
                         playingGame = True
@@ -625,14 +651,12 @@ def _selectMusicPage():
                 selectMenu = True
                 homePage = False
                 pygame.mixer.music.stop()
-           # if not(programRunning):
-              #  pygame.quit()
-    
-            
 
-        
-
-def sampleSoundPage():
+### _sampleSoundPage
+###     page that inform before start the game
+###    INPUT -
+###    OUTPUT void 
+def _sampleSoundPage():
     bg = pygame.image.load(sampleSoundPagePath+"/Sample_sound_page.png")
     mixer.music.load(sampleSoundPagePath+"/Sample Sound.mp3")
     mixer.music.play()
@@ -836,7 +860,7 @@ def _pauseTime():
                         return -1
                     elif stateButton == 3:
                         pygame.mixer.music.stop()
-                        main()
+                        _main()
                 if event.key == pygame.K_SPACE:
                     pygame.mixer.music.load(pauseSoundPath+"/pausegame.mp3")
                     pygame.mixer.music.play()
@@ -980,9 +1004,11 @@ def _exitTime():
         screen.blit(exitButton,(431,463))
         pygame.display.update()
 
-
-
-def countdownPage(songName):
+### _countdownPage()
+###     countdown after pause and exit game
+###    INPUT songName
+###    OUTPUT void 
+def _countdownPage(songName):
     bg = pygame.image.load(gamePagePath+"/game_page.png")
     mixer.music.load(soundPath+"/sample_sound/countdown.mp3")
     startT=pygame.time.get_ticks()/1000
@@ -1058,8 +1084,8 @@ def _play(t,b,songName):
                         if pauseTemp == -1:
                             return -1
                         elif pauseTemp == 0:
-                            main()
-                        tempC = countdownPage(songName)
+                            _main()
+                        tempC = _countdownPage(songName)
                         pauseTime += pauseTemp+tempC
                         getPos=(pygame.time.get_ticks()-startTicks-pauseTime-exitTime)/1000
                         pygame.mixer.music.load(musicPath+"/"+songName+"_music.mp3")
@@ -1071,7 +1097,7 @@ def _play(t,b,songName):
                         exitTemp = _exitTime()
                         if exitTemp == 1:
                             quit()
-                        tempC = countdownPage(songName)
+                        tempC = _countdownPage(songName)
                         exitTime = exitTime+exitTemp+tempC
                         pygame.mixer.music.unpause()
                         getPos=(pygame.time.get_ticks()-startTicks-pauseTime-exitTime)/1000
@@ -1219,7 +1245,11 @@ def _play(t,b,songName):
                 f.write(str(highestScore))
             return scoreValue
 
-def total_score_page(score,songName):
+### _totalScorePage()
+###     total score page after finishing game
+###    INPUT score, songName - score and the name of song
+###    OUTPUT void 
+def _totalScorePage(score,songName):
     bg = pygame.image.load(totalScorePagePath+"/bg.png") 
     collectButton = pygame.image.load(totalScorePagePath+"/Collect_button.png")
     titleGetpoint = pygame.image.load(totalScorePagePath+"/getPoint.png")
@@ -1255,11 +1285,11 @@ def total_score_page(score,songName):
                     pygame.mixer.music.load(totalScorePagePath+"/Collect_TotalScore.mp3")
                     pygame.mixer.music.play()
                 if event.key == pygame.K_RETURN:
-                    main()
+                    _main()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(525,576,230,100) == 1:
                     clickSound.play()
-                    main()
+                    _main()
 
         screen.blit(bg,(0,0))
         screen.blit(star,(390,434))
@@ -1268,10 +1298,12 @@ def total_score_page(score,songName):
         _showText(songName,562,260)
         pygame.display.update()
 
-     
-
-def main():
-    check0 = home_Page()
+### _main()
+###     main function to play game
+###    INPUT -
+###    OUTPUT void 
+def _main():
+    check0 = _homePage()
     check2=-1
     tempTotal=-1
     stateMusicConfirm=-1
@@ -1280,11 +1312,11 @@ def main():
         while check2 == -1 or check2==-2:
             check1 =-1
             while check1==-1:
-                check1 = tutorialPage_1()
+                check1 = _tutorialPage1()
                 if check1==2:
                     check2=-1
                     while check2==-1:
-                        check2 = tutorialPage_2()
+                        check2 = _tutorialPage2()
              
             
     elif check0 == 2:
@@ -1293,15 +1325,15 @@ def main():
             selectSongVar = _selectMusicPage()
             stateMusicConfirm = -2
             while stateMusicConfirm == -2:
-                stateMusicConfirm = confirmMusicPage(selectSongVar)
+                stateMusicConfirm = _confirmMusicPage(selectSongVar)
         t=tempt[stateMusicConfirm]
         b=tempb[stateMusicConfirm]
         endGamePoint =-1  
         while endGamePoint == -1:
-            sampleSoundPage()
+            _sampleSoundPage()
             endGamePoint = _play(t,b,list_song[stateMusicConfirm])
             if endGamePoint != -1:
                 while tempTotal == -1:
-                    tempTotal=total_score_page(_calculatePoint(endGamePoint),list_song[stateMusicConfirm])
+                    tempTotal=_totalScorePage(_calculatePoint(endGamePoint),list_song[stateMusicConfirm])
         
-main()
+_main()
