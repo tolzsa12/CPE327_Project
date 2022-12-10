@@ -37,7 +37,7 @@ soundPath = mainPath+ "/sound"
 
 # Image load
 
-gamePageBg=pygame.image.load(gamePagePath+"/game_page.png")
+gamePageBg = pygame.image.load(gamePagePath+"/game_page.png")
 dog = pygame.image.load(gamePagePath+"/dog.png")
 cat = pygame.image.load(gamePagePath+"/cat.png")
 sushi = pygame.image.load(gamePagePath+"/sushi.png")
@@ -97,9 +97,9 @@ b4 = ["n", c, d, c, d, d, c, c, d, d, c, d, c, d, c, d, c, d, d, c, c, d, d, c, 
 
 # Array of available music
 
-tempT=[t0,t1,t2,t3,t4]
-tempB=[b0,b1,b2,b3,b4]
-listSong = ["Jingle Bell","Shutdown","Too Cute", "Antifragile","Tokyo Drift"] #เวลาจะเพิ่มหรือลด มาแก้ตรงนี้พอ เวลาตั้งชื่อไฟล์ให้ตั้งด้วยชื่อเพลงนี้ ตามด้วย_ 
+tempT = [t0, t1, t2, t3, t4]
+tempB = [b0, b1, b2, b3, b4]
+listSong = ["Jingle Bell", "Shutdown", "Too Cute", "Antifragile", "Tokyo Drift"] #เวลาจะเพิ่มหรือลด มาแก้ตรงนี้พอ เวลาตั้งชื่อไฟล์ให้ตั้งด้วยชื่อเพลงนี้ ตามด้วย_ 
 numSong = len(listSong)
 
 
@@ -116,10 +116,6 @@ SCREEN_HEIGHT = 800
 screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 BLACK = (0, 0, 0)
 BG_SELECTMUSIC = pygame.transform.scale(pygame.image.load('data/olavan_asset/select_music_page/Select_music_page.png'),(SCREEN_WIDTH,SCREEN_HEIGHT))
-
-#add the song
-
-
 
 
 # Touchable elements
@@ -367,7 +363,7 @@ def _drawButton(x, y, image):
     if pygame.mouse.get_pressed()[0] == 0:
         clicked = False
     
-    screen.blit(image,(displayBlueBlock.x,displayBlueBlock.y))
+    screen.blit(image,(displayBlueBlock.x, displayBlueBlock.y))
     return action 
 
 
@@ -526,13 +522,12 @@ def _confirmMusicPage(stateMusic):
                 pygame.quit()
                 exit()
             if pygame.mouse.get_pressed()[0]:
-                if _checkClickRect(410,569,230,100) == 1: #select back
-                        _selectMusicPage()
+                if _checkClickRect(410, 569, 230, 100) == 1: #select back
                         pygame.mixer.music.stop()
                         clickSound.play()
                         return -1
                         
-                if _checkClickRect(640,569,230,100) == 1: #select play
+                if _checkClickRect(640, 569, 230, 100) == 1: #select play
                         pygame.mixer.music.stop()
                         clickSound.play()
                         return stateMusic
@@ -1127,45 +1122,45 @@ def _play(t, b, songName):
         catX = 497
         dogX = 666
         for event in pygame.event.get():
-                if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT:
+                    pygame.quit()
+                    exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_f:            
+                    catX = 255
+                    key = "f"
+                    ySushi = 488
+                elif event.key == pygame.K_j: 
+                    dogX = 915
+                    key = "j"
+                    yFood = 488
+                elif event.key == pygame.K_SPACE:
+                    pygame.mixer.music.pause()
+                    pauseTemp = _pauseTime()
+                    if pauseTemp == -1:
+                        return -1
+                    elif pauseTemp == 0:
+                        _main()
+                    tempC = _countdownPage(songName)
+                    pauseTime += pauseTemp+tempC
+                    getPos=(pygame.time.get_ticks()-startTicks-pauseTime-exitTime)/1000
+                    pygame.mixer.music.load(musicPath+"/"+songName+"_music.mp3")
+                    pygame.mixer.music.play()
+                    pygame.mixer.music.set_pos(getPos)
+                elif event.key == pygame.K_ESCAPE:
+                    pygame.mixer.music.pause()
+                    clickSound.play()
+                    exitTemp = _exitTime()
+                    if exitTemp == 1:
                         pygame.quit()
                         exit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_f:            
-                        catX = 255
-                        key = "f"
-                        ySushi = 488
-                    elif event.key == pygame.K_j: 
-                        dogX = 915
-                        key = "j"
-                        yFood = 488
-                    elif event.key == pygame.K_SPACE:
-                        pygame.mixer.music.pause()
-                        pauseTemp = _pauseTime()
-                        if pauseTemp == -1:
-                            return -1
-                        elif pauseTemp == 0:
-                            _main()
-                        tempC = _countdownPage(songName)
-                        pauseTime += pauseTemp+tempC
-                        getPos=(pygame.time.get_ticks()-startTicks-pauseTime-exitTime)/1000
-                        pygame.mixer.music.load(musicPath+"/"+songName+"_music.mp3")
-                        pygame.mixer.music.play()
-                        pygame.mixer.music.set_pos(getPos)
-                    elif event.key == pygame.K_ESCAPE:
-                        pygame.mixer.music.pause()
-                        clickSound.play()
-                        exitTemp = _exitTime()
-                        if exitTemp == 1:
-                            pygame.quit()
-                            exit()
-                        tempC = _countdownPage(songName)
-                        exitTime = exitTime+exitTemp+tempC
-                        pygame.mixer.music.unpause()
-                        getPos=(pygame.time.get_ticks()-startTicks-pauseTime-exitTime)/1000
-                        pygame.mixer.music.load(musicPath+"/"+songName+"_music.mp3")
-                        pygame.mixer.music.play()
-                        pygame.mixer.music.set_pos(getPos)
+                    tempC = _countdownPage(songName)
+                    exitTime = exitTime+exitTemp+tempC
+                    pygame.mixer.music.unpause()
+                    getPos=(pygame.time.get_ticks()-startTicks-pauseTime-exitTime)/1000
+                    pygame.mixer.music.load(musicPath+"/"+songName+"_music.mp3")
+                    pygame.mixer.music.play()
+                    pygame.mixer.music.set_pos(getPos)
                                     
         presentTicks = (pygame.time.get_ticks()-startTicks-pauseTime-exitTime)/1000 
         
@@ -1374,7 +1369,7 @@ def _main():
     stateMusicConfirm = -1
     if check0 == 1:
         mixer.music.stop()
-        while check2 == -1 or check2 == -2:
+        while check2==-1 or check2==-2:
             check1 = -1
             while check1 == -1:
                 check1 = _tutorialPage1()
