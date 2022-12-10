@@ -105,7 +105,7 @@ num_song = len(list_song)
 # Font load
 
 font=pygame.font.Font(fontPath+"/trebuc.ttf",32)
-detailfont = pygame.font.SysFont("arialblack",40)
+detailFont = pygame.font.SysFont("arialblack",40)
 
 
 # Screen setting
@@ -113,6 +113,13 @@ detailfont = pygame.font.SysFont("arialblack",40)
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 800
 screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
+<<<<<<< Updated upstream
+=======
+
+#add the song
+listSong = ["Jingle Bell","Shutdown","Too Cute"] #เวลาจะเพิ่มหรือลด มาแก้ตรงนี้พอ เวลาตั้งชื่อไฟล์ให้ตั้งด้วยชื่อเพลงนี้ ตามด้วย_ 
+numSong = len(listSong)
+>>>>>>> Stashed changes
 BLACK = (0,0,0)
 BG_SELECTMUSIC = pygame.transform.scale(pygame.image.load(
     'data/olavan_asset/select_music_page/Select_music_page.png'),(SCREEN_WIDTH,SCREEN_HEIGHT))
@@ -281,7 +288,7 @@ def _tutorialPage1():
 def _tutorialPage2():
     pygame.display.set_caption("OLAVAN")
     tutorialPage2 = pygame.image.load(homePagePath+"/Tutorial2.png")
-    homepageButton = pygame.image.load(homePagePath+"/Home_button.png")
+    homePageButton = pygame.image.load(homePagePath+"/Home_button.png")
     prevButton = pygame.image.load(homePagePath+"/Previous_button.png")
     mixer.music.load(homePagePath+"/Click sound effect.mp3")
     mixer.music.play()
@@ -318,7 +325,7 @@ def _tutorialPage2():
                     mixer.music.play()
         
         screen.blit(tutorialPage2,(0,0))
-        screen.blit(homepageButton,(16,20))
+        screen.blit(homePageButton,(16,20))
         screen.blit(prevButton,(16,686))
         pygame.display.update()
 
@@ -341,7 +348,7 @@ def _howSelectMusic(state):
     if not pygame.mixer.music.get_busy():
         pygame.mixer.music.load("data/sound/select_music/Select_Music_Page.mp3")
         pygame.mixer.music.play()
-        sampleMusic = list_song[state]
+        sampleMusic = listSong[state]
         pygame.mixer.music.queue("data/music/"+sampleMusic+"_hook.mp3")
 
 
@@ -384,22 +391,23 @@ def _clickEffect():
 
 def _displayDetail(state):
     if state == 0:
-        Music1name = list_song[num_song-1]
-        Music2name = list_song[state]
-        Music3name = list_song[state+1]
+        music1Name = listSong[numSong-1]
+        music2Name = listSong[state]
+        music3Name = listSong[state+1]
   
-    elif state > 0 and state < num_song-1:
+    elif state > 0 and state < numSong-1:
 
-        Music1name = list_song[state-1]
-        Music2name = list_song[state]
-        Music3name = list_song[state+1]
+        music1Name = listSong[state-1]
+        music2Name = listSong[state]
+        music3Name = listSong[state+1]
    
-    elif state == num_song - 1:
+    elif state == numSong - 1:
        
-        Music1name = list_song[state-1]
-        Music2name = list_song[state]
-        Music3name = list_song[0]
+        music1Name = listSong[state-1]
+        music2Name = listSong[state]
+        music3Name = listSong[0]
 
+<<<<<<< Updated upstream
     Music1 = detailfont.render(Music1name,True,BLACK)
     Music2 = detailfont.render(Music2name,True,BLACK)
     Music3 = detailfont.render(Music3name,True,BLACK)
@@ -414,6 +422,22 @@ def _displayDetail(state):
     _displayIcon(Music1name,69,272)
     _displayIcon(Music2name,545,272)
     _displayIcon(Music3name,1021,272)  
+=======
+    music1 = detailFont.render(music1Name,True,BLACK)
+    music2 = detailFont.render(music2Name,True,BLACK)
+    music3 = detailFont.render(music3Name,True,BLACK)
+   
+    screen.blit(music1 ,(posBlueblock1_x+Blueblock_weight/2 - music1.get_width()/2
+    ,posBlueblock1_y + Blueblock_height/2 - music1.get_height()/2 + 50))
+    screen.blit(music2 ,(posBlueblock2_x+Blueblock_weight/2 - music2.get_width()/2
+    ,posBlueblock2_y + Blueblock_height/2 - music2.get_height()/2 + 50))
+    screen.blit(music3 ,(posBlueblock3_x+Blueblock_weight/2 - music3.get_width()/2
+    ,posBlueblock3_y + Blueblock_height/2 - music3.get_height()/2 + 50))
+
+    _displayIcon(music1Name,69,272)
+    _displayIcon(music2Name,545,272)
+    _displayIcon(music3Name,1021,272)  
+>>>>>>> Stashed changes
     _displayArrow()
 
 
@@ -423,10 +447,10 @@ def _displayDetail(state):
 ###    OUTPUT void
 
 def _displayArrow():
-    left_arrow = pygame.image.load('data/olavan_asset/select_music_page/left_arrow.png').convert_alpha()
-    right_arrow = pygame.image.load('data/olavan_asset/select_music_page/right_arrow.png').convert_alpha()
-    screen.blit(left_arrow,(115,550))
-    screen.blit(right_arrow,(1070,550))
+    leftArrow = pygame.image.load('data/olavan_asset/select_music_page/left_arrow.png').convert_alpha()
+    rightArrow = pygame.image.load('data/olavan_asset/select_music_page/right_arrow.png').convert_alpha()
+    screen.blit(leftArrow,(115,550))
+    screen.blit(rightArrow,(1070,550))
 
 
 ### _displayIcon()
@@ -446,7 +470,7 @@ def _displayIcon(music,x,y):
 
 def _showSampleMusic(state,selectMenu): 
    if not pygame.mixer.music.get_busy() and selectMenu:
-    sampleMusic = list_song[state]
+    sampleMusic = listSong[state]
     pygame.mixer.music.load("data/music/"+sampleMusic+"_hook.mp3")
     pygame.mixer.music.play(-1)
 
@@ -502,7 +526,7 @@ def _confirmMusicPage(stateMusic):
     titleMusic = pygame.image.load(confirmPagePath+"/title_music.png")
     titleTotalScore = pygame.image.load(confirmPagePath+"/title_totalscore.png")
     startButton = pygame.image.load(confirmPagePath+"/Start_game_button.png")
-    musicName = list_song[stateMusic]
+    musicName = listSong[stateMusic]
 
     try:
         highestScore = int(_getHighestScore(musicName))
@@ -613,7 +637,7 @@ def _selectMusicPage():
                 #Part แสดงกล่องฟ้า ปุ่ม และคลิกกล่องฟ้า
                 if _drawButton(-74,227,Blueblock):
                     if stateMusic == 0:
-                        stateMusic = num_song-1
+                        stateMusic = numSong-1
                     else: 
                         stateMusic -= 1
                     pygame.mixer.music.stop()
@@ -622,7 +646,7 @@ def _selectMusicPage():
                     pass
 
                 if _drawButton(878,227,Blueblock):
-                    if stateMusic == num_song-1:
+                    if stateMusic == numSong-1:
                         stateMusic = 0
                     else: 
                         stateMusic += 1
@@ -647,15 +671,14 @@ def _selectMusicPage():
                 if event.type == pygame.KEYDOWN:
                     
                     if event.key == pygame.K_f:
-                        pygame.K_BACKSPACE
                         if stateMusic == 0:
-                            stateMusic = num_song-1
+                            stateMusic = numSong-1
                         else:
                             stateMusic -= 1
                         pygame.mixer.music.stop() # ทำการหยุดเพลงที่เล่นอยู่
 
                     if event.key == pygame.K_j:
-                        if stateMusic == num_song-1:
+                        if stateMusic == numSong-1:
                             stateMusic = 0
                         else: 
                             stateMusic += 1
@@ -1121,8 +1144,8 @@ def _play(t,b,songName):
     
     while True:
         key = "initial"
-        ysushi = 495
-        yfood = 495
+        ySushi = 495
+        yFood = 495
         catX = 497
         dogX = 666
         for event in pygame.event.get():
@@ -1133,11 +1156,11 @@ def _play(t,b,songName):
                     if event.key == pygame.K_f:            
                         catX = 255
                         key = "f"
-                        ysushi = 488
+                        ySushi = 488
                     elif event.key == pygame.K_j: 
                         dogX = 915
                         key = "j"
-                        yfood = 488
+                        yFood = 488
                     elif event.key == pygame.K_SPACE:
                         pygame.mixer.music.pause()
                         pauseTemp = _pauseTime()
@@ -1293,8 +1316,14 @@ def _play(t,b,songName):
         pygame.time.delay(10)
         catX = 497
         dogX = 666
+<<<<<<< Updated upstream
         screen.blit(sushi,(138,ysushi))
         screen.blit(food,(1047,yfood))
+=======
+        
+        screen.blit(sushi,(138,ySushi))
+        screen.blit(food,(1047,yFood))
+>>>>>>> Stashed changes
         pygame.display.update()
 
         if presentTicks >= t[36]:
@@ -1313,7 +1342,7 @@ def _play(t,b,songName):
 def _totalScorePage(score,songName):
     bg = pygame.image.load(totalScorePagePath+"/bg.png") 
     collectButton = pygame.image.load(totalScorePagePath+"/Collect_button.png")
-    titleGetpoint = pygame.image.load(totalScorePagePath+"/getPoint.png")
+    titleGetPoint = pygame.image.load(totalScorePagePath+"/getPoint.png")
     star = pygame.image.load(totalScorePagePath+"/"+str(score)+".png")
     soundT = pygame.mixer.Sound(totalScorePagePath+"/result_score.mp3")
     soundT.play()
@@ -1355,7 +1384,7 @@ def _totalScorePage(score,songName):
         screen.blit(bg,(0,0))
         screen.blit(star,(390,434))
         screen.blit(collectButton, (512, 576))
-        screen.blit(titleGetpoint, (380, 370))
+        screen.blit(titleGetPoint, (380, 370))
         _showText(songName,562,260)
         pygame.display.update()
 
@@ -1393,10 +1422,10 @@ def _main():
         endGamePoint =-1  
         while endGamePoint == -1:
             _sampleSoundPage()
-            endGamePoint = _play(t,b,list_song[stateMusicConfirm])
+            endGamePoint = _play(t,b,listSong[stateMusicConfirm])
             if endGamePoint != -1:
                 while tempTotal == -1:
-                    tempTotal=_totalScorePage(_calculatePoint(endGamePoint),list_song[stateMusicConfirm])
+                    tempTotal=_totalScorePage(_calculatePoint(endGamePoint),listSong[stateMusicConfirm])
         
 
 _main()
