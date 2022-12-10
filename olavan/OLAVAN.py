@@ -70,21 +70,14 @@ t3 = [0, 3.5, 4.6, 6.8, 9.7, 11.7, 13.8, 16, 18.5, 20.3, 22.4, 27.8, 29.7, 31.4,
 
 c = 'c'
 d = 'd'
-<<<<<<< HEAD
-b0 = ["n", c, d, c, d, d, c, d, c, d, d, c, c, d, d, d, d, c, c, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, c]
-b1 = ["n", d, c, d, c, d, d, c, c, d, c, d, c, d, c, d, d, c, c, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, c]
-b2 = ["n", c, c, c, d, d, d, c, d, d, d, d, c, d, c, d, d, c, d, d, c, c, d, d, d, c, d, d, c, d, c, d, c, d, c, d]
-b4 = ["n", c, d, c, d, c, d, c, d, d, c, d, c, d, c, d, d, c, c, d, c, d, d, c, d, c, d, d, c, d, c, d, c, d, d, d]
-#b5 = ["n", c, c, c, d, c, d, c, d, d, c, c, d, c, d, d, c, d, c, c, d, d, c, d, c, d, d, c, d, c, d, c, c, d, d, c]
-=======
+
+
 b0 = ["n", c, d, c, d, d, c, d, c, d, d, c, c, d, d, d, d, c, c, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, c] # Jingle Bell
 b1 = ["n", d, c, d, c, d, d, c, c, d, c, d, c, d, c, d, d, c, c, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, c] # Shutdown
 b2 = ["n", c, c, c, d, d, d, c, d, d, d, d, c, d, c, d, d, c, d, d, c, c, d, d, d, c, d, d, c, d, c, d, c, d, c, d] # Too cute
 b3 = ["n", c, d, c, d, c, d, c, d, d, c, d, c, d, c, d, d, c, c, d, c, d, d, c, d, c, d, d, c, d, c, d, c, d, d, d] # Antifragile
 b4 = ["n", c, d, c, d, d, c, c, d, d, c, d, c, d, c, d, c, d, d, c, c, d, d, c, d, c, d, c, d, c, d, c, c, d, d, c] # Tokyo drift
 
-
->>>>>>> e76e38bcc1389c8373670ba4fca4d2e16588bdce
 
 #add the song
 tempt=[t0,t1,t2]
