@@ -1397,6 +1397,6 @@ def _main():
             endGamePoint = _play(t, b, listSong[stateMusicConfirm])
             if endGamePoint != -1:
                 while tempTotal == -1:
-                    tempTotal=_totalScorePage(_calculatePoint(endGamePoint), listSong[stateMusicConfirm])
+                    tempTotal = _totalScorePage(_calculatePoint(endGamePoint), listSong[stateMusicConfirm])
         
 _main()
