@@ -197,7 +197,7 @@ def _homePage():
                     pygame.mixer.pause()
                     return 1
 
-                if event.key == pygame.K_j: #select start
+                if event.key == pygame.K_j or event.key == pygame.K_RETURN: #select start
                     pygame.mixer.pause()
                     return 2
                 
