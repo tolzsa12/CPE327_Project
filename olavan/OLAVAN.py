@@ -728,6 +728,15 @@ def _sampleSoundPage():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     a = 1
+
+                if event.key == pygame.K_ESCAPE:
+                    pygame.mixer.music.pause()
+                    clickSound.play()
+                    exitt = _exit()
+                    if exitt == 1:
+                        pygame.quit()
+                        exit()
+                    return 0           
                                  
         screen.blit(bg,(0,0))
         pygame.display.update()
@@ -1407,7 +1416,9 @@ def _main():
         b = tempB[stateMusicConfirm]
         endGamePoint = -1  
         while endGamePoint == -1:
-            _sampleSoundPage()
+            sample = _sampleSoundPage()
+            while sample == 0: #want to exit but back
+                sample = _sampleSoundPage()
             endGamePoint = _play(t, b, listSong[stateMusicConfirm])
             if endGamePoint != -1:
                 while tempTotal == -1:
