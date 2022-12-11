@@ -1063,6 +1063,9 @@ def _exitTime():
                     clickSound.play()
                     mixer.music.stop()
                     return exitTime-exitStart
+                elif event.key == pygame.K_SPACE:
+                    mixer.music.load(homePagePath+"/Exit_Game.mp3")
+                    mixer.music.play()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(431, 283, 430, 180) == 1:
                     clickSound.play()
