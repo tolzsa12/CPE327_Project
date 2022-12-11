@@ -467,11 +467,17 @@ def _play(t,b,songName):
                         pygame.mixer.music.unpause()
                         #pygame.mixer.Channel(0).pause()
                                     
-        presentTicks=(pygame.time.get_ticks()-startTicks-pauseTime-exitTime)/1000 
-
+        presentTicks=(pygame.time.get_ticks()-startTicks-pauseTime-exitTime)/1000
+        
+        #TESTING CODE AUTOMATICALLY ZONE
         #code for pressing in time test
         if countTest <= 35:
-            if presentTicks >= t2[countTest]+0.5:
+            #in the condition below
+            #กรณีที่ถูกทุกอัน(<1.0) ใส่ +0.5
+            #กรณีที่ถูกทุกอัน(=1.0) ใส่ +1.0
+            #กรณีที่กดไม่ทัน ใส่ +1.3
+            #กรณีที่ไม่กด คอมเม้นส่วนของโค้ดตรงนี้ไปได้เลย
+            if presentTicks >= t2[countTest]+1.3:
                 if b2[countTest]=='c':
                     keyboard.press('f')
                     keyboard.release('f')
@@ -483,10 +489,6 @@ def _play(t,b,songName):
                     keyboard.release('j')
                     countTest=countTest+1
                     print("press j for time "+str(countTest)+" at time "+str(presentTicks))
-
-
-
-
         
         if a[1] == 0:       
             countPlaySFX += _call(1,b[1],t[1],countPlaySFX,presentTicks)
