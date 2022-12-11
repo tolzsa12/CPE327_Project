@@ -333,7 +333,7 @@ def _tutorialPage2():
                     mixer.music.play()
                     _main()
                 if event.key == pygame.K_SPACE:
-                    mixer.music.load(homePagePath+"/Tutorial 2.mp3")
+                    mixer.music.load(homePagePath+"/Tutorial2.mp3")
                     mixer.music.play()
         
         screen.blit(tutorialPage2, (0, 0))
