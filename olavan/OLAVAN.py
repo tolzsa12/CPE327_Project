@@ -83,6 +83,7 @@ t6 = [0, 10.6, 13.5, 15.2, 16.5, 18.4, 19.5, 22.3, 26.3, 30.4, 34.6, 36.3, 38.7,
 t7 = [0, 3.2, 5, 7.9, 9.5, 12.3, 14.2, 16.9, 18.6, 20.3, 22, 23.7, 25.9, 28.3, 31, 35, 38.5, 41.2, 43, 44.1, 45.3, 47.4, 48.7, 52, 55.4, 57.7, 59.9, 62.2, 65.6, 71.3, 73.5, 75.8, 77, 79.2, 82.7, 87.1, 92]
 t8 = [0, 5.7, 7.5, 9 , 11.5, 13.1, 15.4, 16.9, 22.2, 24.3, 26, 27.8, 29.7, 31.6, 33.4, 35.2, 37, 39, 41.8, 43.6, 45.4, 47.3, 50.5, 51.9, 53.8, 56.6, 59.3, 61.1, 62.9, 64.8, 66.6, 68.5, 70.3, 72.2, 74.1, 75.9, 81]
 t9 = [0, 4.1, 7.8, 11.5, 14.4, 17.1, 20.8, 22.7, 24.5, 28.2, 33.8, 35.5, 41.2, 44.8, 46.7, 50.4, 52.2, 57.8, 63.3, 65.2, 68.8, 74.4, 78, 80.4, 83.6, 85.4, 87.3, 91, 93.3, 95.1, 97.1, 98.8, 100.6, 102.5, 104.4, 107.6, 114]
+t10 = [0, 5.9, 8.9, 11.9, 15.2, 21, 24, 27.7, 29.1, 32.8, 35.8, 37.9, 40.2, 42.4, 45.3, 50.5, 52, 54.2, 57, 59.7, 61.5, 65.3, 66.7, 69.6, 71.9, 73.3, 74.8, 77, 80, 85.1, 86.6, 89.5, 91, 92.5, 94.6, 96.9, 104] #89.5 31
 # Beat type array has 36 index [35]
 # Index 0 always be "n"
 # Index 1 - 35 is the type of beat
@@ -101,12 +102,14 @@ b6 = ["n", c, d, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, d, c, d, c, d, 
 b7 = ["n", d, d, d, c, d, d, c, d, c, c, d, c, d, c, d, c, d, d, c, d, c, d, d, c, c, d, c, d, c, d, c, d, c, c, d] # Fire Boy
 b8 = ["n", d, d, d, c, d, d, c, d, c, c, d, c, d, c, d, c, d, d, c, d, c, d, d, c, c, d, c, d, c, d, c, d, c, c, d] # La Lai
 b9 = ["n", c, c, c, d, c, d, c, d, d, c, c, d, c, d, d, c, d, c, c, d, d, c, d, c, d, d, c, d, c, d, c, c, d, d, c] # Hidden Line
+b10 = ["n", c, c, c, d, d, d, c, d, d, d, d, c, d, c, d, d, c, d, d, c, c, d, d, d, c, d, d, c, d, c, d, c, d, c, d] # Mali
+
 
 # Array of available music
 
-tempT = [t0, t1, t2, t3, t4, t5, t6, t7, t8, t9]
-tempB = [b0, b1, b2, b3, b4, b5, b6, b7, b8, b9]
-listSong = ["Jingle Bell", "Shutdown", "Too Cute", "Antifragile", "Tokyo Drift", "Booty Bomb", "Oh Ka", "Fire Boy", "La Lai", "Hidden Line"] #เวลาจะเพิ่มหรือลด มาแก้ตรงนี้พอ เวลาตั้งชื่อไฟล์ให้ตั้งด้วยชื่อเพลงนี้ ตามด้วย_ 
+tempT = [t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10]
+tempB = [b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10]
+listSong = ["Jingle Bell", "Shutdown", "Too Cute", "Antifragile", "Tokyo Drift", "Booty Bomb", "Oh Ka", "Fire Boy", "La Lai", "Hidden Line", "Mali"] #เวลาจะเพิ่มหรือลด มาแก้ตรงนี้พอ เวลาตั้งชื่อไฟล์ให้ตั้งด้วยชื่อเพลงนี้ ตามด้วย_ 
 numSong = len(listSong)
 
 
@@ -555,9 +558,6 @@ def _confirmMusicPage(stateMusic):
                     pygame.mixer.music.stop()
                     clickSound.play()
                     return -1
-                #if event.key == pygame.K_SPACE:
-                    #_confirmMusicPage(stateMusic)
-                    #เรียกซ้ำแบบนี้ไม่ได้นะ ขอคอมเม้นไว้ก่อน
             
         if not pygame.mixer.music.get_busy() and a==0:
             pygame.mixer.music.load(confirmPagePath+"/ConfirmSelectMusic.mp3")
