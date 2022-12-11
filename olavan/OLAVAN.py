@@ -563,6 +563,10 @@ def _confirmMusicPage(stateMusic):
                     pygame.mixer.music.stop()
                     clickSound.play()
                     return stateMusic
+                if event.key == pygame.K_SPACE:
+                    pygame.mixer.music.load(confirmPagePath+"/"+musicName+".mp3")
+                    pygame.mixer.music.queue(confirmPagePath+"/"+str(highestStar)+"Star.mp3")
+                    pygame.mixer.music.play()
                 if event.key == pygame.K_BACKSPACE:
                     pygame.mixer.music.stop()
                     clickSound.play()
