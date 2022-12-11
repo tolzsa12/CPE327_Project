@@ -81,7 +81,13 @@ t4 = [0, 4.4, 6.4, 8.3, 13.25, 15.15, 18.8, 21.7, 22.5, 25.2, 26.5, 28.4, 30.2, 
 t5 = [0, 11.7, 14.9, 17.3, 18.6, 19.5, 21.1, 23.5, 24.3, 26.7, 29.1, 30.2, 31.6, 33.5, 36.0, 38.4, 39.7, 40.9, 43.4, 45.8, 48.3, 50.8, 53.7, 54.8, 56.9, 58.3, 60.6, 63.2, 65.7, 70.9, 73.6, 75.6, 83.0, 85.4, 87.9, 90.4, 120]
 t6 = [0, 10.6, 13.5, 15.2, 16.5, 18.4, 19.5, 22.3, 26.3, 30.4, 34.6, 36.3, 38.7, 40.1, 42.9, 47.2, 51.2, 57.5, 59.7, 61.7, 63.8, 65.9, 68, 70.6, 72.1, 74.2, 76.4, 78.4, 84.8, 88.9, 90.5, 91.5, 93.6, 95.7, 98, 99.9, 104]
 t7 = [0, 3.2, 5, 7.9, 9.5, 12.3, 14.2, 16.9, 18.6, 20.3, 22, 23.7, 25.9, 28.3, 31, 35, 38.5, 41.2, 43, 44.1, 45.3, 47.4, 48.7, 52, 55.4, 57.7, 59.9, 62.2, 65.6, 71.3, 73.5, 75.8, 77, 79.2, 82.7, 87.1, 92]
-t8 = [0, 5.7, 7.5, 9 ]
+t8 = [0, 5.7, 7.5, 9 , 11.5, 13.1, 15.4, 16.9, 22.2, 24.3, 26, 27.8, 29.7, 31.6, 33.4, 35.2, 37, 39, 41.8, 43.6, 45.4, 47.3, 50.5, 51.9, 53.8, 56.6, 59.3, 61.1, 62.9, 64.8, 66.6, 68.5, 70.3, 72.2, 74.1, 75.9, 81]
+t9 = [0, 4.1, 7.8, 11.5, 14.4, 17.1, 20.8, 22.7, 24.5, 28.2, 33.8, 35.5, 41.2, 44.8, 46.7, 50.4, 52.2, 57.8, 63.3, 65.2, 68.8, 74.4, 78, 80.4, 83.6, 85.4, 87.3, 91, 93.3, 95.1, 97.1, 98.8, 100.6, 102.5, 104.4, 107.6, 114]
+t10 = [0, 5.9, 8.9, 11.9, 15.2, 21, 24, 27.7, 29.1, 32.8, 35.8, 37.9, 40.2, 42.4, 45.3, 50.5, 52, 54.2, 57, 59.7, 61.5, 65.3, 66.7, 69.6, 71.9, 73.3, 74.8, 77, 80, 85.1, 86.6, 89.5, 91, 92.5, 94.6, 96.9, 104] 
+t11 = [0, 1.7, 3.1, 4.9, 6.9, 8.5, 10.7, 13.3, 15.6, 17, 20.1, 23.1, 24.7, 26.2, 27.7, 29.2, 32.2, 35.3, 38.3, 40.9, 42.8, 44, 45.9, 48.4, 50.3, 51.8, 53.3, 56.4, 58, 60.9, 62.3, 64, 65.5, 67, 69.9, 71.5, 76] 
+t12 = [0, 2.5, 6.5, 7.9, 10.3, 11.7, 14.1, 15.5, 17.9, 19.3, 21.6, 23.5, 25.5, 27.3, 29.2, 31.1, 32.9, 34.9, 36.7, 38.6, 40.5, 42.4, 44.3, 45.3, 46.3, 48, 49.9, 51.6, 52.8, 54.7, 55.7, 56.7, 57.7, 59.4, 60.4, 62.2, 65] 
+t13 = [0, 1, 3.6, 6.2, 8.8, 10, 11.4, 12.7, 13.9, 15.2, 16.5, 17.8, 19.2, 20.5, 21.7, 23, 24.3, 25.5, 26.9, 29.5, 30.7, 32, 33.3, 35.2, 36.5, 37.8, 39.1, 41.7, 43, 44.2, 47, 49.4, 52.7, 55.9, 58.5, 63.1, 68] 
+t14 = [0, 1.3, 3.7, 6.3, 7.5, 11.3, 13.9, 16.4, 21.4, 24, 26.5, 29, 31.5, 34, 36.6, 39.1, 41.6, 44.2, 46.7, 47.9, 50.5, 51.8, 54.3, 56.8, 59.3, 61.9, 64.4, 65.6, 66.9, 68.2, 69.5, 71.9, 74.4, 77, 79.6, 82.1, 86]
 
 # Beat type array has 36 index [35]
 # Index 0 always be "n"
@@ -100,19 +106,26 @@ b5 = ["n", c, c, c, d, c, d, c, d, d, c, c, d, c, d, d, c, d, c, c, d, d, c, d, 
 b6 = ["n", c, d, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, d, c, d, c, d, d, d, c, d, c, d, c, d, c, d, d, d] # Oh Ka
 b7 = ["n", d, d, d, c, d, d, c, d, c, c, d, c, d, c, d, c, d, d, c, d, c, d, d, c, c, d, c, d, c, d, c, d, c, c, d] # Fire Boy
 b8 = ["n", d, d, d, c, d, d, c, d, c, c, d, c, d, c, d, c, d, d, c, d, c, d, d, c, c, d, c, d, c, d, c, d, c, c, d] # La Lai
+b9 = ["n", c, c, c, d, c, d, c, d, d, c, c, d, c, d, d, c, d, c, c, d, d, c, d, c, d, d, c, d, c, d, c, c, d, d, c] # Hidden Line
+b10 = ["n", c, c, c, d, d, d, c, d, d, d, d, c, d, c, d, d, c, d, d, c, c, d, d, d, c, d, d, c, d, c, d, c, d, c, d] # Mali
+b11 = ["n", c, d, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, d, c, d, c, d, d, d, c, d, c, d, c, d, c, d, d, d] # Side to Side
+b12 = ["n", c, d, c, d, d, c, d, c, d, d, c, c, d, d, d, d, c, c, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, c] # Waka Waka
+b13 = ["n", d, c, d, c, d, d, c, c, d, c, d, c, d, c, d, d, c, c, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, c] # Baby 1More Time
+b14 = ["n", d, d, d, c, d, d, c, d, c, c, d, c, d, c, d, c, d, d, c, d, c, d, d, c, c, d, c, d, c, d, c, d, c, c, d] # Animals
+
 
 # Array of available music
 
-tempT = [t0, t1, t2, t3, t4, t5, t6, t7]
-tempB = [b0, b1, b2, b3, b4, b5, b6, b7]
-listSong = ["Jingle Bell", "Shutdown", "Too Cute", "Antifragile", "Tokyo Drift", "Booty Bomb", "Oh Ka", "Fire Boy"] #เวลาจะเพิ่มหรือลด มาแก้ตรงนี้พอ เวลาตั้งชื่อไฟล์ให้ตั้งด้วยชื่อเพลงนี้ ตามด้วย_ 
+tempT = [t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14]
+tempB = [b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14]
+listSong = ["Jingle Bell", "Shutdown", "Too Cute", "Antifragile", "Tokyo Drift", "Booty Bomb", "Oh Ka", "Fire Boy", "La Lai", "Hidden Line", "Mali", "Side to Side", "Waka Waka", "Baby 1More Time", "Animals"] #เวลาจะเพิ่มหรือลด มาแก้ตรงนี้พอ เวลาตั้งชื่อไฟล์ให้ตั้งด้วยชื่อเพลงนี้ ตามด้วย_ 
 numSong = len(listSong)
 
 
 # Font load
 
-font = pygame.font.Font(fontPath+"/trebuc.ttf",32)
-detailFont = pygame.font.SysFont("arialblack",40)
+font = pygame.font.Font(fontPath+"/trebuc.ttf",28)
+detailFont = pygame.font.SysFont("arialblack",35)
 
 
 # Screen setting
@@ -162,7 +175,7 @@ def _homePage():
     startButton = pygame.image.load(homePagePath+"/Start_button.png")
     tutorialButton = pygame.image.load(homePagePath+"/Tutorial_button.png")
     bgSound = pygame.mixer.Sound(homePagePath+"/MusicHomePage.mp3")
-    bgSound.play()
+    bgSound.play(-1)
     startT = pygame.time.get_ticks()/1000
     endT = 0
     a = 0    
@@ -184,7 +197,7 @@ def _homePage():
                     pygame.mixer.pause()
                     return 1
 
-                if event.key == pygame.K_j: #select start
+                if event.key == pygame.K_j or event.key == pygame.K_RETURN: #select start
                     pygame.mixer.pause()
                     return 2
                 
@@ -320,7 +333,7 @@ def _tutorialPage2():
                     mixer.music.play()
                     _main()
                 if event.key == pygame.K_SPACE:
-                    mixer.music.load(homePagePath+"/Tutorial 2.mp3")
+                    mixer.music.load(homePagePath+"/Tutorial2.mp3")
                     mixer.music.play()
         
         screen.blit(tutorialPage2, (0, 0))
@@ -550,13 +563,14 @@ def _confirmMusicPage(stateMusic):
                     pygame.mixer.music.stop()
                     clickSound.play()
                     return stateMusic
+                if event.key == pygame.K_SPACE:
+                    pygame.mixer.music.load(confirmPagePath+"/"+musicName+".mp3")
+                    pygame.mixer.music.queue(confirmPagePath+"/"+str(highestStar)+"Star.mp3")
+                    pygame.mixer.music.play()
                 if event.key == pygame.K_BACKSPACE:
                     pygame.mixer.music.stop()
                     clickSound.play()
                     return -1
-                #if event.key == pygame.K_SPACE:
-                    #_confirmMusicPage(stateMusic)
-                    #เรียกซ้ำแบบนี้ไม่ได้นะ ขอคอมเม้นไว้ก่อน
             
         if not pygame.mixer.music.get_busy() and a==0:
             pygame.mixer.music.load(confirmPagePath+"/ConfirmSelectMusic.mp3")
@@ -718,6 +732,15 @@ def _sampleSoundPage():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     a = 1
+
+                if event.key == pygame.K_ESCAPE:
+                    pygame.mixer.music.pause()
+                    clickSound.play()
+                    exitt = _exit()
+                    if exitt == 1:
+                        pygame.quit()
+                        exit()
+                    return 0           
                                  
         screen.blit(bg,(0,0))
         pygame.display.update()
@@ -1044,6 +1067,9 @@ def _exitTime():
                     clickSound.play()
                     mixer.music.stop()
                     return exitTime-exitStart
+                elif event.key == pygame.K_SPACE:
+                    mixer.music.load(homePagePath+"/Exit_Game.mp3")
+                    mixer.music.play()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(431, 283, 430, 180) == 1:
                     clickSound.play()
@@ -1350,9 +1376,11 @@ def _totalScorePage(score, songName):
                     pygame.mixer.music.load(totalScorePagePath+"/Collect_TotalScore.mp3")
                     pygame.mixer.music.play()
                 if event.key == pygame.K_RETURN:
+                    pygame.mixer.music.pause()
                     _main()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(525,576,230,100) == 1:
+                    pygame.mixer.music.pause()
                     clickSound.play()
                     _main()
 
@@ -1395,7 +1423,9 @@ def _main():
         b = tempB[stateMusicConfirm]
         endGamePoint = -1  
         while endGamePoint == -1:
-            _sampleSoundPage()
+            sample = _sampleSoundPage()
+            while sample == 0: #want to exit but back
+                sample = _sampleSoundPage()
             endGamePoint = _play(t, b, listSong[stateMusicConfirm])
             if endGamePoint != -1:
                 while tempTotal == -1:
