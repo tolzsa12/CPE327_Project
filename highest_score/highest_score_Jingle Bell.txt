@@ -1,5 +1,0 @@
-<<<<<<< Updated upstream
-1500
-=======
-1600
->>>>>>> Stashed changes
