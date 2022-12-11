@@ -175,7 +175,7 @@ def _homePage():
     startButton = pygame.image.load(homePagePath+"/Start_button.png")
     tutorialButton = pygame.image.load(homePagePath+"/Tutorial_button.png")
     bgSound = pygame.mixer.Sound(homePagePath+"/MusicHomePage.mp3")
-    bgSound.play()
+    bgSound.play(-1)
     startT = pygame.time.get_ticks()/1000
     endT = 0
     a = 0    
