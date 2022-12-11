@@ -175,7 +175,7 @@ def _homePage():
     startButton = pygame.image.load(homePagePath+"/Start_button.png")
     tutorialButton = pygame.image.load(homePagePath+"/Tutorial_button.png")
     bgSound = pygame.mixer.Sound(homePagePath+"/MusicHomePage.mp3")
-    bgSound.play()
+    bgSound.play(-1)
     startT = pygame.time.get_ticks()/1000
     endT = 0
     a = 0    
@@ -333,7 +333,7 @@ def _tutorialPage2():
                     mixer.music.play()
                     _main()
                 if event.key == pygame.K_SPACE:
-                    mixer.music.load(homePagePath+"/Tutorial 2.mp3")
+                    mixer.music.load(homePagePath+"/Tutorial2.mp3")
                     mixer.music.play()
         
         screen.blit(tutorialPage2, (0, 0))
