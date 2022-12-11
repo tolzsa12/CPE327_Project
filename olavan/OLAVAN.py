@@ -81,8 +81,8 @@ t4 = [0, 4.4, 6.4, 8.3, 13.25, 15.15, 18.8, 21.7, 22.5, 25.2, 26.5, 28.4, 30.2, 
 t5 = [0, 11.7, 14.9, 17.3, 18.6, 19.5, 21.1, 23.5, 24.3, 26.7, 29.1, 30.2, 31.6, 33.5, 36.0, 38.4, 39.7, 40.9, 43.4, 45.8, 48.3, 50.8, 53.7, 54.8, 56.9, 58.3, 60.6, 63.2, 65.7, 70.9, 73.6, 75.6, 83.0, 85.4, 87.9, 90.4, 120]
 t6 = [0, 10.6, 13.5, 15.2, 16.5, 18.4, 19.5, 22.3, 26.3, 30.4, 34.6, 36.3, 38.7, 40.1, 42.9, 47.2, 51.2, 57.5, 59.7, 61.7, 63.8, 65.9, 68, 70.6, 72.1, 74.2, 76.4, 78.4, 84.8, 88.9, 90.5, 91.5, 93.6, 95.7, 98, 99.9, 104]
 t7 = [0, 3.2, 5, 7.9, 9.5, 12.3, 14.2, 16.9, 18.6, 20.3, 22, 23.7, 25.9, 28.3, 31, 35, 38.5, 41.2, 43, 44.1, 45.3, 47.4, 48.7, 52, 55.4, 57.7, 59.9, 62.2, 65.6, 71.3, 73.5, 75.8, 77, 79.2, 82.7, 87.1, 92]
-t8 = [0, 5.7, 7.5, 9 ]
-
+t8 = [0, 5.7, 7.5, 9 , 11.5, 13.1, 15.4, 16.9, 22.2, 24.3, 26, 27.8, 29.7, 31.6, 33.4, 35.2, 37, 39, 41.8, 43.6, 45.4, 47.3, 50.5, 51.9, 53.8, 56.6, 59.3, 61.1, 62.9, 64.8, 66.6, 68.5, 70.3, 72.2, 74.1, 75.9, 81]
+t9 = [0, 4.1, 7.8, 11.5, 14.4, 17.1, 20.8, 22.7, 24.5, 28.2, 33.8, 35.5, 41.2, 44.8, 46.7, 50.4, 52.2, 57.8, 63.3, 65.2, 68.8, 74.4, 78, 80.4, 83.6, 85.4, 87.3, 91, 93.3, 95.1, 97.1, 98.8, 100.6, 102.5, 104.4, 107.6, 114]
 # Beat type array has 36 index [35]
 # Index 0 always be "n"
 # Index 1 - 35 is the type of beat
@@ -100,12 +100,13 @@ b5 = ["n", c, c, c, d, c, d, c, d, d, c, c, d, c, d, d, c, d, c, c, d, d, c, d, 
 b6 = ["n", c, d, c, d, c, d, c, d, d, d, c, c, d, c, c, d, d, c, d, c, d, c, d, d, d, c, d, c, d, c, d, c, d, d, d] # Oh Ka
 b7 = ["n", d, d, d, c, d, d, c, d, c, c, d, c, d, c, d, c, d, d, c, d, c, d, d, c, c, d, c, d, c, d, c, d, c, c, d] # Fire Boy
 b8 = ["n", d, d, d, c, d, d, c, d, c, c, d, c, d, c, d, c, d, d, c, d, c, d, d, c, c, d, c, d, c, d, c, d, c, c, d] # La Lai
+b9 = ["n", c, c, c, d, c, d, c, d, d, c, c, d, c, d, d, c, d, c, c, d, d, c, d, c, d, d, c, d, c, d, c, c, d, d, c] # Hidden Line
 
 # Array of available music
 
-tempT = [t0, t1, t2, t3, t4, t5, t6, t7]
-tempB = [b0, b1, b2, b3, b4, b5, b6, b7]
-listSong = ["Jingle Bell", "Shutdown", "Too Cute", "Antifragile", "Tokyo Drift", "Booty Bomb", "Oh Ka", "Fire Boy"] #เวลาจะเพิ่มหรือลด มาแก้ตรงนี้พอ เวลาตั้งชื่อไฟล์ให้ตั้งด้วยชื่อเพลงนี้ ตามด้วย_ 
+tempT = [t0, t1, t2, t3, t4, t5, t6, t7, t8, t9]
+tempB = [b0, b1, b2, b3, b4, b5, b6, b7, b8, b9]
+listSong = ["Jingle Bell", "Shutdown", "Too Cute", "Antifragile", "Tokyo Drift", "Booty Bomb", "Oh Ka", "Fire Boy", "La Lai", "Hidden Line"] #เวลาจะเพิ่มหรือลด มาแก้ตรงนี้พอ เวลาตั้งชื่อไฟล์ให้ตั้งด้วยชื่อเพลงนี้ ตามด้วย_ 
 numSong = len(listSong)
 
 
@@ -1350,9 +1351,11 @@ def _totalScorePage(score, songName):
                     pygame.mixer.music.load(totalScorePagePath+"/Collect_TotalScore.mp3")
                     pygame.mixer.music.play()
                 if event.key == pygame.K_RETURN:
+                    pygame.mixer.music.pause()
                     _main()
             if pygame.mouse.get_pressed()[0]:
                 if _checkClickRect(525,576,230,100) == 1:
+                    pygame.mixer.music.pause()
                     clickSound.play()
                     _main()
 
